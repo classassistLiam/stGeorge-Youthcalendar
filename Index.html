@@ -1,0 +1,578 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b5b43">
+<meta name="description" content="St George Youth church community dashboard for attendance, stewardship, Bible trivia, leadership and events.">
+<title>St George Youth | Community Hub</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+:root{--green:#075e43;--green2:#0d805d;--lime:#d9ff66;--mint:#eaf8ef;--paper:#f4f8f5;--ink:#17352a;--muted:#6d7d74;--gold:#d8ad3d;--red:#d94343;--line:#e1eae4;--white:#fff;--shadow:0 12px 34px rgba(15,65,45,.08);--radius:22px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #a8d95b;outline-offset:2px}img{max-width:100%}.app{min-height:100vh;display:grid;grid-template-columns:248px minmax(0,1fr)}.sidebar{background:linear-gradient(180deg,#073d2d,#0a4b37);color:#fff;padding:24px 16px;display:flex;flex-direction:column;gap:22px;position:sticky;top:0;height:100vh;overflow:auto;z-index:30}.brand{display:flex;align-items:center;gap:11px;padding:4px 10px 18px;border-bottom:1px solid #ffffff20}.brand-mark{width:40px;height:40px;border-radius:14px;background:var(--lime);color:var(--green);display:grid;place-items:center;font-size:22px;font-weight:900}.brand strong{display:block;letter-spacing:.4px}.brand small{color:#b5d6c5;font-size:11px}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;color:#d5e7dd;padding:12px 13px;border-radius:13px;text-align:left;display:flex;align-items:center;gap:12px;font-weight:650}.nav button:hover,.nav button.active{background:#ffffff18;color:var(--lime)}.nav .ico{width:22px;text-align:center;font-size:17px}.sidebar-bottom{margin-top:auto}.side-note{font-size:11px;color:#b9d4c6;line-height:1.6;padding:14px}.main{min-width:0;padding:26px clamp(14px,2.5vw,36px) 40px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:24px}.topbar h1{font-size:clamp(23px,2.4vw,34px);line-height:1.1;margin:0}.eyebrow{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green2);font-weight:850;margin-bottom:7px}.subtle{color:var(--muted)}.top-actions{display:flex;align-items:center;gap:10px}.clock-pill,.icon-btn{background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px 13px;color:var(--ink);box-shadow:0 3px 10px #1231  ;white-space:nowrap}.icon-btn{min-width:42px}.mobile-menu{display:none}.welcome{background:linear-gradient(110deg,#0b5b43,#138460);color:white;border-radius:26px;padding:25px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px;position:relative;overflow:hidden;box-shadow:var(--shadow);margin-bottom:20px}.welcome:after{content:"✦";position:absolute;font-size:180px;right:18%;top:-75px;color:#ffffff0b;pointer-events:none}.welcome h2{font-size:clamp(22px,2.4vw,31px);margin:0 0 8px}.welcome p{margin:0;color:#d9eee4;max-width:620px}.welcome-date{background:#ffffff18;border:1px solid #ffffff2c;border-radius:16px;padding:14px 18px;min-width:150px;z-index:1}.welcome-date b{display:block;font-size:21px}.welcome-date small{color:#d9eee4}.stats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:13px;margin-bottom:20px}.stat{background:#fff;border:1px solid var(--line);border-radius:19px;padding:17px;min-width:0;box-shadow:0 4px 15px #15351a05}.stat-top{display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--muted);font-size:12px;font-weight:700}.stat-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:12px;background:var(--mint);font-size:17px}.stat strong{display:block;font-size:clamp(22px,2vw,29px);margin:12px 0 3px;letter-spacing:-.8px;overflow-wrap:anywhere}.stat small{font-size:11px;color:var(--muted)}.layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,.85fr);gap:18px;align-items:start}.stack{display:grid;gap:18px;min-width:0}.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:21px;box-shadow:0 5px 18px #15351a04;min-width:0}.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}.card h3{font-size:17px;margin:0}.card-head p{margin:4px 0 0;color:var(--muted);font-size:12px}.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;background:#eef7ef;color:var(--green);font-size:11px;font-weight:800;padding:6px 10px}.btn{border:0;background:var(--green);color:#fff;padding:11px 15px;border-radius:12px;font-weight:750;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .16s,background .16s}.btn:hover{background:var(--green2);transform:translateY(-1px)}.btn.secondary{background:#edf5ef;color:var(--green)}.btn.lime{background:var(--lime);color:#173b2b}.btn.danger{background:#fff0ef;color:#a72b2b}.btn.small{padding:8px 11px;font-size:12px}.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}.btn-row{display:flex;gap:8px;flex-wrap:wrap}.chart-wrap{height:260px;position:relative;width:100%}.chart-wrap.tall{height:300px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.field{display:grid;gap:6px;min-width:0}.field.full{grid-column:1/-1}.field label{font-size:12px;color:#496258;font-weight:800}.field input,.field select,.field textarea,.search-input{width:100%;min-width:0;border:1px solid #dce7df;background:#fbfdfb;border-radius:12px;padding:12px 13px;color:var(--ink)}.field textarea{min-height:84px;resize:vertical}.help{font-size:11px;color:var(--muted);line-height:1.5}.section{scroll-margin-top:18px}.section-title{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:28px 0 14px}.section-title h2{margin:0;font-size:23px}.section-title p{margin:4px 0 0;color:var(--muted);font-size:13px}.member-tools{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:15px}.search-input{max-width:300px}.member-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.member-card{border:1px solid var(--line);border-radius:18px;padding:15px;text-align:center;position:relative;min-width:0;background:#fff;transition:transform .2s,box-shadow .2s}.member-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.member-card.inactive{filter:grayscale(1);background:#f0f1f0}.member-card.paused{border-style:dashed;opacity:.72}.avatar{width:68px;height:68px;border-radius:50%;object-fit:cover;background:#e7f4e9;border:3px solid #edf7ed;margin:0 auto 9px;display:block}.member-card h4{margin:0 0 3px;overflow-wrap:anywhere}.member-card p{margin:2px 0;color:var(--muted);font-size:11px;overflow-wrap:anywhere}.member-card .member-status{margin:8px auto;display:inline-block;border-radius:99px;background:#edf7ef;color:var(--green);font-size:10px;font-weight:850;padding:5px 8px}.member-card.inactive .member-status{background:#e0e0e0;color:#666}.member-card .member-actions{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin-top:8px}.progress{height:7px;border-radius:9px;background:#e9eee9;overflow:hidden;margin:9px 0}.progress span{height:100%;display:block;background:linear-gradient(90deg,#20a26f,#d8ff66);border-radius:9px}.table-wrap{overflow:auto;max-width:100%;border:1px solid var(--line);border-radius:13px}table{border-collapse:collapse;width:100%;min-width:480px;font-size:12px}th,td{padding:12px 13px;border-bottom:1px solid #edf1ed;text-align:left;white-space:normal}th{background:#f6faf6;color:#52665c;font-size:11px;text-transform:uppercase;letter-spacing:.4px}tr:last-child td{border-bottom:0}.rank{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:9px;background:#edf5ef;font-weight:900}.rank.gold{background:#ffefb2;color:#775600}.rank.silver{background:#e8edf0;color:#53616a}.rank.bronze{background:#f5dfcf;color:#8d4e20}.event-list{display:grid;gap:9px}.event-item{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:14px;background:#f5faf6;border:1px solid #edf3ed}.event-date{width:49px;min-width:49px;border-radius:12px;background:#fff;border:1px solid var(--line);padding:7px 3px;text-align:center}.event-date b{display:block;color:var(--green);font-size:18px;line-height:1.1}.event-date small{font-size:9px;color:var(--muted);text-transform:uppercase;font-weight:850}.event-item h4{margin:0 0 3px;font-size:13px}.event-item p{margin:0;color:var(--muted);font-size:11px}.notice{border-radius:13px;background:#fff8e2;color:#745a14;padding:12px 14px;font-size:12px;line-height:1.55;border:1px solid #f4e8b8}.success{background:#eaf8ef;color:#135c3f;border:1px solid #d7eddf}.error{background:#fff0ef;color:#a52a2a;border:1px solid #f5d6d3}.empty{padding:24px;text-align:center;color:var(--muted);font-size:13px}.token{font-size:clamp(18px,2.3vw,26px);letter-spacing:.5px;font-weight:900;overflow-wrap:anywhere;color:var(--green)}.finance-balance{background:#f2f9e5;border-radius:16px;padding:15px;margin-bottom:15px;display:flex;justify-content:space-between;gap:12px;align-items:center}.finance-balance strong{font-size:23px}.loss{color:var(--red)}.award-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.award{border-radius:15px;padding:13px;text-align:center;background:#fff9e8;border:1px solid #f2e7bf}.award:nth-child(2){background:#f5f7f8;border-color:#e4e8eb}.award:nth-child(3){background:#fff3e9;border-color:#f2dfd0}.award b{display:block;font-size:12px}.award small{color:var(--muted);font-size:10px}.toast-area{position:fixed;right:18px;top:18px;z-index:1000;display:grid;gap:8px;width:min(360px,calc(100vw - 36px))}.toast{padding:13px 15px;border-radius:13px;background:#123f2e;color:#fff;box-shadow:0 12px 30px #0002;animation:toastIn .22s ease}.toast.bad{background:#8c2727}@keyframes toastIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}.modal-backdrop{position:fixed;inset:0;background:#0b2119a6;z-index:100;display:none;align-items:center;justify-content:center;padding:18px}.modal-backdrop.open{display:flex}.modal{width:min(580px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:22px;padding:22px;box-shadow:0 25px 90px #0004}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.modal-head h3{margin:0}.close-btn{border:0;background:#edf4ef;border-radius:10px;width:36px;height:36px}.hidden{display:none!important}.footer{padding:20px 4px;color:var(--muted);font-size:11px;text-align:center}.quick-actions{display:flex;gap:8px;flex-wrap:wrap}.song{padding:12px;border:1px solid var(--line);border-radius:13px;display:flex;justify-content:space-between;gap:10px;align-items:center}.song b{font-size:12px}.song small{display:block;color:var(--muted);font-size:11px}.chip{font-size:10px;font-weight:800;border-radius:20px;background:#eef7ef;color:var(--green);padding:5px 8px;white-space:nowrap}
+@media(max-width:1250px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}.member-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr)}}
+@media(max-width:920px){.app{grid-template-columns:1fr}.sidebar{position:fixed;top:0;bottom:0;left:0;width:min(290px,85vw);height:100dvh;transform:translateX(-105%);transition:transform .25s ease;box-shadow:20px 0 50px #0002}.sidebar.open{transform:translateX(0)}.mobile-menu{display:inline-flex}.main{padding:18px 16px 90px}.layout{grid-template-columns:1fr}.welcome{padding:22px}.topbar{align-items:flex-start}.clock-pill{display:none}}
+@media(max-width:600px){.main{padding:14px 12px 85px}.topbar{margin-bottom:16px}.topbar h1{font-size:24px}.top-actions{gap:6px}.welcome{display:block;border-radius:20px;padding:20px}.welcome-date{display:inline-block;margin-top:16px;min-width:0}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.stat{padding:13px;border-radius:16px}.stat strong{font-size:24px}.card{padding:15px;border-radius:18px}.card-head{flex-wrap:wrap}.chart-wrap{height:230px}.chart-wrap.tall{height:250px}.member-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.member-card{padding:11px 8px}.avatar{width:58px;height:58px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.section-title{align-items:flex-start;flex-direction:column;margin-top:23px}.section-title h2{font-size:21px}.search-input{max-width:none;flex:1;min-width:150px}.member-tools .field{flex:1}.award-grid{gap:6px}.award{padding:10px 5px}.award b{font-size:11px}.finance-balance{align-items:flex-start;flex-direction:column}.btn{padding:11px 12px}.btn-row .btn{flex:1}.toast-area{top:10px;right:10px;width:calc(100vw - 20px)}}
+@media(max-width:360px){.member-grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.welcome h2{font-size:21px}.stat strong{font-size:21px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* === ST GEORGE SIGNATURE VISUAL LAYER === */
+:root{--green:#064b36;--green2:#0a7854;--lime:#dfff76;--mint:#e9f7ee;--paper:#f3f7f2;--ink:#15382b;--muted:#64766c;--gold:#d4ad4d;--line:#dce8df;--white:#fff;--shadow:0 16px 42px rgba(8,58,39,.09);--radius:22px}
+body{background:radial-gradient(ellipse at 92% 0%,#e4f4e7 0,transparent 32%),var(--paper);background-attachment:fixed}
+.sidebar{background:linear-gradient(155deg,#052f24 0%,#07563c 55%,#0a704d 100%);border-right:1px solid #ffffff12}
+.brand-mark{border-radius:13px 13px 13px 4px;box-shadow:0 6px 20px #dfff7630;transform:rotate(-3deg)}
+.brand strong{letter-spacing:.9px;font-size:12px}.brand small{letter-spacing:.5px}
+.nav button{border:1px solid transparent;transition:background .18s,border-color .18s,transform .18s}
+.nav button:hover{transform:translateX(2px);border-color:#ffffff18}.nav button.active{background:linear-gradient(90deg,#dfff7624,#ffffff08);border-color:#dfff7638;box-shadow:inset 3px 0 var(--lime)}
+.main{max-width:1720px;width:100%;margin:0 auto}
+.topbar{padding:4px 0 18px;border-bottom:1px solid #dce8df;margin-bottom:22px}
+.topbar h1{letter-spacing:-1.2px;font-weight:850}.eyebrow{letter-spacing:1.8px}
+.clock-pill{background:#fff;border-color:#d8e7dc;border-radius:999px;font-size:12px}
+.welcome{background:linear-gradient(112deg,#063b2b 0%,#08734f 62%,#0c8a61 100%);border:1px solid #ffffff20;box-shadow:0 20px 50px #075e431c;padding:clamp(23px,3vw,34px)}
+.welcome:before{content:"ST GEORGE  •  FAITH · FELLOWSHIP · PURPOSE";position:absolute;right:24px;bottom:15px;font-size:9px;font-weight:800;letter-spacing:2px;color:#ffffff35;pointer-events:none}
+.welcome h2{letter-spacing:-.9px;font-weight:850}.welcome p{font-size:14px;line-height:1.75}
+.welcome-date{backdrop-filter:blur(12px);box-shadow:inset 0 1px #ffffff20}
+.stat,.card{box-shadow:0 7px 24px rgba(19,67,43,.035);transition:box-shadow .2s,border-color .2s,transform .2s}
+.stat:hover,.card:hover{border-color:#cbded0;box-shadow:0 12px 30px rgba(19,67,43,.065)}
+.stat{border-radius:19px}.stat-icon{border-radius:12px 12px 12px 4px;color:var(--green)}
+.stat strong{font-weight:850;letter-spacing:-1.1px}
+.card{border-radius:21px}.card h3{letter-spacing:-.25px;font-weight:800}.card-head{margin-bottom:19px}
+.pill{border:1px solid #dceee0}.btn{box-shadow:0 4px 10px #064b3610}.btn:active{transform:scale(.98)}
+.btn.lime{box-shadow:0 6px 18px #dfff7620}.section-title{padding-bottom:11px;border-bottom:1px solid #e1ebe3}.section-title h2{letter-spacing:-.8px;font-weight:850}
+.member-card{border-radius:18px;background:linear-gradient(180deg,#fff,#fcfefc)}.avatar{border-color:#e6f3e8;box-shadow:0 4px 12px #075e4310}
+.event-item{background:linear-gradient(110deg,#f5faf6,#fff);border-radius:15px}.event-date{box-shadow:0 3px 8px #12310a06}
+.table-wrap{box-shadow:inset 0 1px #ffffff}.toast{border:1px solid #ffffff20}
+#serverSyncBar{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:-7px 0 18px;padding:10px 13px;border:1px solid var(--line);background:#ffffffc9;border-radius:14px;font-size:12px;color:var(--muted)}
+#serverDot{width:8px;height:8px;display:inline-block;border-radius:50%;background:#c18b23;box-shadow:0 0 0 4px #c18b2317}
+#serverSyncBar[data-status="connected"] #serverDot{background:#1b9b65;box-shadow:0 0 0 4px #1b9b6518}
+#serverSyncBar[data-status="error"] #serverDot{background:#c83e3e;box-shadow:0 0 0 4px #c83e3e18}
+#serverSyncBar .sync-spacer{flex:1}
+#syncNowBtn{padding:7px 11px;border-radius:10px}
+@media(max-width:600px){.welcome:before{display:none}.welcome{padding:20px}.topbar{border-bottom:0;padding-bottom:4px}#serverSyncBar{font-size:11px;gap:7px}.main{padding-top:12px}}
+
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true">✦</div>
+    <div>
+      <strong>ST GEORGE YOUTH</strong>
+      <small>Community Hub · 2026</small>
+    </div>
+  </div>
+
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <button type="button" class="active" data-target="overview" aria-current="page">
+      <span class="ico" aria-hidden="true">▦</span>
+      <span>Dashboard</span>
+    </button>
+
+    <button type="button" data-target="members">
+      <span class="ico" aria-hidden="true">♙</span>
+      <span>Members &amp; Attendance</span>
+    </button>
+
+    <button type="button" data-target="finance">
+      <span class="ico" aria-hidden="true">▤</span>
+      <span>Finance &amp; Stewardship</span>
+    </button>
+
+    <button type="button" data-target="trivia">
+      <span class="ico" aria-hidden="true">✝</span>
+      <span>Bible Trivia</span>
+    </button>
+
+    <button type="button" data-target="awards">
+      <span class="ico" aria-hidden="true">🏆</span>
+      <span>Awards &amp; Recognition</span>
+    </button>
+
+    <button type="button" data-target="elections">
+      <span class="ico" aria-hidden="true">☑</span>
+      <span>Leadership Elections</span>
+    </button>
+
+    <button type="button" data-target="choir">
+      <span class="ico" aria-hidden="true">♫</span>
+      <span>Choir Planner</span>
+    </button>
+
+    <button type="button" data-target="events">
+      <span class="ico" aria-hidden="true">▣</span>
+      <span>Treasurer's Office</span>
+    </button>
+
+    <button type="button" data-target="backup">
+      <span class="ico" aria-hidden="true">⇧</span>
+      <span>Fun &amp; Games</span>
+    </button>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <div class="side-note">
+      “Let all that you do be done in love.”<br>
+      <b>1 Corinthians 16:14</b>
+      <br><br>
+      Local-first · Cloud sync available through the configured Apps Script server.
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div style="display:flex;align-items:center;gap:11px">
+      <button class="icon-btn mobile-menu" id="menuBtn" aria-label="Open menu">☰</button>
+      <div><div class="eyebrow">Your community, connected</div><h1>Church dashboard</h1></div>
+    </div>
+    <div class="top-actions"><div class="clock-pill" id="liveClock">Loading date…</div><button class="icon-btn" id="notifyBtn" aria-label="Notifications">♧</button><button class="icon-btn" id="themeBtn" aria-label="Toggle contrast">◐</button></div>
+  </header>
+  <div id="serverSyncBar" data-status="connecting" role="status" aria-live="polite">
+    <span id="serverDot"></span><strong id="serverSyncTitle">Server sync not configured</strong>
+    <span id="serverSyncDetail">Add your existing Apps Script web-app URL in the JavaScript configuration.</span>
+    <span class="sync-spacer"></span><button class="btn secondary small" id="syncNowBtn" type="button">↻ Sync now</button>
+  </div>
+
+  <section id="overview">
+    <div class="welcome">
+      <div><div class="eyebrow" style="color:var(--lime)">WELCOME TO ST GEORGE YOUTH</div><h2>Grow in faith. Serve with purpose.</h2><p>One bright workspace for attendance, stewardship, learning, leadership and fellowship.</p><div class="quick-actions" style="margin-top:17px"><button class="btn lime" data-go="members">＋ Register member</button><button class="btn" style="background:#ffffff20;border:1px solid #ffffff40" data-go="finance">View stewardship</button></div></div>
+      <div class="welcome-date"><small id="todayDay">TODAY</small><b id="todayDate">—</b><small id="sundayLabel">Sunday fellowship tracker</small></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-top"><span>Registered members</span><span class="stat-icon">♙</span></div><strong id="statMembers">0</strong><small>Profiles saved in this hub</small></div>
+      <div class="stat"><div class="stat-top"><span>Active members</span><span class="stat-icon">✓</span></div><strong id="statActive">0</strong><small>Attendance rate ≥ 60%</small></div>
+      <div class="stat"><div class="stat-top"><span>Today's check-ins</span><span class="stat-icon">⌁</span></div><strong id="statCheckins">0</strong><small>Unique members checked in</small></div>
+      <div class="stat"><div class="stat-top"><span>Current balance</span><span class="stat-icon">₵</span></div><strong id="statBalance">KSh 0</strong><small>Recorded income minus expenses</small></div>
+      <div class="stat"><div class="stat-top"><span>Trivia attempts</span><span class="stat-icon">✝</span></div><strong id="statTrivia">0</strong><small>This calendar year</small></div>
+      <div class="stat"><div class="stat-top"><span>Upcoming events</span><span class="stat-icon">▣</span></div><strong id="statEvents">0</strong><small>Next 60 days</small></div>
+    </div>
+    <div class="layout">
+      <div class="stack">
+        <article class="card"><div class="card-head"><div><h3>Attendance overview</h3><p>Weekly check-ins from saved hub records</p></div><span class="pill">LIVE FROM LOCAL DATA</span></div><div class="chart-wrap"><canvas id="attendanceChart" aria-label="Weekly attendance chart"></canvas></div></article>
+        <article class="card"><div class="card-head"><div><h3>Stewardship at a glance</h3><p>Sunday income, expenditure and balance</p></div><button class="btn secondary small" data-go="finance">Open finance →</button></div><div class="chart-wrap"><canvas id="overviewFinanceChart" aria-label="Finance overview chart"></canvas></div></article>
+      </div>
+      <div class="stack">
+        <article class="card"><div class="card-head"><div><h3>Next on the calendar</h3><p>Faith, community and public observances</p></div><button class="btn secondary small" data-go="events">All events</button></div><div class="event-list" id="dashboardEvents"></div></article>
+        <article class="card"><div class="card-head"><div><h3>Community pulse</h3><p>Simple progress indicators</p></div></div><div id="pulseContent"></div><div class="notice" style="margin-top:14px">Privacy note: this is a single-device prototype. Back up data regularly and do not store sensitive biometric templates or real vote secrets in this file.</div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="members">
+    <div class="section-title"><div><div class="eyebrow">People first</div><h2>Members &amp; attendance</h2><p>Register members, record Sunday attendance and pause school-going members during term time.</p></div><button class="btn" id="openRegister">＋ Add member</button></div>
+    <div class="layout">
+      <div class="stack">
+        <article class="card"><div class="card-head"><div><h3>Member directory</h3><p>Grey profiles are below the 60% attendance threshold or paused.</p></div><span class="pill" id="memberTotalPill">0 profiles</span></div>
+          <div class="member-tools"><input class="search-input" id="memberSearch" placeholder="Search name or member ID…"><select class="search-input" id="memberFilter" aria-label="Filter members"><option value="all">All members</option><option value="active">Active ≥ 60%</option><option value="inactive">Below 60%</option><option value="paused">Paused / boarding</option></select><button class="btn secondary" id="attendanceBtn">✓ Record Sunday attendance</button></div>
+          <div id="membersGrid" class="member-grid"></div>
+        </article>
+      </div>
+      <div class="stack">
+        <article class="card"><div class="card-head"><div><h3>Attendance check-in</h3><p>Select a registered member and confirm their identity.</p></div></div>
+          <div class="field"><label for="checkinMember">Member</label><select id="checkinMember"><option value="">Choose a member…</option></select></div>
+          <div class="field" style="margin-top:12px"><label for="checkinMethod">Confirmation method</label><select id="checkinMethod"><option value="touch">On-screen touch / keypad confirmation (demo)</option><option value="passkey">Device passkey / biometric (requires configured secure server)</option></select></div>
+          <p class="help" style="margin-top:10px">A normal webpage cannot read a phone's fingerprint sensor or a laptop's fingerprint pad directly. This demo records a touch confirmation only; it does not claim a biometric match.</p>
+          <button class="btn" style="width:100%;margin-top:13px" id="checkinBtn">Confirm check-in</button><div id="attendanceMessage" style="margin-top:12px"></div>
+        </article>
+        <article class="card"><div class="card-head"><div><h3>Attendance policy</h3></div></div><p class="subtle" style="font-size:13px">Monthly participation is calculated as attended eligible Sundays ÷ eligible Sundays. Profiles become active at 60% or more. Paused members are excluded from the denominator while paused.</p><div class="notice" style="margin-top:12px">For fair records, register one check-in per member per Sunday. Use the export feature to keep a backup.</div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="finance">
+    <div class="section-title"><div><div class="eyebrow">Trust &amp; stewardship</div><h2>Finance &amp; stewardship</h2><p>Track M-PESA and cash separately, with a Sunday transaction token and visible calculation.</p></div><span class="pill">TREASURER WORKFLOW</span></div>
+    <div class="layout">
+      <div class="stack">
+        <article class="card"><div class="card-head"><div><h3>Sunday financial trend</h3><p>Income, expenditure and savings/losses</p></div><span class="pill">KSh</span></div><div class="chart-wrap tall"><canvas id="financeChart" aria-label="Sunday financial line chart"></canvas></div></article>
+        <article class="card"><div class="card-head"><div><h3>Finance ledger</h3><p>Saved records with transaction IDs and payment source</p></div><button class="btn secondary small" id="exportFinanceBtn">Export CSV</button></div><div class="table-wrap"><table><thead><tr><th>Sunday / ID</th><th>Income</th><th>Expenses</th><th>Balance</th><th>Source</th></tr></thead><tbody id="financeRows"></tbody></table></div></article>
+      </div>
+      <div class="stack">
+        <article class="card"><div class="card-head"><div><h3>Record Sunday finances</h3><p>Demo treasurer gate</p></div></div>
+          <div class="notice">Prototype security: this local PIN gate is not secure authorization. Before real church use, move finance writes to a backend with individual accounts, roles and an audit log.</div>
+          <form id="financeForm" style="margin-top:14px"><div class="form-grid">
+            <div class="field full"><label for="financeDate">Sunday / transaction date</label><input type="date" id="financeDate" required=""></div>
+            <div class="field"><label for="financeIncome">Total income (KSh)</label><input type="number" id="financeIncome" min="0" step="0.01" placeholder="0.00" required=""></div>
+            <div class="field"><label for="financeExpenses">Total expenditure (KSh)</label><input type="number" id="financeExpenses" min="0" step="0.01" placeholder="0.00" required=""></div>
+            <div class="field"><label for="financeMpesa">M-PESA income (KSh)</label><input type="number" id="financeMpesa" min="0" step="0.01" value="0"></div>
+            <div class="field"><label for="financeCash">Cash income (KSh)</label><input type="number" id="financeCash" min="0" step="0.01" value="0"></div>
+            <div class="field full"><label for="financeExpenseNote">Expenditure details / notes</label><textarea id="financeExpenseNote" placeholder="e.g. transport, refreshments, printing"></textarea></div>
+            <div class="field full"><label for="treasurerPin">Treasurer PIN (demo default: 2468)</label><input type="password" id="treasurerPin" inputmode="numeric" autocomplete="current-password" placeholder="Enter PIN" required=""></div>
+          </div><button class="btn" style="width:100%;margin-top:14px" type="submit">Verify &amp; save finance record</button><p class="help" style="margin-top:9px">Income is checked against M-PESA + cash. Savings = income − expenses. A negative result is flagged as a loss in red.</p><div id="financeMessage" style="margin-top:12px"></div></form>
+        </article>
+        <article class="card"><h3>Latest Sunday token</h3><p class="subtle" style="font-size:12px">Stable per date; a new record gets a unique transaction ID.</p><div class="token" id="latestToken" style="margin-top:10px">ACK-SUN-—</div><button class="btn secondary small" id="copyTokenBtn" style="margin-top:12px">Copy token</button></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="trivia">
+    <div class="section-title"><div><div class="eyebrow">Learn together</div><h2>Weekly Bible trivia</h2><p>Question set changes by week. Scores are saved with the hub records; difficulty adapts to performance.</p></div><span class="pill" id="difficultyPill">LEVEL: STARTER</span></div>
+    <div class="layout">
+      <div class="stack">
+        <article class="card"><div class="card-head"><div><h3 id="triviaWeekTitle">This week's challenge</h3><p id="triviaMeta">One attempt per member per week</p></div><span class="pill" id="triviaWeekPill">WEEKLY</span></div>
+          <form id="triviaForm"><div class="field"><label for="triviaMember">Your registered profile</label><select id="triviaMember" required=""><option value="">Choose your profile…</option></select></div><div class="field" style="margin-top:13px"><label id="questionLabel" for="triviaAnswer">Question</label><div id="questionText" style="font-size:19px;font-weight:800;margin:6px 0 12px">Loading question…</div><input id="triviaAnswer" autocomplete="off" placeholder="Type your answer" required=""></div><button class="btn" type="submit" style="width:100%;margin-top:14px">Submit answer</button></form><div id="triviaMessage" style="margin-top:13px"></div>
+        </article>
+        <article class="card"><div class="card-head"><div><h3>Leaderboard</h3><p>Gold: positions 1–4 · Silver: 5–7 · Bronze: 8–13</p></div><button class="btn secondary small" id="exportTriviaBtn">Export CSV</button></div><div class="table-wrap"><table><thead><tr><th>Rank</th><th>Member</th><th>Score</th><th>Level</th><th>Week</th></tr></thead><tbody id="triviaRows"></tbody></table></div></article>
+      </div>
+      <div class="stack"><article class="card"><h3>Difficulty that learns</h3><p class="subtle" style="font-size:13px">If the group repeatedly scores highly, the next question is selected from a harder pool. This is rule-based adaptation, not an AI model.</p><div class="progress" style="margin-top:16px"><span id="difficultyBar" style="width:25%"></span></div><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)"><span>Starter</span><span>Scholar</span></div><div id="difficultySummary" class="notice" style="margin-top:14px"></div></article>
+        <article class="card"><h3>Weekly learning tip</h3><p id="weeklyTip" class="subtle" style="font-size:13px;line-height:1.7"></p><button class="btn secondary small" id="newTipBtn">Another tip</button></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="awards">
+    <div class="section-title"><div><div class="eyebrow">Celebrate faithfulness</div><h2>Awards &amp; recognition</h2><p>Transparent candidate scoring from attendance, trivia and service records.</p></div><button class="btn secondary" id="refreshAwards">Refresh shortlist</button></div>
+    <article class="card"><div class="notice">Suggested shortlist only. Leaders should review context fairly, including approved boarding-school pauses, disability, caregiving and other excused absences. Do not use this score as the sole basis for awards.</div><div class="award-grid" style="margin-top:16px"><div class="award"><b>🏅 Attendance champion</b><small>Reliable eligible attendance</small></div><div class="award"><b>📖 Bible scholar</b><small>Trivia score and improvement</small></div><div class="award"><b>🤝 Community servant</b><small>Service notes entered by leaders</small></div></div><div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Suggested rank</th><th>Member</th><th>Attendance</th><th>Trivia avg.</th><th>Combined score</th><th>Review</th></tr></thead><tbody id="awardRows"></tbody></table></div></article>
+  </section>
+
+  <section class="section" id="elections">
+    <div class="section-title"><div><div class="eyebrow">Servant leadership</div><h2>Leadership elections</h2><p>Collect demo ballots by office. Real secret ballots require a secure server and verified eligibility.</p></div><span class="pill">3-YEAR CYCLE</span></div>
+    <div class="layout">
+      <article class="card"><div class="card-head"><div><h3>Cast a demo ballot</h3><p>One ballot per member per office in this browser</p></div></div><form id="voteForm"><div class="form-grid"><div class="field full"><label for="voterMember">Voter profile</label><select id="voterMember" required=""><option value="">Select registered member…</option></select></div><div class="field full"><label for="voteRole">Office</label><select id="voteRole" required=""><option>Chairperson</option><option>Vice Chairperson</option><option>Secretary</option><option>Vice Secretary</option><option>Treasurer</option><option>Time Keeper</option><option>Brigadier Officer</option></select></div><div class="field full"><label for="voteCandidate">Candidate</label><input id="voteCandidate" required="" placeholder="Candidate's registered full name"></div><div class="field full"><label for="voteConfirm">Confirmation</label><select id="voteConfirm"><option value="touch">On-screen confirmation (demo)</option><option value="passkey">Device passkey (needs secure backend)</option></select></div></div><button class="btn" style="width:100%;margin-top:14px">Confirm demo ballot</button><div id="voteMessage" style="margin-top:12px"></div></form></article>
+      <article class="card"><h3>Election summary</h3><p class="subtle" style="font-size:12px">Only aggregate totals are displayed here. This local prototype does not provide cryptographic ballot secrecy or prevent someone with browser access from modifying records.</p><div id="electionSummary" style="margin-top:14px"></div><button class="btn secondary small" id="exportVotesBtn" style="margin-top:14px">Export election log</button></article>
+    </div>
+  </section>
+
+  <section class="section" id="choir">
+    <div class="section-title"><div><div class="eyebrow">Worship planning</div><h2>Choir song planner</h2><p>Build a balanced setlist in Swahili, Kikuyu and English. Recommendations are editable examples, not live trend rankings.</p></div><button class="btn" id="addSongBtn">＋ Add song</button></div>
+    <div class="layout">
+      <article class="card"><div class="card-head"><div><h3>Recommended starting library</h3><p>Choose by language, theme and congregation familiarity.</p></div><select id="songLanguage" class="search-input" aria-label="Filter songs"><option value="all">All languages</option><option>Swahili</option><option>Kikuyu</option><option>English</option></select></div><div id="songList" class="stack" style="gap:9px"></div></article>
+      <article class="card"><h3>Sunday setlist</h3><p class="subtle" style="font-size:12px">Add songs to the plan and export it for choir practice.</p><div id="setlist" class="stack" style="margin-top:14px;gap:8px"></div><button class="btn secondary" id="exportSetlist" style="margin-top:13px;width:100%">Export setlist CSV</button><div class="notice" style="margin-top:13px">Check song keys, lyrics permissions, and the choir's vocal range before rehearsal.</div></article>
+    </div>
+  </section>
+
+  <section class="section" id="events">
+    <div class="section-title"><div><div class="eyebrow">Faith &amp; community</div><h2>Events calendar</h2><p>Kenya public holidays and common Christian/community observances. Confirm dates with the official ACK parish calendar.</p></div><button class="btn secondary" id="addEventBtn">＋ Add event</button></div>
+    <article class="card"><div class="member-tools"><select class="search-input" id="eventFilter"><option value="upcoming">Upcoming events</option><option value="all">All listed events</option><option value="christian">Christian calendar</option><option value="kenya">Kenya / community</option><option value="custom">My events</option></select><input class="search-input" type="month" id="eventMonth" aria-label="Filter by month"></div><div class="event-list" id="allEvents"></div><p class="help" style="margin-top:14px">Movable Christian dates (Easter and Pentecost) vary by year. Mother's Day, Father's Day, Valentine's Day, International Girlfriend's Day and National Boyfriend Day are community observances, not official ACK or Kenyan public holidays. Passover follows the Jewish calendar. Mourning or memorial observances should be added only when formally announced.</p></article>
+  </section>
+
+  <section class="section" id="backup">
+    <div class="section-title"><div><div class="eyebrow">Keep your records safe</div><h2>Data &amp; settings</h2><p>Export backups before changing device or browser. Local backup plus optional sync to the existing Google Apps Script server.</p></div></div>
+    <div class="layout">
+      <article class="card"><h3>Backup and restore</h3><p class="subtle" style="font-size:13px">Download a JSON backup containing member profiles, attendance, finances, trivia scores, setlist and events. The file can include member photos, so keep it private.</p><div class="btn-row" style="margin-top:15px"><button class="btn" id="backupBtn">Download full backup</button><button class="btn secondary" id="restoreBtn">Restore backup</button><input type="file" id="restoreFile" accept="application/json,.json" class="hidden"></div><div id="backupMessage" style="margin-top:12px"></div></article>
+      <article class="card"><h3>Storage &amp; server status</h3><div id="storageStatus" style="margin-top:12px"></div><div class="notice" style="margin-top:14px">For real deployment: use Firebase or another backend, server-enforced roles, consent and privacy notices, backups, and an audit log. Never store raw fingerprint or face data in localStorage.</div><button class="btn danger" id="clearDemoBtn" style="margin-top:14px">Clear all local demo data</button></article>
+    </div>
+  </section>
+  <div class="footer">St George Youth Community Hub · Local prototype · Designed for phone, tablet and desktop · Verify parish dates and finance entries before official use.</div>
+</main>
+</div>
+
+<div class="toast-area" id="toastArea" aria-live="polite"></div>
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="modal-head"><h3 id="modalTitle">Add record</h3><button class="close-btn" id="closeModal" aria-label="Close dialog">✕</button></div><div id="modalContent"></div></div></div>
+
+<script>
+'use strict';
+// SETUP: paste your existing Apps Script deployment URL (ending in /exec) into SERVER_API_URL below.
+// Code.gs is intentionally unchanged; app snapshots use its existing sendMessage/getMessages actions.
+const STORE_KEY='stGeorgeYouthHub.v3';
+const $=id=>document.getElementById(id);
+const fmtMoney=n=>'KSh '+Number(n||0).toLocaleString('en-KE',{maximumFractionDigits:2});
+const todayISO=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+const localDate=s=>{if(!s)return new Date();const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const isoDate=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const escapeHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const dateLabel=s=>localDate(s).toLocaleDateString('en-KE',{day:'numeric',month:'short',year:'numeric'});
+const uid=prefix=>prefix+'-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,7).toUpperCase();
+const currentYear=()=>new Date().getFullYear();
+function weekKey(date=new Date()){const d=new Date(date);d.setHours(0,0,0,0);d.setDate(d.getDate()+4-(d.getDay()||7));const y0=new Date(d.getFullYear(),0,1);return `${d.getFullYear()}-W${String(Math.ceil((((d-y0)/86400000)+1)/7)).padStart(2,'0')}`}
+function sundayFor(date=new Date()){const d=new Date(date);d.setHours(0,0,0,0);d.setDate(d.getDate()-d.getDay());return isoDate(d)}
+function seedState(){return {version:3,members:[],finances:[],triviaScores:[],votes:[],events:seedEvents(),songs:seedSongs(),setlist:[],attendanceSundays:[],settings:{treasurerPin:'2468',lastResetYear:currentYear()}}}
+function loadState(){try{const raw=localStorage.getItem(STORE_KEY);if(!raw)return seedState();const s=JSON.parse(raw);return {...seedState(),...s,settings:{...seedState().settings,...s.settings}}}catch(e){return seedState()}}
+/*
+  SERVER SYNC — uses the EXISTING Code.gs API without modifying it.
+  The app-state snapshot is stored as a special message in the existing Messages sheet.
+  Paste your deployed Apps Script Web App URL ending in /exec below.
+*/
+const SERVER_API_URL='https://script.google.com/macros/s/AKfycbyX6LQnFHqPySpKc__sX34P-Kj_iJGGAvwkSyX_GVy8YCwFO_4Q2aLzGqmelpZG7apy/exec';
+const SERVER_STATE_ROOM='__stgeorge_hub_state_v3__';
+const SERVER_STATE_NAME='St George Hub Snapshot';
+let serverSyncTimer=null,serverSyncBusy=false,serverSyncPending=false,serverSyncLastAt=0;
+const localStateHadData=!!localStorage.getItem(STORE_KEY);
+function serverConfigured(){return /^https:\/\/script\.google\.com\/macros\/s\/.+\/exec(?:\?.*)?$/.test(SERVER_API_URL)}
+function setServerStatus(status,title,detail){const bar=$('serverSyncBar');if(!bar)return;bar.dataset.status=status;$('serverSyncTitle').textContent=title;$('serverSyncDetail').textContent=detail}
+async function serverCall(action,payload={}){
+ if(!serverConfigured())throw new Error('Add the deployed Apps Script /exec URL to SERVER_API_URL first.');
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),25000);
+ try{
+  const response=await fetch(SERVER_API_URL,{method:'POST',mode:'cors',redirect:'follow',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({action,...payload}),signal:controller.signal,cache:'no-store'});
+  if(!response.ok)throw new Error('Server returned HTTP '+response.status+'.');
+  const raw=await response.text();let result;
+  try{result=JSON.parse(raw)}catch(e){throw new Error('The server did not return JSON. Check that the URL is the deployed Web App /exec URL.')}
+  if(result&&result.success===false)throw new Error(result.message||'Server request failed.');
+  return result;
+ }catch(error){if(error.name==='AbortError')throw new Error('Server request timed out. Check your connection and deployment URL.');throw error}
+ finally{clearTimeout(timer)}
+}
+function localUpdatedAt(){return Number(localStorage.getItem(STORE_KEY+'_updatedAt')||0)}
+function stateForServer(){
+ const copy=JSON.parse(JSON.stringify(state));
+ // Keep the server snapshot small: profile photos are uploaded to Drive separately.
+ return copy;
+}
+async function uploadLocalPhotos(){
+ for(const member of state.members){
+  if(typeof member.photo!=='string'||!member.photo.startsWith('data:image/'))continue;
+  const match=member.photo.match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/);
+  if(!match)continue;
+  const ext=(match[1].split('/')[1]||'jpg').replace('jpeg','jpg');
+  const result=await serverCall('uploadMedia',{name:member.name,data:match[2],mimeType:match[1],fileName:'stgeorge_'+String(member.id||Date.now()).replace(/[^a-z0-9_-]/gi,'_')+'.'+ext});
+  if(result&&result.success&&result.url)member.photo=result.url;
+ }
+}
+async function writeServerSnapshot(){
+ if(!serverConfigured())return false;
+ await uploadLocalPhotos();
+ const snapshot={__stGeorgeHubSnapshot:3,savedAt:Date.now(),state:stateForServer()};
+ const message=JSON.stringify(snapshot);
+ if(message.length>47000)throw new Error('The saved records are too large for one Google Sheets cell. Export a backup and reduce large profile photos.');
+ const result=await serverCall('sendMessage',{name:SERVER_STATE_NAME,message,roomId:SERVER_STATE_ROOM,messageType:'state'});
+ if(!result||!result.success)throw new Error('Server did not confirm the saved snapshot.');
+ const savedAt=snapshot.savedAt;localStorage.setItem(STORE_KEY+'_updatedAt',String(savedAt));localStorage.setItem(STORE_KEY+'_serverSavedAt',String(savedAt));serverSyncLastAt=savedAt;
+ return true;
+}
+async function readServerSnapshot(){
+ const result=await serverCall('getMessages',{roomId:SERVER_STATE_ROOM});
+ const messages=Array.isArray(result.messages)?result.messages:[];
+ for(let i=messages.length-1;i>=0;i--){
+  const m=messages[i];if(m.name!==SERVER_STATE_NAME||!m.message)continue;
+  try{const parsed=JSON.parse(m.message);if(parsed&&parsed.__stGeorgeHubSnapshot===3&&parsed.state&&Array.isArray(parsed.state.members))return parsed}catch(e){}
+ }
+ return null;
+}
+async function syncServerNow({quiet=false}={}){
+ if(!serverConfigured()){
+  setServerStatus('error','Server URL needed','Local backup is active; cloud sync is off until SERVER_API_URL is configured.');
+  if(!quiet)toast('Add your Apps Script web-app URL to enable server sync.','bad');return;
+ }
+ if(serverSyncBusy){serverSyncPending=true;return}
+ serverSyncBusy=true;setServerStatus('connecting','Connecting to Google Sheets…','Checking the latest saved community records.');
+ try{
+  await serverCall('setupDatabase');
+  const remote=await readServerSnapshot(),localTime=localUpdatedAt();
+  if(remote&&Number(remote.savedAt||0)>localTime){
+   state={...seedState(),...remote.state,settings:{...seedState().settings,...(remote.state.settings||{})}};
+   localStorage.setItem(STORE_KEY,JSON.stringify(state));localStorage.setItem(STORE_KEY+'_updatedAt',String(remote.savedAt));localStorage.setItem(STORE_KEY+'_serverSavedAt',String(remote.savedAt));renderAll();
+   setServerStatus('connected','Connected · latest records loaded','Restored the latest saved community data from Google Sheets.');
+  }else if(!remote||localTime>Number(remote.savedAt||0)){
+   await writeServerSnapshot();
+   setServerStatus('connected','Connected · data saved','Your current community records have been saved to the existing Apps Script backend.');
+  }else{
+   setServerStatus('connected','Connected · up to date','Your local records match the latest server snapshot.');
+  }
+  if(!quiet)toast('Server sync completed.');
+ }catch(error){
+  setServerStatus('error','Server sync failed',error.message||'Could not reach the server. Your local changes remain on this device.');
+  if(!quiet)toast('Server sync failed: '+(error.message||'Check configuration.'),'bad');
+ }finally{
+  serverSyncBusy=false;
+  if(serverSyncPending){serverSyncPending=false;queueServerSync(800)}
+ }
+}
+function queueServerSync(delay=1600){
+ if(!serverConfigured()){setServerStatus('error','Local-only mode','Add your existing Apps Script /exec URL to enable cloud sync.');return}
+ clearTimeout(serverSyncTimer);setServerStatus('connecting','Changes saved locally · waiting to sync','Cloud sync starts automatically shortly.');
+ serverSyncTimer=setTimeout(async()=>{
+  if(serverSyncBusy){serverSyncPending=true;return}
+  serverSyncBusy=true;setServerStatus('connecting','Saving to Google Sheets…','Uploading any new profile photos and saving a compact data snapshot.');
+  try{await writeServerSnapshot();setServerStatus('connected','Saved to Google Sheets','Last successful sync: '+new Date(serverSyncLastAt).toLocaleTimeString('en-KE',{hour:'2-digit',minute:'2-digit'}));}
+  catch(error){setServerStatus('error','Cloud save failed',error.message||'Local copy is safe; retry when online.');}
+  finally{serverSyncBusy=false;if(serverSyncPending){serverSyncPending=false;queueServerSync(500)}}
+ },delay);
+}
+function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state));localStorage.setItem(STORE_KEY+'_updatedAt',String(Date.now()));renderAll();queueServerSync();return true}catch(e){toast('Could not save locally. Browser storage may be full; export a backup and reduce photos.','bad');return false}}
+function toast(message,type='ok'){const el=document.createElement('div');el.className='toast'+(type==='bad'?' bad':'');el.textContent=message;$('toastArea').appendChild(el);setTimeout(()=>el.remove(),3800)}
+function seedEvents(){
+ const y=currentYear(); const fixed=[
+  [y+'-01-01','New Year’s Day','kenya','Kenya public holiday / community'],
+  [y+'-02-14',"Valentine’s Day",'community','Community observance'],
+  [y+'-03-08',"International Women’s Day",'community','Community observance'],
+  [y+'-05-01','Labour Day','kenya','Kenya public holiday'],
+  [y+'-06-01','Madaraka Day','kenya','Kenya public holiday'],
+  [y+'-06-05','World Environment Day','community','Environmental awareness'],
+  [y+'-10-10','Mazingira Day','kenya','Kenya public holiday'],
+  [y+'-10-20','Mashujaa Day','kenya','Kenya public holiday'],
+  [y+'-10-31','International Girlfriend’s Day (informal)','community','Informal community observance'],
+  [y+'-11-01','National Boyfriend Day (informal)','community','Informal community observance'],
+  [y+'-12-12','Jamhuri Day','kenya','Kenya public holiday'],
+  [y+'-12-25','Christmas Day','christian','Christian celebration / public holiday'],
+  [y+'-12-26','Boxing Day','kenya','Kenya public holiday'],
+ ];
+ // Easter-based dates calculated using Gregorian computus.
+ const easter=easterDate(y);const add=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return isoDate(x)};
+ fixed.push([add(easter,-2),'Good Friday','christian','Holy Week'],[isoDate(easter),'Easter Sunday','christian','Resurrection celebration'],[add(easter,1),'Easter Monday','kenya','Public holiday subject to official notice'],[add(easter,39),'Ascension Day','christian','40th day after Easter'],[add(easter,49),'Pentecost Sunday','christian','50th day after Easter'],[add(easter,-7),'Palm Sunday','christian','Beginning of Holy Week']);
+ fixed.push([y+'-05-10',"Mother’s Day (second Sunday in May)",'community','Community observance'],[y+'-06-21',"Father’s Day (third Sunday in June)",'community','Community observance']);
+ return fixed.map((e,i)=>({id:'EVT-'+y+'-'+i,date:e[0],title:e[1],category:e[2],description:e[3],custom:false}));
+}
+function easterDate(Y){const a=Y%19,b=Math.floor(Y/100),c=Y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),month=Math.floor((h+l-7*m+114)/31),day=((h+l-7*m+114)%31)+1;return new Date(Y,month-1,day)}
+function seedSongs(){return [
+ {id:'S1',title:'Mungu Ni Mwema',language:'Swahili',theme:'Thanksgiving',note:'Choose a familiar congregational arrangement.'},
+ {id:'S2',title:'Ninakupenda Yesu',language:'Swahili',theme:'Devotion',note:'Works well as a reflective worship song.'},
+ {id:'S3',title:'Nĩwe Mũthamaki (confirm local title/lyrics)',language:'Kikuyu',theme:'Praise',note:'Confirm title and preferred local arrangement with the choir.'},
+ {id:'S4',title:'Ngai Witu',language:'Kikuyu',theme:'Prayer',note:'Check the exact version used by your congregation.'},
+ {id:'S5',title:'Goodness of God',language:'English',theme:'Testimony',note:'A strong testimony / thanksgiving theme.'},
+ {id:'S6',title:'Great Is Thy Faithfulness',language:'English',theme:'Hymn',note:'Traditional hymn; suitable for reflective worship.'},
+ {id:'S7',title:'10,000 Reasons (Bless the Lord)',language:'English',theme:'Praise',note:'Good for a congregational praise set.'},
+ {id:'S8',title:'Amazing Grace',language:'English',theme:'Grace',note:'Traditional hymn; choose a key suitable for the group.'}
+]}
+function resetYearIfNeeded(){const y=currentYear();if(state.settings.lastResetYear!==y){state.triviaScores=state.triviaScores.filter(x=>x.year===y);state.settings.lastResetYear=y;persistOnly()}}
+function persistOnly(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state));localStorage.setItem(STORE_KEY+'_updatedAt',String(Date.now()));queueServerSync(2200)}catch(e){}}
+function getMember(id){return state.members.find(m=>m.id===id)}
+function eligibleAttendance(m){return (m.attendance||[]).filter(a=>!a.excused).length}
+function attendancePercent(m){const eligible=(m.attendance||[]).filter(a=>!a.excused);if(!eligible.length)return 0;return Math.round(eligible.filter(a=>a.present).length/eligible.length*100)}
+function isPaused(m){return m.status==='Paused / boarding'}
+function activeMembers(){return state.members.filter(m=>!isPaused(m)&&attendancePercent(m)>=60)}
+function memberDisplayStatus(m){if(isPaused(m))return 'PAUSED';return attendancePercent(m)>=60?'ACTIVE':'INACTIVE'}
+function avatarFor(m){return m.photo||`data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" rx="50" fill="#dff2e3"/><text x="50" y="59" text-anchor="middle" font-size="38" fill="#176144" font-family="Arial">${(m.name||'?').trim().charAt(0).toUpperCase()}</text></svg>`)}`}
+function renderClock(){const d=new Date();$('liveClock').textContent=d.toLocaleString('en-KE',{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});$('todayDay').textContent=d.toLocaleDateString('en-KE',{weekday:'long'}).toUpperCase();$('todayDate').textContent=d.toLocaleDateString('en-KE',{day:'numeric',month:'short'});$('sundayLabel').textContent='Next Sunday · '+dateLabel(nextSunday())}
+function nextSunday(){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+((7-d.getDay())%7||7));return isoDate(d)}
+function renderStats(){
+ $('statMembers').textContent=state.members.length;
+ $('statActive').textContent=activeMembers().length;
+ const today=sundayFor(new Date());$('statCheckins').textContent=state.members.filter(m=>(m.attendance||[]).some(a=>a.date===today&&a.present)).length;
+ const bal=state.finances.reduce((s,f)=>s+f.balance,0);$('statBalance').textContent=fmtMoney(bal);
+ $('statTrivia').textContent=state.triviaScores.filter(s=>s.year===currentYear()).length;
+ const now=new Date(),limit=new Date();limit.setDate(limit.getDate()+60);$('statEvents').textContent=state.events.filter(e=>localDate(e.date)>=new Date(now.getFullYear(),now.getMonth(),now.getDate())&&localDate(e.date)<=limit).length;
+ $('memberTotalPill').textContent=state.members.length+' profiles';
+}
+function renderMembers(){
+ const query=($('memberSearch')?.value||'').toLowerCase(),filter=$('memberFilter')?.value||'all';
+ const list=state.members.filter(m=>(m.name+' '+m.id).toLowerCase().includes(query)).filter(m=>filter==='all'||(filter==='active'&&!isPaused(m)&&attendancePercent(m)>=60)||(filter==='inactive'&&!isPaused(m)&&attendancePercent(m)<60)||(filter==='paused'&&isPaused(m)));
+ $('membersGrid').innerHTML=list.length?list.map(m=>{const p=attendancePercent(m),paused=isPaused(m),inactive=!paused&&p<60;return `<article class="member-card ${inactive?'inactive':''} ${paused?'paused':''}"><img class="avatar" src="${avatarFor(m)}" alt="Profile photo of ${escapeHTML(m.name)}"><h4>${escapeHTML(m.name)}</h4><p>${escapeHTML(m.id)} · ${escapeHTML(m.ministry||'Youth member')}</p><span class="member-status">${memberDisplayStatus(m)}</span><div class="progress"><span style="width:${p}%"></span></div><p>${p}% attendance · ${eligibleAttendance(m)} eligible Sundays</p><div class="member-actions"><button class="btn secondary small" data-attend="${m.id}">Check in</button><button class="btn secondary small" data-pause="${m.id}">${paused?'Resume':'Pause'}</button><button class="btn secondary small" data-edit="${m.id}">Edit</button></div></article>`}).join(''):'<div class="empty" style="grid-column:1/-1">No matching members yet. Add a member to get started.</div>';
+ const options='<option value="">Choose a member…</option>'+state.members.map(m=>`<option value="${m.id}">${escapeHTML(m.name)} · ${m.id}</option>`).join('');
+ ['checkinMember','triviaMember','voterMember'].forEach(id=>{const old=$(id).value;$(id).innerHTML=options;if(state.members.some(m=>m.id===old))$(id).value=old});
+}
+function chartBase(){return {responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:8,font:{size:10}}}},scales:{x:{grid:{display:false},ticks:{font:{size:10},maxRotation:0}},y:{beginAtZero:true,ticks:{font:{size:10}},grid:{color:'#edf2ee'}}}}}
+function renderCharts(){
+ if(typeof Chart==='undefined')return;
+ const labels=[];const counts=[];const today=localDate(sundayFor());for(let i=7;i>=0;i--){const d=new Date(today);d.setDate(d.getDate()-i*7);const iso=isoDate(d);labels.push(d.toLocaleDateString('en-KE',{day:'numeric',month:'short'}));counts.push(state.members.filter(m=>(m.attendance||[]).some(a=>a.date===iso&&a.present)).length)}
+ const aCtx=$('attendanceChart');if(attendanceChart)attendanceChart.destroy();attendanceChart=new Chart(aCtx,{type:'bar',data:{labels,datasets:[{label:'Checked in',data:counts,backgroundColor:'#1a936f',borderRadius:7,maxBarThickness:28}]},options:{...chartBase(),scales:{...chartBase().scales,y:{...chartBase().scales.y,suggestedMax:Math.max(5,...counts)}}}});
+ const f=state.finances.slice().sort((a,b)=>a.date.localeCompare(b.date)).slice(-12),fl=f.map(x=>dateLabel(x.date).replace(/,\s*\d{4}$/,''));
+ const ds=[{label:'Income',data:f.map(x=>x.income),borderColor:'#14966b',backgroundColor:'#14966b',tension:.3,pointRadius:3},{label:'Expenses',data:f.map(x=>x.expenses),borderColor:'#e4a11b',backgroundColor:'#e4a11b',tension:.3,pointRadius:3},{label:'Savings / loss',data:f.map(x=>x.balance),borderColor:'#3985d6',backgroundColor:f.map(x=>x.balance<0?'#dc3f3f':'#3985d6'),pointBackgroundColor:f.map(x=>x.balance<0?'#dc3f3f':'#3985d6'),pointRadius:f.map(x=>x.balance<0?6:3),tension:.3,fill:false}];
+ if(financeChart)financeChart.destroy();financeChart=new Chart($('financeChart'),{type:'line',data:{labels:fl,datasets:ds},options:{...chartBase(),scales:{...chartBase().scales,y:{...chartBase().scales.y,ticks:{callback:v=>'KSh '+Number(v).toLocaleString('en-KE')}}}}});
+ if(overviewFinanceChart)overviewFinanceChart.destroy();overviewFinanceChart=new Chart($('overviewFinanceChart'),{type:'line',data:{labels:fl,datasets:ds.map(x=>({...x,pointRadius:2,borderWidth:2}))},options:{...chartBase(),plugins:{...chartBase().plugins,legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:7,font:{size:9}}}},scales:{...chartBase().scales,y:{...chartBase().scales.y,ticks:{callback:v=>Number(v).toLocaleString('en-KE')}}}}});
+}
+function renderFinance(){
+ const fs=state.finances.slice().sort((a,b)=>b.date.localeCompare(a.date));$('financeRows').innerHTML=fs.length?fs.map(f=>`<tr><td><b>${dateLabel(f.date)}</b><br><small>${escapeHTML(f.id)}</small></td><td>${fmtMoney(f.income)}</td><td>${fmtMoney(f.expenses)}</td><td class="${f.balance<0?'loss':''}"><b>${fmtMoney(f.balance)}</b>${f.balance<0?' · LOSS':''}</td><td>${fmtMoney(f.mpesa)} M-PESA<br>${fmtMoney(f.cash)} cash</td></tr>`).join(''):'<tr><td colspan="5" class="empty">No finance records have been saved.</td></tr>';
+ const latest=fs[0];$('latestToken').textContent=latest?latest.id:`ACK-SUN-${sundayFor()}`;
+}
+const questions={
+ 1:[{q:'Who built an ark to survive the flood?',a:['noah'],ref:'Genesis 6–9'},{q:'Who was the mother of Jesus?',a:['mary'],ref:'Luke 1'},{q:'What is the first book of the Bible?',a:['genesis'],ref:'Genesis 1'},{q:'Who defeated Goliath?',a:['david'],ref:'1 Samuel 17'}],
+ 2:[{q:'Which disciple denied Jesus three times?',a:['peter','simon peter'],ref:'Luke 22'},{q:'Who was swallowed by a great fish?',a:['jonah'],ref:'Jonah 1'},{q:'What did Jesus turn water into at Cana?',a:['wine'],ref:'John 2'},{q:'Who led the Israelites out of Egypt?',a:['moses'],ref:'Exodus'}],
+ 3:[{q:'Name the fruit of the Spirit listed first in Galatians 5.',a:['love'],ref:'Galatians 5:22'},{q:'Which queen visited Solomon to test his wisdom?',a:['queen of sheba','the queen of sheba'],ref:'1 Kings 10'},{q:'On which day did Jesus rise from the dead?',a:['third day','the third day'],ref:'Luke 24'},{q:'What was the occupation of Peter before following Jesus?',a:['fisherman','fishermen','fishing'],ref:'Matthew 4'}],
+ 4:[{q:'Which prophet confronted the prophets of Baal on Mount Carmel?',a:['elijah'],ref:'1 Kings 18'},{q:'What is the shortest verse in many English Bible translations?',a:['jesus wept'],ref:'John 11:35'},{q:'Who interpreted Pharaoh’s dreams in Egypt?',a:['joseph'],ref:'Genesis 41'},{q:'Which New Testament letter describes the armour of God?',a:['ephesians','letter to the ephesians'],ref:'Ephesians 6'}]
+};
+const tips=['Read the passage around a verse, not only the verse itself. Context helps you understand the message.','Try explaining today’s Bible passage in your own words to a friend.','Use a concordance or Bible index to compare related passages.','Ask: What does this passage teach about God, people, and practical life?'];
+function difficultyLevel(){const recent=state.triviaScores.filter(s=>s.year===currentYear()).slice(-30);if(recent.length<5)return 1;const avg=recent.reduce((n,s)=>n+s.score,0)/recent.length;return avg>=85?4:avg>=65?3:avg>=40?2:1}
+function currentQuestion(){const level=difficultyLevel(),wk=weekKey();const bank=questions[level]||questions[1];let hash=0;for(const c of wk)hash=(hash*31+c.charCodeAt(0))>>>0;return {...bank[hash%bank.length],level,wk}}
+function renderTrivia(){
+ const q=currentQuestion();$('questionText').textContent=q.q;$('triviaWeekTitle').textContent='This week · '+q.wk;$('triviaMeta').textContent=`Level ${q.level} of 4 · Reference: ${q.ref} · One attempt per member per week`;
+ $('difficultyPill').textContent=['','LEVEL: STARTER','LEVEL: GROWING','LEVEL: ADVANCED','LEVEL: SCHOLAR'][q.level];$('difficultyBar').style.width=(q.level*25)+'%';
+ const recent=state.triviaScores.filter(s=>s.year===currentYear());const avg=recent.length?Math.round(recent.reduce((n,s)=>n+s.score,0)/recent.length):0;
+ $('difficultySummary').textContent=recent.length<5?`Collect ${5-recent.length} more scored attempts before adaptive difficulty increases. Current year average: ${avg}%.`:`Group average is ${avg}%. ${q.level===4?'Scholar level is active: questions draw on more detailed Bible knowledge.':'The question pool adjusts as scores improve.'}`;
+ $('weeklyTip').textContent=tips[new Date().getDay()%tips.length];
+ const scores=state.triviaScores.filter(s=>s.year===currentYear()).slice().sort((a,b)=>b.score-a.score||a.createdAt-b.createdAt);
+ $('triviaRows').innerHTML=scores.length?scores.slice(0,50).map((s,i)=>`<tr><td><span class="rank ${i<4?'gold':i<7?'silver':i<13?'bronze':''}">${i+1}</span></td><td>${escapeHTML(getMember(s.memberId)?.name||s.memberName||'Former member')}</td><td><b>${s.score}%</b></td><td>${s.level||1}</td><td>${escapeHTML(s.week)}</td></tr>`).join(''):'<tr><td colspan="5" class="empty">No trivia attempts yet this year.</td></tr>';
+}
+function renderEvents(){
+ const filter=$('eventFilter')?.value||'upcoming',month=$('eventMonth')?.value||'',now=new Date();now.setHours(0,0,0,0);
+ let events=state.events.slice().sort((a,b)=>a.date.localeCompare(b.date));
+ if(filter==='upcoming')events=events.filter(e=>localDate(e.date)>=now);
+ if(filter==='christian')events=events.filter(e=>e.category==='christian');
+ if(filter==='kenya')events=events.filter(e=>e.category==='kenya'||e.category==='community');
+ if(filter==='custom')events=events.filter(e=>e.custom);
+ if(month)events=events.filter(e=>e.date.startsWith(month));
+ $('allEvents').innerHTML=events.length?events.map(e=>`<div class="event-item"><div class="event-date"><b>${localDate(e.date).getDate()}</b><small>${localDate(e.date).toLocaleDateString('en-KE',{month:'short'})}</small></div><div style="flex:1"><h4>${escapeHTML(e.title)}</h4><p>${dateLabel(e.date)} · ${escapeHTML(e.description||'Church community event')}</p></div><span class="chip">${escapeHTML(e.category)}</span>${e.custom?`<button class="btn danger small" data-delete-event="${e.id}" aria-label="Delete event">×</button>`:''}</div>`).join(''):'<div class="empty">No events match this filter.</div>';
+ const upcoming=state.events.filter(e=>localDate(e.date)>=now).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,4);
+ $('dashboardEvents').innerHTML=upcoming.length?upcoming.map(e=>`<div class="event-item"><div class="event-date"><b>${localDate(e.date).getDate()}</b><small>${localDate(e.date).toLocaleDateString('en-KE',{month:'short'})}</small></div><div><h4>${escapeHTML(e.title)}</h4><p>${escapeHTML(e.description||e.category)}</p></div></div>`).join(''):'<div class="empty">No upcoming events. Add one to the calendar.</div>';
+}
+function renderPulse(){const total=state.members.length,active=activeMembers().length,ratio=total?Math.round(active/total*100):0;const totalIn=state.finances.reduce((a,f)=>a+f.income,0),totalOut=state.finances.reduce((a,f)=>a+f.expenses,0);$('pulseContent').innerHTML=`<div style="display:flex;justify-content:space-between;font-size:12px;margin:12px 0 6px"><b>Member participation</b><b>${ratio}%</b></div><div class="progress"><span style="width:${ratio}%"></span></div><div style="display:flex;justify-content:space-between;font-size:12px;margin-top:16px"><span class="subtle">Total income recorded</span><b>${fmtMoney(totalIn)}</b></div><div style="display:flex;justify-content:space-between;font-size:12px;margin-top:9px"><span class="subtle">Total expenditure</span><b>${fmtMoney(totalOut)}</b></div><div style="display:flex;justify-content:space-between;font-size:12px;margin-top:9px"><span class="subtle">Paused / boarding</span><b>${state.members.filter(isPaused).length}</b></div>`}
+function renderAwards(){
+ const list=state.members.map(m=>{const scores=state.triviaScores.filter(s=>s.memberId===m.id&&s.year===currentYear());const avg=scores.length?scores.reduce((a,s)=>a+s.score,0)/scores.length:0;const p=attendancePercent(m);const score=isPaused(m)?0:Math.round(p*.7+avg*.3);return {m,p,avg,score}}).sort((a,b)=>b.score-a.score);
+ $('awardRows').innerHTML=list.length?list.slice(0,20).map((x,i)=>`<tr><td><span class="rank ${i===0?'gold':i===1?'silver':i===2?'bronze':''}">${i+1}</span></td><td>${escapeHTML(x.m.name)}${isPaused(x.m)?' (paused)':''}</td><td>${x.p}%</td><td>${Math.round(x.avg)}%</td><td><b>${x.score}/100</b></td><td>${isPaused(x.m)?'Review pause':'Leader review'}</td></tr>`).join(''):'<tr><td colspan="6" class="empty">Register members to build a fair shortlist.</td></tr>';
+}
+function renderSongs(){const lang=$('songLanguage')?.value||'all';const songs=state.songs.filter(s=>lang==='all'||s.language===lang);$('songList').innerHTML=songs.map(s=>`<div class="song"><div><b>${escapeHTML(s.title)}</b><small>${escapeHTML(s.language)} · ${escapeHTML(s.theme||'Worship')}</small><small>${escapeHTML(s.note||'')}</small></div><button class="btn secondary small" data-add-song="${s.id}">Add</button></div>`).join('')||'<div class="empty">No songs in this category.</div>';const chosen=state.setlist.map(id=>state.songs.find(s=>s.id===id)).filter(Boolean);$('setlist').innerHTML=chosen.length?chosen.map((s,i)=>`<div class="song"><div><b>${i+1}. ${escapeHTML(s.title)}</b><small>${escapeHTML(s.language)}</small></div><button class="btn danger small" data-remove-song="${s.id}">Remove</button></div>`).join(''):'<div class="empty">Your setlist is empty. Add a song from the library.</div>'}
+function renderVotes(){const offices=['Chairperson','Vice Chairperson','Secretary','Vice Secretary','Treasurer','Time Keeper','Brigadier Officer'];$('electionSummary').innerHTML=offices.map(role=>{const votes=state.votes.filter(v=>v.role===role);const counts={};votes.forEach(v=>counts[v.candidate]=(counts[v.candidate]||0)+1);const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]);return `<div style="padding:11px 0;border-bottom:1px solid var(--line)"><b style="font-size:13px">${role}</b><div class="subtle" style="font-size:11px">${votes.length} demo ballot(s)</div>${sorted.slice(0,3).map(([name,n])=>`<div style="display:flex;justify-content:space-between;font-size:12px;margin-top:6px"><span>${escapeHTML(name)}</span><b>${n}</b></div>`).join('')||'<small class="subtle">No ballots recorded</small>'}</div>`}).join('')}
+function renderStorage(){const bytes=new Blob([JSON.stringify(state)]).size;const mb=(bytes/1024/1024).toFixed(2);$('storageStatus').innerHTML=`<div style="display:flex;justify-content:space-between;margin:9px 0;font-size:13px"><span class="subtle">Estimated data size</span><b>${mb} MB</b></div><div style="display:flex;justify-content:space-between;margin:9px 0;font-size:13px"><span class="subtle">Members</span><b>${state.members.length}</b></div><div style="display:flex;justify-content:space-between;margin:9px 0;font-size:13px"><span class="subtle">Finance records</span><b>${state.finances.length}</b></div><div style="display:flex;justify-content:space-between;margin:9px 0;font-size:13px"><span class="subtle">Last backup</span><b>${localStorage.getItem(STORE_KEY+'_backupAt')||'Not recorded'}</b></div>`}
+function renderAll(){renderClock();renderStats();renderMembers();renderFinance();renderTrivia();renderEvents();renderPulse();renderAwards();renderSongs();renderVotes();renderStorage();renderCharts()}
+function openModal(title,html){$('modalTitle').textContent=title;$('modalContent').innerHTML=html;$('modalBackdrop').classList.add('open')}
+function closeModal(){$('modalBackdrop').classList.remove('open')}
+function compressImage(file){return new Promise((resolve,reject)=>{if(!file){resolve('');return}if(!file.type.startsWith('image/')){reject(new Error('Please choose an image file.'));return}const reader=new FileReader();reader.onerror=()=>reject(new Error('Could not read image.'));reader.onload=()=>{const img=new Image();img.onerror=()=>reject(new Error('Could not load image.'));img.onload=()=>{const max=420,scale=Math.min(1,max/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=Math.round(img.width*scale);c.height=Math.round(img.height*scale);c.getContext('2d').drawImage(img,0,0,c.width,c.height);resolve(c.toDataURL('image/jpeg',.72))};img.src=reader.result};reader.readAsDataURL(file)})}
+function registerModal(member=null){const m=member||{};openModal(member?'Edit member':'Register a member',`<form id="memberForm"><div class="form-grid"><div class="field full"><label>Full name *</label><input name="name" required maxlength="90" value="${escapeHTML(m.name||'')}" placeholder="Member's full name"></div><div class="field"><label>Age</label><input name="age" type="number" min="1" max="120" value="${escapeHTML(m.age||'')}"></div><div class="field"><label>Gender (optional)</label><select name="gender"><option value="">Prefer not to say</option><option ${m.gender==='Female'?'selected':''}>Female</option><option ${m.gender==='Male'?'selected':''}>Male</option><option ${m.gender==='Other'?'selected':''}>Other</option></select></div><div class="field"><label>Ministry / role</label><input name="ministry" maxlength="60" value="${escapeHTML(m.ministry||'Youth member')}" placeholder="e.g. Choir"></div><div class="field"><label>Member status</label><select name="status"><option ${m.status==='Active'?'selected':''}>Active</option><option ${isPaused(m)?'selected':''}>Paused / boarding</option></select></div><div class="field full"><label>Profile photo (optional)</label><input name="photo" type="file" accept="image/*"><small class="help">Photo is resized before saving to reduce device storage use.</small></div><div class="field full"><label>Consent</label><label style="font-weight:500"><input name="consent" type="checkbox" required style="width:auto" ${member?'checked':''}> I have permission to store this member's profile details and optional photo for church administration.</label></div></div><button class="btn" style="width:100%;margin-top:15px">${member?'Save changes':'Register member & generate ID'}</button></form>`);
+ $('memberForm').addEventListener('submit',async e=>{e.preventDefault();const fd=new FormData(e.currentTarget),name=String(fd.get('name')).trim();if(!name)return;try{let photo=m.photo||'';const file=fd.get('photo');if(file&&file.size)photo=await compressImage(file);if(member){Object.assign(member,{name,age:fd.get('age'),gender:fd.get('gender'),ministry:fd.get('ministry')||'Youth member',status:fd.get('status'),photo})}else{if(state.members.some(x=>x.name.toLowerCase()===name.toLowerCase())){toast('A member with that name already exists. Check the directory first.','bad');return}state.members.push({id:uid('ACK'),name,age:fd.get('age'),gender:fd.get('gender'),ministry:fd.get('ministry')||'Youth member',status:fd.get('status'),photo,attendance:[],createdAt:new Date().toISOString()})}closeModal();saveState();toast(member?'Member updated.':'Member registered and ID generated.');}catch(err){toast(err.message||'Could not save member.','bad')}});}
+function recordAttendance(memberId){const m=getMember(memberId);if(!m){toast('Select a registered member first.','bad');return}if(isPaused(m)){toast('This member is paused. Resume their profile before recording attendance.','bad');return}const date=sundayFor(new Date());m.attendance=m.attendance||[];if(m.attendance.some(a=>a.date===date&&a.present)){toast(`${m.name} is already checked in for ${dateLabel(date)}.`,'bad');return}if(!state.attendanceSundays.includes(date))state.attendanceSundays.push(date);m.attendance.push({date,present:true,excused:false,method:'touch-demo',at:new Date().toISOString()});saveState();toast('Attendance recorded for '+m.name+'.')}
+function showAttendanceModal(){if(!state.members.length){toast('Register members before recording attendance.','bad');return}openModal('Sunday attendance register',`<p class="subtle" style="font-size:13px">Sunday: <b>${dateLabel(sundayFor())}</b>. Tick each person who is present. Paused members are disabled.</p><div style="display:grid;gap:8px;margin:14px 0;max-height:45vh;overflow:auto">${state.members.map(m=>`<label style="display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:12px;${isPaused(m)?'opacity:.5':''}"><input type="checkbox" data-bulk-member="${m.id}" ${isPaused(m)?'disabled':''} ${(m.attendance||[]).some(a=>a.date===sundayFor()&&a.present)?'checked':''} style="width:18px;height:18px"><span><b>${escapeHTML(m.name)}</b><small style="display:block;color:var(--muted)">${m.id}${isPaused(m)?' · paused':''}</small></span></label>`).join('')}</div><button class="btn" id="saveBulkAttendance" style="width:100%">Save attendance register</button>`);
+ $('saveBulkAttendance').onclick=()=>{const date=sundayFor();if(!state.attendanceSundays.includes(date))state.attendanceSundays.push(date);document.querySelectorAll('[data-bulk-member]').forEach(cb=>{const m=getMember(cb.dataset.bulkMember);if(!m||isPaused(m))return;m.attendance=m.attendance||[];const old=m.attendance.find(a=>a.date===date);if(cb.checked){if(old){old.present=true;old.excused=false}else m.attendance.push({date,present:true,excused:false,method:'bulk-touch-demo',at:new Date().toISOString()})}else if(old){old.present=false}});closeModal();saveState();toast('Sunday attendance register saved.')}
+}
+function stableSundayToken(date){return 'ACK-SUN-'+date.replaceAll('-','')+'-'+hashCode(date).toString(36).toUpperCase()}
+function hashCode(s){let h=0;for(let i=0;i<s.length;i++)h=((h<<5)-h+s.charCodeAt(i))|0;return Math.abs(h)}
+$('financeDate').value=sundayFor();
+$('financeForm').addEventListener('submit',e=>{e.preventDefault();const pin=$('treasurerPin').value;if(pin!==state.settings.treasurerPin){$('financeMessage').innerHTML='<div class="notice error">Treasurer verification failed. Finance was not saved.</div>';return}const date=$('financeDate').value,income=Number($('financeIncome').value),expenses=Number($('financeExpenses').value),mpesa=Number($('financeMpesa').value||0),cash=Number($('financeCash').value||0);if(!date||[income,expenses,mpesa,cash].some(n=>!Number.isFinite(n)||n<0)){toast('Enter valid non-negative amounts and a date.','bad');return}if(Math.abs((mpesa+cash)-income)>0.01){$('financeMessage').innerHTML='<div class="notice error">M-PESA + cash must equal total income. Please reconcile the figures before saving.</div>';return}const existing=state.finances.find(f=>f.date===date);if(existing&&!confirm('A record already exists for this date. Replace it?'))return;const record={id:uid('TRX'),sundayToken:stableSundayToken(date),date,income,expenses,mpesa,cash,balance:income-expenses,notes:$('financeExpenseNote').value.trim(),source:'M-PESA + cash',createdAt:new Date().toISOString()};if(existing)state.finances=state.finances.filter(f=>f.date!==date);state.finances.push(record);$('financeMessage').innerHTML=`<div class="notice success">Saved. ${record.balance<0?'Loss recorded: ':'Savings recorded: '}${fmtMoney(record.balance)} · ${record.id}</div>`;$('treasurerPin').value='';saveState();toast('Finance record saved with transaction ID.');});
+$('checkinBtn').onclick=()=>{const id=$('checkinMember').value;if(!id){toast('Choose a member first.','bad');return}if($('checkinMethod').value==='passkey'){toast('Real passkey verification needs a configured secure backend; no biometric was claimed.','bad');return}if(confirm('Confirm this member is present today? This is a touch confirmation demo, not fingerprint verification.')){recordAttendance(id);$('attendanceMessage').innerHTML='<div class="notice success">Touch confirmation saved locally.</div>'}};
+$('attendanceBtn').onclick=showAttendanceModal;$('openRegister').onclick=()=>registerModal();
+$('membersGrid').addEventListener('click',e=>{const a=e.target.closest('[data-attend]'),p=e.target.closest('[data-pause]'),ed=e.target.closest('[data-edit]');if(a)recordAttendance(a.dataset.attend);if(p){const m=getMember(p.dataset.pause);if(!m)return;if(isPaused(m)){m.status='Active';m.resumedAt=todayISO()}else{m.status='Paused / boarding';m.pausedAt=todayISO()}saveState();toast(isPaused(m)?'Profile paused.':'Profile resumed.')}if(ed){const m=getMember(ed.dataset.edit);if(m)registerModal(m)}});
+$('memberSearch').addEventListener('input',renderMembers);$('memberFilter').addEventListener('change',renderMembers);
+$('triviaForm').addEventListener('submit',e=>{e.preventDefault();const id=$('triviaMember').value,m=getMember(id),answer=$('triviaAnswer').value.trim().toLowerCase();if(!m){toast('Select your registered profile.','bad');return}const q=currentQuestion();if(state.triviaScores.some(s=>s.memberId===id&&s.week===q.wk)){ $('triviaMessage').innerHTML='<div class="notice error">This member already submitted an attempt this week.</div>';return}const correct=q.a.some(a=>a.toLowerCase()===answer),score=correct?100:0;state.triviaScores.push({id:uid('QUIZ'),memberId:id,memberName:m.name,score,correct,week:q.wk,level:q.level,year:currentYear(),question:q.q,createdAt:Date.now()});saveState();$('triviaMessage').innerHTML=`<div class="notice ${correct?'success':'error'}">${correct?'Correct! Well done.':'Not quite. The expected answer is: '+q.a[0]+'.'} Reference: ${q.ref}. Score: ${score}%.</div>`;$('triviaAnswer').value='';toast('Trivia attempt recorded.');});
+$('newTipBtn').onclick=()=>{$('weeklyTip').textContent=tips[Math.floor(Math.random()*tips.length)]};
+$('refreshAwards').onclick=()=>{renderAwards();toast('Award shortlist refreshed.');};
+$('voteForm').addEventListener('submit',e=>{e.preventDefault();const member=getMember($('voterMember').value),role=$('voteRole').value,candidate=$('voteCandidate').value.trim();if(!member||!candidate){toast('Complete voter and candidate fields.','bad');return}if($('voteConfirm').value==='passkey'){toast('Real passkey verification requires a secure backend; ballot not recorded.','bad');return}if(state.votes.some(v=>v.voterId===member.id&&v.role===role)){ $('voteMessage').innerHTML='<div class="notice error">This member already has a demo ballot for this office on this device.</div>';return}if(!confirm(`Confirm demo ballot for ${role}: ${candidate}? This is not a secure secret ballot.`))return;state.votes.push({id:uid('BAL'),voterId:member.id,role,candidate,at:new Date().toISOString()});saveState();$('voteMessage').innerHTML='<div class="notice success">Demo ballot saved locally. Do not use this prototype for official elections.</div>';toast('Demo ballot recorded.');});
+$('songLanguage').onchange=renderSongs;$('songList').addEventListener('click',e=>{const b=e.target.closest('[data-add-song]');if(!b)return;if(!state.setlist.includes(b.dataset.addSong))state.setlist.push(b.dataset.addSong);saveState();toast('Song added to setlist.')});$('setlist').addEventListener('click',e=>{const b=e.target.closest('[data-remove-song]');if(!b)return;state.setlist=state.setlist.filter(id=>id!==b.dataset.removeSong);saveState()});
+$('addSongBtn').onclick=()=>openModal('Add a choir song',`<form id="songForm"><div class="form-grid"><div class="field full"><label>Song title</label><input name="title" required></div><div class="field"><label>Language</label><select name="language"><option>Swahili</option><option>Kikuyu</option><option>English</option></select></div><div class="field"><label>Theme</label><input name="theme" placeholder="Praise, prayer…"></div><div class="field full"><label>Notes</label><input name="note"></div></div><button class="btn" style="margin-top:14px;width:100%">Save song</button></form>`);$('songForm').onsubmit=e=>{e.preventDefault();const f=new FormData(e.currentTarget);state.songs.push({id:uid('SONG'),title:f.get('title').trim(),language:f.get('language'),theme:f.get('theme'),note:f.get('note')});closeModal();saveState();toast('Song added.')};
+$('addEventBtn').onclick=()=>openModal('Add church event',`<form id="eventForm"><div class="form-grid"><div class="field full"><label>Event name</label><input name="title" required></div><div class="field"><label>Date</label><input name="date" type="date" required value="${todayISO()}"></div><div class="field"><label>Category</label><select name="category"><option value="christian">Christian</option><option value="kenya">Kenya public holiday</option><option value="community">Community</option><option value="custom">Church programme</option></select></div><div class="field full"><label>Details</label><textarea name="description"></textarea></div></div><button class="btn" style="width:100%;margin-top:14px">Save event</button></form>`);$('eventForm').onsubmit=e=>{e.preventDefault();const f=new FormData(e.currentTarget);state.events.push({id:uid('EVT'),title:f.get('title').trim(),date:f.get('date'),category:f.get('category'),description:f.get('description'),custom:true});closeModal();saveState();toast('Event added to calendar.')};
+$('allEvents').addEventListener('click',e=>{const b=e.target.closest('[data-delete-event]');if(!b)return;state.events=state.events.filter(x=>x.id!==b.dataset.deleteEvent);saveState();toast('Custom event deleted.')});$('eventFilter').onchange=renderEvents;$('eventMonth').onchange=renderEvents;
+function csvEscape(v){return '"'+String(v??'').replaceAll('"','""')+'"'}
+function downloadText(filename,text,type='text/plain'){const blob=new Blob([text],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function downloadCSV(filename,rows){downloadText(filename,rows.map(r=>r.map(csvEscape).join(',')).join('\r\n'),'text/csv;charset=utf-8')}
+$('exportFinanceBtn').onclick=()=>downloadCSV('church-finance.csv',[['Transaction ID','Date','Income KSh','Expenses KSh','Savings or loss KSh','M-PESA KSh','Cash KSh','Notes'],...state.finances.map(f=>[f.id,f.date,f.income,f.expenses,f.balance,f.mpesa,f.cash,f.notes])]);
+$('exportTriviaBtn').onclick=()=>downloadCSV('bible-trivia.csv',[['Member','Score','Level','Week','Year','Question'],...state.triviaScores.map(s=>[getMember(s.memberId)?.name||s.memberName,s.score,s.level,s.week,s.year,s.question])]);
+$('exportVotesBtn').onclick=()=>downloadCSV('demo-election-log.csv',[['Ballot ID','Voter ID','Office','Candidate','Date'],...state.votes.map(v=>[v.id,v.voterId,v.role,v.candidate,v.at])]);
+$('exportSetlist').onclick=()=>downloadCSV('choir-setlist.csv',[['Order','Song','Language','Theme','Notes'],...state.setlist.map((id,i)=>{const s=state.songs.find(x=>x.id===id);return s?[i+1,s.title,s.language,s.theme,s.note]:[]}).filter(x=>x.length)]);
+$('backupBtn').onclick=()=>{downloadText('st-george-youth-backup-'+todayISO()+'.json',JSON.stringify(state,null,2),'application/json');localStorage.setItem(STORE_KEY+'_backupAt',new Date().toLocaleString());renderStorage();toast('Backup downloaded. Keep it private.')};
+$('restoreBtn').onclick=()=>$('restoreFile').click();$('restoreFile').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const parsed=JSON.parse(await file.text());if(!parsed||!Array.isArray(parsed.members)||!Array.isArray(parsed.finances))throw new Error('This does not look like a valid church backup.');if(!confirm('Replace the current local records with this backup? Download a backup of the current data first if needed.'))return;state={...seedState(),...parsed};saveState();toast('Backup restored.');}catch(err){toast(err.message||'Could not restore backup.','bad')}e.target.value=''};
+$('clearDemoBtn').onclick=()=>{if(!confirm('Permanently clear all local demo members, finances, trivia, votes, and custom records from this browser? Export a backup first.'))return;state=seedState();saveState();toast('Local demo data cleared.')};
+$('copyTokenBtn').onclick=async()=>{try{await navigator.clipboard.writeText($('latestToken').textContent);toast('Token copied.')}catch(e){toast('Copy unavailable in this browser. Select the token and copy it.','bad')}};
+$('notifyBtn').onclick=()=>{const n=state.members.filter(m=>!isPaused(m)&&attendancePercent(m)<60).length;toast(n?`${n} member profile(s) are below 60% attendance.`:'No attendance alerts right now.')};
+$('themeBtn').onclick=()=>{document.body.classList.toggle('high-contrast');if(document.body.classList.contains('high-contrast')){document.documentElement.style.setProperty('--paper','#eaf4ec');document.documentElement.style.setProperty('--line','#c9ddd0')}else{document.documentElement.style.setProperty('--paper','#f4f8f5');document.documentElement.style.setProperty('--line','#e1eae4')}};
+$('closeModal').onclick=closeModal;$('modalBackdrop').addEventListener('click',e=>{if(e.target===$('modalBackdrop'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+$('menuBtn').onclick=()=>$('sidebar').classList.toggle('open');
+document.querySelectorAll('[data-target]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x===b));document.getElementById(b.dataset.target).scrollIntoView({behavior:'smooth'});$('sidebar').classList.remove('open')}));
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.go).scrollIntoView({behavior:'smooth'})));
+$('exportTriviaBtn').addEventListener('click',()=>{});
+$('syncNowBtn').addEventListener('click',()=>syncServerNow());
+function init(){
+ resetYearIfNeeded();renderAll();setInterval(renderClock,30000);
+ if(serverConfigured()){
+  setServerStatus('connecting','Connecting to Google Sheets…','Loading saved records from the configured Apps Script deployment.');
+  setTimeout(()=>syncServerNow({quiet:true}),250);
+ }else{
+  setServerStatus('error','Local-only mode','Paste your deployed Apps Script /exec URL into SERVER_API_URL to turn on server storage.');
+ }
+}
+init();
+</script>
+<script>document.querySelectorAll('#nav [data-target]').forEach(button => {
+  button.addEventListener('click', () => {
+    const targetId = button.dataset.target;
+    const target = document.getElementById(targetId);
+
+    if (!target) {
+      console.error(`Navigation error: No section found with id="${targetId}"`);
+      return;
+    }
+
+    document.querySelectorAll('#nav [data-target]').forEach(item => {
+      item.classList.remove('active');
+      item.removeAttribute('aria-current');
+    });
+
+    button.classList.add('active');
+    button.setAttribute('aria-current', 'page');
+
+    // This assumes your main content sections use these IDs.
+    document.querySelectorAll('main section[id]').forEach(section => {
+      section.hidden = section.id !== targetId;
+    });
+
+    target.hidden = false;
+  });
+});</script>
+
+
+</body></html>
