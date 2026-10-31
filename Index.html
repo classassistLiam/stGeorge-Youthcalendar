@@ -53,69 +53,19 @@ body{background:radial-gradient(ellipse at 92% 0%,#e4f4e7 0,transparent 32%),var
 <body>
 <div class="app">
 <aside class="sidebar" id="sidebar">
-  <div class="brand">
-    <div class="brand-mark" aria-hidden="true">✦</div>
-    <div>
-      <strong>ST GEORGE YOUTH</strong>
-      <small>Community Hub · 2026</small>
-    </div>
-  </div>
-
-  <nav class="nav" id="nav" aria-label="Main navigation">
-    <button type="button" class="active" data-target="overview" aria-current="page">
-      <span class="ico" aria-hidden="true">▦</span>
-      <span>Dashboard</span>
-    </button>
-
-    <button type="button" data-target="members">
-      <span class="ico" aria-hidden="true">♙</span>
-      <span>Members &amp; Attendance</span>
-    </button>
-
-    <button type="button" data-target="finance">
-      <span class="ico" aria-hidden="true">▤</span>
-      <span>Finance &amp; Stewardship</span>
-    </button>
-
-    <button type="button" data-target="trivia">
-      <span class="ico" aria-hidden="true">✝</span>
-      <span>Bible Trivia</span>
-    </button>
-
-    <button type="button" data-target="awards">
-      <span class="ico" aria-hidden="true">🏆</span>
-      <span>Awards &amp; Recognition</span>
-    </button>
-
-    <button type="button" data-target="elections">
-      <span class="ico" aria-hidden="true">☑</span>
-      <span>Leadership Elections</span>
-    </button>
-
-    <button type="button" data-target="choir">
-      <span class="ico" aria-hidden="true">♫</span>
-      <span>Choir Planner</span>
-    </button>
-
-    <button type="button" data-target="events">
-      <span class="ico" aria-hidden="true">▣</span>
-      <span>Treasurer's Office</span>
-    </button>
-
-    <button type="button" data-target="backup">
-      <span class="ico" aria-hidden="true">⇧</span>
-      <span>Fun &amp; Games</span>
-    </button>
+  <div class="brand"><div class="brand-mark">✦</div><div><strong>ST GEORGE YOUTH</strong><small>Community Hub · 2026</small></div></div>
+  <nav class="nav" id="nav">
+    <button class="active" data-target="overview"><span class="ico">▦</span> Dashboard</button>
+    <button data-target="members"><span class="ico">♙</span> Members &amp; Attendance</button>
+    <button data-target="finance"><span class="ico">▤</span> Finance &amp; Stewardship</button>
+    <button data-target="trivia"><span class="ico">✝</span> Bible Trivia</button>
+    <button data-target="awards"><span class="ico">🏆</span> Awards &amp; Recognition</button>
+    <button data-target="elections"><span class="ico">☑</span> Leadership Elections</button>
+    <button data-target="choir"><span class="ico">♫</span> Choir Planner</button>
+    <button data-target="events"><span class="ico">▣</span> Treasure's Office</button>
+    <button data-target="backup"><span class="ico">⇧</span> Fun &amp; Games</button>
   </nav>
-
-  <div class="sidebar-bottom">
-    <div class="side-note">
-      “Let all that you do be done in love.”<br>
-      <b>1 Corinthians 16:14</b>
-      <br><br>
-      Local-first · Cloud sync available through the configured Apps Script server.
-    </div>
-  </div>
+  <div class="sidebar-bottom"><div class="side-note">“Let all that you do be done in love.”<br><b>1 Corinthians 16:14</b><br><br>Local-first · cloud sync available through the configured Apps Script server.</div></div>
 </aside>
 
 <main class="main">
@@ -208,7 +158,7 @@ body{background:radial-gradient(ellipse at 92% 0%,#e4f4e7 0,transparent 32%),var
     <div class="layout">
       <div class="stack">
         <article class="card"><div class="card-head"><div><h3 id="triviaWeekTitle">This week's challenge</h3><p id="triviaMeta">One attempt per member per week</p></div><span class="pill" id="triviaWeekPill">WEEKLY</span></div>
-          <form id="triviaForm"><div class="field"><label for="triviaMember">Your registered profile</label><select id="triviaMember" required=""><option value="">Choose your profile…</option></select></div><div class="field" style="margin-top:13px"><label id="questionLabel" for="triviaAnswer">Question</label><div id="questionText" style="font-size:19px;font-weight:800;margin:6px 0 12px">Loading question…</div><input id="triviaAnswer" autocomplete="off" placeholder="Type your answer" required=""></div><button class="btn" type="submit" style="width:100%;margin-top:14px">Submit answer</button></form><div id="triviaMessage" style="margin-top:13px"></div>
+          <form id="triviaForm"><div class="field"><label for="triviaMember">Your registered profile</label><select id="triviaMember" required=""><option value="">Choose your profile…</option></select></div><div class="field" style="margin-top:13px"><label id="questionLabel" for="triviaAnswer">Question</label><div id="questionText" style="font-size:19px;font-weight:800;margin:6px 0 12px">Loading question…</div><input id="triviaAnswer" autocomplete="off" placeholder="Type your answer" required=""></div><button class="btn" type="submit" style="width:100%;margin-top:14px">Submit answer</button></form><div id="triviaMessage" style="margin-top:13px"></div><p id="triviaServerStatus" class="help" role="status" style="margin-top:8px">Loading question bank and server scores…</p>
         </article>
         <article class="card"><div class="card-head"><div><h3>Leaderboard</h3><p>Gold: positions 1–4 · Silver: 5–7 · Bronze: 8–13</p></div><button class="btn secondary small" id="exportTriviaBtn">Export CSV</button></div><div class="table-wrap"><table><thead><tr><th>Rank</th><th>Member</th><th>Score</th><th>Level</th><th>Week</th></tr></thead><tbody id="triviaRows"></tbody></table></div></article>
       </div>
@@ -258,6 +208,32 @@ body{background:radial-gradient(ellipse at 92% 0%,#e4f4e7 0,transparent 32%),var
 <div class="toast-area" id="toastArea" aria-live="polite"></div>
 <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="modal-head"><h3 id="modalTitle">Add record</h3><button class="close-btn" id="closeModal" aria-label="Close dialog">✕</button></div><div id="modalContent"></div></div></div>
 
+<script>document.querySelectorAll('#nav [data-target]').forEach(button => {
+  button.addEventListener('click', () => {
+    const targetId = button.dataset.target;
+    const target = document.getElementById(targetId);
+
+    if (!target) {
+      console.error(`Navigation error: No section found with id="${targetId}"`);
+      return;
+    }
+
+    document.querySelectorAll('#nav [data-target]').forEach(item => {
+      item.classList.remove('active');
+      item.removeAttribute('aria-current');
+    });
+
+    button.classList.add('active');
+    button.setAttribute('aria-current', 'page');
+
+    // This assumes your main content sections use these IDs.
+    document.querySelectorAll('main section[id]').forEach(section => {
+      section.hidden = section.id !== targetId;
+    });
+
+    target.hidden = false;
+  });
+});</script>
 <script>
 'use strict';
 // SETUP: paste your existing Apps Script deployment URL (ending in /exec) into SERVER_API_URL below.
@@ -284,6 +260,11 @@ function loadState(){try{const raw=localStorage.getItem(STORE_KEY);if(!raw)retur
 const SERVER_API_URL='https://script.google.com/macros/s/AKfycbyX6LQnFHqPySpKc__sX34P-Kj_iJGGAvwkSyX_GVy8YCwFO_4Q2aLzGqmelpZG7apy/exec';
 const SERVER_STATE_ROOM='__stgeorge_hub_state_v3__';
 const SERVER_STATE_NAME='St George Hub Snapshot';
+const SERVER_TRIVIA_QUESTIONS_ROOM='__stgeorge_trivia_questions_v1__';
+const SERVER_TRIVIA_SCORES_ROOM='__stgeorge_trivia_scores_v1__';
+const SERVER_TRIVIA_QUESTIONS_NAME='St George Trivia Question Bank';
+const SERVER_TRIVIA_SCORE_NAME='St George Trivia Score';
+let triviaServerBusy=false;
 let serverSyncTimer=null,serverSyncBusy=false,serverSyncPending=false,serverSyncLastAt=0;
 const localStateHadData=!!localStorage.getItem(STORE_KEY);
 function serverConfigured(){return /^https:\/\/script\.google\.com\/macros\/s\/.+\/exec(?:\?.*)?$/.test(SERVER_API_URL)}
@@ -459,6 +440,30 @@ const questions={
  3:[{q:'Name the fruit of the Spirit listed first in Galatians 5.',a:['love'],ref:'Galatians 5:22'},{q:'Which queen visited Solomon to test his wisdom?',a:['queen of sheba','the queen of sheba'],ref:'1 Kings 10'},{q:'On which day did Jesus rise from the dead?',a:['third day','the third day'],ref:'Luke 24'},{q:'What was the occupation of Peter before following Jesus?',a:['fisherman','fishermen','fishing'],ref:'Matthew 4'}],
  4:[{q:'Which prophet confronted the prophets of Baal on Mount Carmel?',a:['elijah'],ref:'1 Kings 18'},{q:'What is the shortest verse in many English Bible translations?',a:['jesus wept'],ref:'John 11:35'},{q:'Who interpreted Pharaoh’s dreams in Egypt?',a:['joseph'],ref:'Genesis 41'},{q:'Which New Testament letter describes the armour of God?',a:['ephesians','letter to the ephesians'],ref:'Ephesians 6'}]
 };
+
+function normaliseTriviaBank(bank){
+ if(!bank||typeof bank!=='object')return false;let valid=0;
+ for(const level of [1,2,3,4]){const list=bank[level];if(!Array.isArray(list))continue;const clean=list.filter(q=>q&&typeof q.q==='string'&&q.q.trim()&&Array.isArray(q.a)&&q.a.length&&typeof q.ref==='string');if(clean.length){questions[level]=clean.map(q=>({q:q.q.trim(),a:q.a.map(a=>String(a).trim().toLowerCase()).filter(Boolean),ref:q.ref.trim()}));valid+=clean.length;}}
+ return valid>0;
+}
+async function loadTriviaBankFromServer(){
+ const result=await serverCall('getMessages',{roomId:SERVER_TRIVIA_QUESTIONS_ROOM});const messages=Array.isArray(result.messages)?result.messages:[];
+ for(let i=messages.length-1;i>=0;i--){const m=messages[i];if(m.name!==SERVER_TRIVIA_QUESTIONS_NAME||!m.message)continue;try{const data=JSON.parse(m.message);if(data&&data.version===1&&normaliseTriviaBank(data.questions))return true;}catch(e){}}
+ const payload={version:1,updatedAt:new Date().toISOString(),questions};const saved=await serverCall('sendMessage',{name:SERVER_TRIVIA_QUESTIONS_NAME,message:JSON.stringify(payload),roomId:SERVER_TRIVIA_QUESTIONS_ROOM,messageType:'trivia-bank'});if(!saved||!saved.success)throw new Error('Question bank could not be saved to the server.');return true;
+}
+async function loadTriviaScoresFromServer(){
+ const result=await serverCall('getMessages',{roomId:SERVER_TRIVIA_SCORES_ROOM});const messages=Array.isArray(result.messages)?result.messages:[];const found=[];
+ for(const m of messages){if(m.name!==SERVER_TRIVIA_SCORE_NAME||!m.message)continue;try{const item=JSON.parse(m.message);if(item&&item.id&&item.memberId&&item.week&&Number.isFinite(Number(item.score)))found.push({...item,score:Number(item.score)});}catch(e){}}
+ const byId=new Map((state.triviaScores||[]).map(x=>[x.id,x]));for(const item of found)if(!byId.has(item.id))byId.set(item.id,item);const merged=[...byId.values()];
+ if(merged.length!==(state.triviaScores||[]).length){state.triviaScores=merged;localStorage.setItem(STORE_KEY,JSON.stringify(state));localStorage.setItem(STORE_KEY+'_updatedAt',String(Date.now()));renderAll();}return found.length;
+}
+async function initialiseTriviaServer(){
+ if(!serverConfigured()||triviaServerBusy)return;triviaServerBusy=true;
+ try{await serverCall('setupDatabase');await loadTriviaBankFromServer();await loadTriviaScoresFromServer();renderTrivia();const el=$('triviaServerStatus');if(el)el.textContent='Questions loaded · server scores connected';}
+ catch(error){const el=$('triviaServerStatus');if(el)el.textContent='Using built-in questions · server unavailable';console.warn('Trivia server sync failed:',error);}
+ finally{triviaServerBusy=false;}
+}
+async function saveTriviaScoreToServer(score){if(!serverConfigured())throw new Error('Apps Script server is not configured.');const result=await serverCall('sendMessage',{name:SERVER_TRIVIA_SCORE_NAME,message:JSON.stringify(score),roomId:SERVER_TRIVIA_SCORES_ROOM,messageType:'trivia-score'});if(!result||!result.success)throw new Error('The server did not confirm this score.');return true;}
 const tips=['Read the passage around a verse, not only the verse itself. Context helps you understand the message.','Try explaining today’s Bible passage in your own words to a friend.','Use a concordance or Bible index to compare related passages.','Ask: What does this passage teach about God, people, and practical life?'];
 function difficultyLevel(){const recent=state.triviaScores.filter(s=>s.year===currentYear()).slice(-30);if(recent.length<5)return 1;const avg=recent.reduce((n,s)=>n+s.score,0)/recent.length;return avg>=85?4:avg>=65?3:avg>=40?2:1}
 function currentQuestion(){const level=difficultyLevel(),wk=weekKey();const bank=questions[level]||questions[1];let hash=0;for(const c of wk)hash=(hash*31+c.charCodeAt(0))>>>0;return {...bank[hash%bank.length],level,wk}}
@@ -509,7 +514,17 @@ $('checkinBtn').onclick=()=>{const id=$('checkinMember').value;if(!id){toast('Ch
 $('attendanceBtn').onclick=showAttendanceModal;$('openRegister').onclick=()=>registerModal();
 $('membersGrid').addEventListener('click',e=>{const a=e.target.closest('[data-attend]'),p=e.target.closest('[data-pause]'),ed=e.target.closest('[data-edit]');if(a)recordAttendance(a.dataset.attend);if(p){const m=getMember(p.dataset.pause);if(!m)return;if(isPaused(m)){m.status='Active';m.resumedAt=todayISO()}else{m.status='Paused / boarding';m.pausedAt=todayISO()}saveState();toast(isPaused(m)?'Profile paused.':'Profile resumed.')}if(ed){const m=getMember(ed.dataset.edit);if(m)registerModal(m)}});
 $('memberSearch').addEventListener('input',renderMembers);$('memberFilter').addEventListener('change',renderMembers);
-$('triviaForm').addEventListener('submit',e=>{e.preventDefault();const id=$('triviaMember').value,m=getMember(id),answer=$('triviaAnswer').value.trim().toLowerCase();if(!m){toast('Select your registered profile.','bad');return}const q=currentQuestion();if(state.triviaScores.some(s=>s.memberId===id&&s.week===q.wk)){ $('triviaMessage').innerHTML='<div class="notice error">This member already submitted an attempt this week.</div>';return}const correct=q.a.some(a=>a.toLowerCase()===answer),score=correct?100:0;state.triviaScores.push({id:uid('QUIZ'),memberId:id,memberName:m.name,score,correct,week:q.wk,level:q.level,year:currentYear(),question:q.q,createdAt:Date.now()});saveState();$('triviaMessage').innerHTML=`<div class="notice ${correct?'success':'error'}">${correct?'Correct! Well done.':'Not quite. The expected answer is: '+q.a[0]+'.'} Reference: ${q.ref}. Score: ${score}%.</div>`;$('triviaAnswer').value='';toast('Trivia attempt recorded.');});
+$('triviaForm').addEventListener('submit',async e=>{
+ e.preventDefault();const form=e.currentTarget,submit=form.querySelector('button[type="submit"]');const id=$('triviaMember').value,m=getMember(id),answer=$('triviaAnswer').value.trim().toLowerCase();
+ if(!m){toast('Select your registered profile.','bad');return;}if(!answer){toast('Type your answer before submitting.','bad');return;}
+ const q=currentQuestion();if(state.triviaScores.some(s=>s.memberId===id&&s.week===q.wk)){$('triviaMessage').innerHTML='<div class="notice error">This member already submitted an attempt this week.</div>';return;}
+ const normalAnswer=answer.replace(/\s+/g,' '),correct=q.a.some(a=>a.toLowerCase().trim()===normalAnswer),score=correct?100:0;
+ const record={id:uid('QUIZ'),memberId:id,memberName:m.name,score,correct,week:q.wk,level:q.level,year:currentYear(),question:q.q,reference:q.ref,createdAt:Date.now(),source:'weekly-bible-trivia'};
+ state.triviaScores.push(record);saveState();if(submit)submit.disabled=true;$('triviaMessage').innerHTML='<div class="notice">Answer recorded on this device. Saving score to the server…</div>';
+ let serverSaved=false,serverError='';try{await saveTriviaScoreToServer(record);serverSaved=true;}catch(error){serverError=error.message||'Server save failed.';console.error('Trivia score server save failed:',error);}if(submit)submit.disabled=false;
+ $('triviaMessage').innerHTML=`<div class="notice ${correct?'success':'error'}">${correct?'Correct! Well done.':'Not quite. The expected answer is: '+q.a[0]+'.'} Reference: ${q.ref}. Score: ${score}%. ${serverSaved?'✓ Score saved to the server.':'⚠ Saved locally only; server save failed: '+escapeHTML(serverError)+' Use Sync now or retry when connected.'}</div>`;
+ $('triviaAnswer').value='';const status=$('triviaServerStatus');if(status)status.textContent=serverSaved?'Question bank and score saved on server':'Server score save failed; local copy retained';renderAll();toast(serverSaved?'Trivia score saved to server.':'Trivia saved locally; server save needs retry.',serverSaved?'ok':'bad');
+});
 $('newTipBtn').onclick=()=>{$('weeklyTip').textContent=tips[Math.floor(Math.random()*tips.length)]};
 $('refreshAwards').onclick=()=>{renderAwards();toast('Award shortlist refreshed.');};
 $('voteForm').addEventListener('submit',e=>{e.preventDefault();const member=getMember($('voterMember').value),role=$('voteRole').value,candidate=$('voteCandidate').value.trim();if(!member||!candidate){toast('Complete voter and candidate fields.','bad');return}if($('voteConfirm').value==='passkey'){toast('Real passkey verification requires a secure backend; ballot not recorded.','bad');return}if(state.votes.some(v=>v.voterId===member.id&&v.role===role)){ $('voteMessage').innerHTML='<div class="notice error">This member already has a demo ballot for this office on this device.</div>';return}if(!confirm(`Confirm demo ballot for ${role}: ${candidate}? This is not a secure secret ballot.`))return;state.votes.push({id:uid('BAL'),voterId:member.id,role,candidate,at:new Date().toISOString()});saveState();$('voteMessage').innerHTML='<div class="notice success">Demo ballot saved locally. Do not use this prototype for official elections.</div>';toast('Demo ballot recorded.');});
@@ -535,44 +550,19 @@ $('menuBtn').onclick=()=>$('sidebar').classList.toggle('open');
 document.querySelectorAll('[data-target]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x===b));document.getElementById(b.dataset.target).scrollIntoView({behavior:'smooth'});$('sidebar').classList.remove('open')}));
 document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.go).scrollIntoView({behavior:'smooth'})));
 $('exportTriviaBtn').addEventListener('click',()=>{});
-$('syncNowBtn').addEventListener('click',()=>syncServerNow());
+$('syncNowBtn').addEventListener('click',async()=>{await syncServerNow();await initialiseTriviaServer();});
 function init(){
  resetYearIfNeeded();renderAll();setInterval(renderClock,30000);
  if(serverConfigured()){
   setServerStatus('connecting','Connecting to Google Sheets…','Loading saved records from the configured Apps Script deployment.');
-  setTimeout(()=>syncServerNow({quiet:true}),250);
+  setTimeout(async()=>{await syncServerNow({quiet:true});await initialiseTriviaServer();},250);
  }else{
   setServerStatus('error','Local-only mode','Paste your deployed Apps Script /exec URL into SERVER_API_URL to turn on server storage.');
+  const el=$('triviaServerStatus');if(el)el.textContent='Built-in questions are available; configure the Apps Script URL to load/save trivia on the server.';
  }
 }
 init();
 </script>
-<script>document.querySelectorAll('#nav [data-target]').forEach(button => {
-  button.addEventListener('click', () => {
-    const targetId = button.dataset.target;
-    const target = document.getElementById(targetId);
-
-    if (!target) {
-      console.error(`Navigation error: No section found with id="${targetId}"`);
-      return;
-    }
-
-    document.querySelectorAll('#nav [data-target]').forEach(item => {
-      item.classList.remove('active');
-      item.removeAttribute('aria-current');
-    });
-
-    button.classList.add('active');
-    button.setAttribute('aria-current', 'page');
-
-    // This assumes your main content sections use these IDs.
-    document.querySelectorAll('main section[id]').forEach(section => {
-      section.hidden = section.id !== targetId;
-    });
-
-    target.hidden = false;
-  });
-});</script>
 
 
 </body></html>
