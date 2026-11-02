@@ -227,6 +227,34 @@ body.dark-theme .topbar{border-color:#2b4035}
 <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="modal-head"><h3 id="modalTitle">Add record</h3><button class="close-btn" id="closeModal" aria-label="Close dialog">✕</button></div><div id="modalContent"></div></div></div>
 
 <script>
+    document.querySelectorAll('#nav [data-target]').forEach(button => {
+  button.addEventListener('click', () => {
+    const targetId = button.dataset.target;
+    const target = document.getElementById(targetId);
+
+    if (!target) {
+      console.error(`Navigation error: No section found with id="${targetId}"`);
+      return;
+    }
+
+    document.querySelectorAll('#nav [data-target]').forEach(item => {
+      item.classList.remove('active');
+      item.removeAttribute('aria-current');
+    });
+
+    button.classList.add('active');
+    button.setAttribute('aria-current', 'page');
+
+    // This assumes your main content sections use these IDs.
+    document.querySelectorAll('main section[id]').forEach(section => {
+      section.hidden = section.id !== targetId;
+    });
+
+    target.hidden = false;
+  });
+});
+</script>
+<script>
 'use strict';
 // SETUP: paste your existing Apps Script deployment URL (ending in /exec) into SERVER_API_URL below.
 // Code.gs is intentionally unchanged; app snapshots use its existing sendMessage/getMessages actions.
