@@ -99,7 +99,7 @@ body.dark-theme .topbar{border-color:#2b4035}
       <button class="icon-btn mobile-menu" id="menuBtn" aria-label="Open menu">☰</button>
       <div><div class="eyebrow">Your community, connected</div><h1>Church dashboard</h1></div>
     </div>
-    <div class="top-actions"><div class="clock-pill" id="liveClock">Loading date…</div><button class="btn secondary small" id="appInstallBtn" type="button" hidden>⬇ Install app</button><button class="icon-btn" id="notifyBtn" aria-label="Notifications">♧</button><button class="icon-btn" id="themeBtn" aria-label="Toggle contrast">◐</button></div>
+    <div class="top-actions"><div class="clock-pill" id="liveClock">Loading date…</div><button class="btn secondary small" id="appInstallBtn" type="button" hidden="">⬇ Install app</button><button class="icon-btn" id="notifyBtn" aria-label="Notifications">♧</button><button class="icon-btn" id="themeBtn" aria-label="Toggle contrast">◐</button></div>
   </header>
   <div id="serverSyncBar" data-status="connecting" role="status" aria-live="polite">
     <span id="serverDot"></span><strong id="serverSyncTitle">Server sync not configured</strong>
@@ -201,7 +201,7 @@ body.dark-theme .topbar{border-color:#2b4035}
   <section class="section" id="elections">
     <div class="section-title"><div><div class="eyebrow">Servant leadership</div><h2>Leadership elections</h2><p>Record leadership ballots by office and election year. The server prevents duplicate submissions; this is not a cryptographically secret ballot.</p></div><span class="pill">3-YEAR CYCLE</span></div>
     <div class="layout">
-      <article class="card"><div class="card-head"><div><h3>Record a leadership ballot</h3><p>One server-validated ballot per member per office and election year</p></div></div><form id="voteForm"><div class="form-grid"><div class="field full"><label for="voterMember">Voter profile</label><select id="voterMember" required=""><option value="">Select registered member…</option></select></div><div class="field"><label for="voteYear">Election year</label><select id="voteYear" required><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option>2030</option></select></div><div class="field"><label for="voteRole">Office</label><select id="voteRole" required=""><option>Chairperson</option><option>Vice Chairperson</option><option>Secretary</option><option>Vice Secretary</option><option>Treasurer</option><option>Time Keeper</option><option>Brigadier Officer</option></select></div><div class="field full"><label for="voteCandidate">Candidate</label><input id="voteCandidate" required="" placeholder="Candidate's registered full name"></div><div class="field full"><label for="voteConfirm">Confirmation</label><select id="voteConfirm"><option value="touch">On-screen confirmation (demo)</option><option value="passkey">Device passkey (needs secure backend)</option></select></div></div><button class="btn" style="width:100%;margin-top:14px">Submit ballot</button><div id="voteMessage" style="margin-top:12px"></div></form></article>
+      <article class="card"><div class="card-head"><div><h3>Record a leadership ballot</h3><p>One server-validated ballot per member per office and election year</p></div></div><form id="voteForm"><div class="form-grid"><div class="field full"><label for="voterMember">Voter profile</label><select id="voterMember" required=""><option value="">Select registered member…</option></select></div><div class="field"><label for="voteYear">Election year</label><select id="voteYear" required=""><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option>2030</option></select></div><div class="field"><label for="voteRole">Office</label><select id="voteRole" required=""><option>Chairperson</option><option>Vice Chairperson</option><option>Secretary</option><option>Vice Secretary</option><option>Treasurer</option><option>Time Keeper</option><option>Brigadier Officer</option></select></div><div class="field full"><label for="voteCandidate">Candidate</label><input id="voteCandidate" required="" placeholder="Candidate's registered full name"></div><div class="field full"><label for="voteConfirm">Confirmation</label><select id="voteConfirm"><option value="touch">On-screen confirmation (demo)</option><option value="passkey">Device passkey (needs secure backend)</option></select></div></div><button class="btn" style="width:100%;margin-top:14px">Submit ballot</button><div id="voteMessage" style="margin-top:12px"></div></form></article>
       <article class="card"><h3>Election summary</h3><p class="subtle" style="font-size:12px">Aggregate totals are displayed here. The server validates duplicates and stores the election year. Voter eligibility and cryptographic ballot secrecy still require a dedicated election identity and secret-ballot system.</p><div id="electionSummary" style="margin-top:14px"></div><button class="btn secondary small" id="exportVotesBtn" style="margin-top:14px">Export election log</button></article>
     </div>
   </section>
@@ -639,6 +639,59 @@ init();
 
 
 <script>
+    
+/* ST GEORGE — AUTOMATIC DATA RESTORATION */
+(function () {
+  'use strict';
+
+  let restoreRunning = false;
+
+  async function restoreChurchData() {
+    if (restoreRunning || !navigator.onLine) return;
+    if (typeof syncServerNow !== 'function') return;
+    if (typeof serverConfigured !== 'function' || !serverConfigured()) return;
+
+    restoreRunning = true;
+
+    try {
+      await syncServerNow({ quiet: true });
+
+      if (typeof initialiseTriviaServer === 'function') {
+        await initialiseTriviaServer();
+      }
+
+      console.info('[ST GEORGE] Cloud data restoration completed.');
+    } catch (error) {
+      console.error('[ST GEORGE] Restoration failed:', error);
+    } finally {
+      restoreRunning = false;
+    }
+  }
+
+  // Restore when the page opens or is refreshed.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', restoreChurchData);
+  } else {
+    restoreChurchData();
+  }
+
+  // Restore when the computer reconnects to the internet.
+  window.addEventListener('online', restoreChurchData);
+
+  // Restore when the user returns to the website.
+  window.addEventListener('focus', restoreChurchData);
+
+  // Restore when returning from another browser tab.
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) restoreChurchData();
+  });
+
+  // Allow manual restoration from the browser console.
+  window.restoreChurchData = restoreChurchData;
+
+})();
+</script>
+<script>
 // St George Youth PWA installation and offline-shell support.
 (()=>{
  let installPrompt=null;
@@ -667,5 +720,6 @@ init();
  window.addEventListener('online',()=>{const d=document.getElementById('serverSyncDetail');if(d)d.textContent='Internet connection restored. Use Sync now to send pending updates.';});
 })();
 </script>
+
 
 </body></html>
