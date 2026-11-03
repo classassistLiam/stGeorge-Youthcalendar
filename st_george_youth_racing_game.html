@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#075e54">
+<title>St. George Youth | Faith & Speed</title>
+<style>
+:root{--green:#075e54;--green2:#128c7e;--lime:#b7f36b;--gold:#f4c95d;--ink:#071c20;--paper:#f5fff8;--muted:#a9c7bd;--red:#ff5d52}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at top,#164d42 0,#071c20 52%,#041114 100%);color:#f4fff9;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
+.wrap{max-width:1100px;margin:auto;padding:18px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:8px 0 18px}.brand{display:flex;align-items:center;gap:12px}.crest{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--lime),#fff);color:#073d32;font-size:25px;box-shadow:0 0 25px #b7f3662b}.brand h1{font-size:clamp(18px,3vw,25px);margin:0;letter-spacing:.3px}.brand p{margin:3px 0 0;color:var(--muted);font-size:12px;letter-spacing:1.6px;text-transform:uppercase}.pill{border:1px solid #a4e6c633;border-radius:99px;padding:9px 13px;font-size:12px;color:#d7f8e6;background:#ffffff08}
+.hero{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;margin:8px 0 16px}.eyebrow{color:var(--lime);font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:800}.hero h2{font-size:clamp(28px,5vw,46px);line-height:1.03;margin:8px 0 10px;letter-spacing:-1.5px}.hero h2 span{color:var(--lime)}.hero p{color:#b8d3c8;max-width:580px;margin:0;line-height:1.6;font-size:14px}.best{background:#ffffff0b;border:1px solid #ffffff15;padding:14px 17px;border-radius:18px;min-width:130px;text-align:right}.best small{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1.4px}.best strong{font-size:27px;color:var(--gold)}
+.game-shell{background:#0b2927;border:1px solid #7fceb044;border-radius:24px;padding:12px;box-shadow:0 25px 70px #0006;overflow:hidden}.hud{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:4px 5px 12px}.stats{display:flex;gap:8px;flex-wrap:wrap}.stat{background:#ffffff0a;border:1px solid #ffffff12;border-radius:12px;padding:8px 12px;min-width:88px}.stat span{display:block;color:#9dbbb0;text-transform:uppercase;letter-spacing:1px;font-size:9px}.stat strong{font-size:18px;color:#f5fff8}.stat strong.gold{color:var(--gold)}.status{color:var(--lime);font-size:12px;font-weight:750}
+.canvas-wrap{position:relative;border-radius:16px;overflow:hidden;background:#123d2b;border:1px solid #7dca8c45}.canvas-wrap canvas{display:block;width:100%;height:auto;aspect-ratio:800/480;touch-action:none}.overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:18px;background:linear-gradient(180deg,#0415128c,#041512c9);text-align:center}.overlay.hidden{display:none}.modal{width:min(420px,100%);padding:22px;border:1px solid #b7f36b55;background:#092a25ee;border-radius:22px;box-shadow:0 12px 45px #0007}.modal .emoji{font-size:38px}.modal h3{font-size:27px;margin:8px 0}.modal p{color:#c1dbce;font-size:13px;line-height:1.55;margin:0 0 16px}.btn{border:0;cursor:pointer;border-radius:12px;padding:12px 17px;font-weight:850;font-size:13px;background:var(--lime);color:#09271e;box-shadow:0 5px 0 #6f9e3e;transition:transform .12s}.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #6f9e3e}.btn.secondary{background:#ffffff10;color:#eafff1;border:1px solid #ffffff24;box-shadow:none}.btn.gold{background:var(--gold);box-shadow:0 5px 0 #b48b2f}.actions{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}.below{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-top:14px}.panel{border:1px solid #ffffff14;background:#ffffff08;border-radius:18px;padding:16px}.panel h3{font-size:14px;margin:0 0 10px}.panel p{color:#b7d2c6;font-size:12px;line-height:1.6;margin:0}.controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}.key{display:inline-grid;place-items:center;min-width:30px;height:28px;padding:0 7px;border-radius:7px;background:#dffff0;color:#093a2f;font-size:11px;font-weight:900;box-shadow:0 2px 0 #75a993}.verse{border-left:3px solid var(--gold);padding-left:12px}.verse blockquote{font-size:15px;line-height:1.5;font-weight:700;margin:0 0 7px}.verse cite{font-style:normal;color:var(--gold);font-size:11px}.mobile-controls{display:none;justify-content:center;gap:14px;margin:12px 0 2px}.steer{width:76px;height:54px;border-radius:15px;border:1px solid #b7f36b66;background:#b7f36b17;color:#eafff1;font-size:24px;font-weight:900;touch-action:manipulation}.steer:active{background:#b7f36b55}.footer{text-align:center;color:#759b8b;font-size:11px;padding:20px 8px 6px}.footer b{color:#b7f36b}
+@media(max-width:650px){.wrap{padding:12px}.hero{grid-template-columns:1fr}.best{display:flex;justify-content:space-between;align-items:center;text-align:left;padding:10px 14px}.best strong{font-size:22px}.below{grid-template-columns:1fr}.mobile-controls{display:flex}.game-shell{padding:8px;border-radius:18px}.stat{min-width:72px;padding:7px 9px}.stat strong{font-size:16px}.overlay .modal{padding:16px}.overlay .modal h3{font-size:23px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="crest">✝</div><div><h1>ST. GEORGE YOUTH</h1><p>Faith • Fellowship • Forward</p></div></div>
+    <div class="pill">🏁 YOUTH RACING CLUB · BETA</div>
+  </header>
+  <section class="hero">
+    <div><div class="eyebrow">Ready, set, grow</div><h2>FAITH & <span>SPEED.</span></h2><p>Take the wheel, dodge the traffic, collect points, and keep moving forward. A little friendly racing for the St. George Youth fellowship.</p></div>
+    <div class="best"><small>Personal best</small><strong id="bestTop">0000</strong></div>
+  </section>
+  <main class="game-shell">
+    <div class="hud">
+      <div class="stats">
+        <div class="stat"><span>Score</span><strong id="score">0000</strong></div>
+        <div class="stat"><span>Speed</span><strong id="speed">1x</strong></div>
+        <div class="stat"><span>Best run</span><strong class="gold" id="best">0000</strong></div>
+      </div>
+      <div class="status" id="status">● READY TO RACE</div>
+    </div>
+    <div class="canvas-wrap">
+      <canvas id="game" width="800" height="480" aria-label="2D car racing game"></canvas>
+      <div class="overlay" id="overlay">
+        <div class="modal"><div class="emoji" id="modalEmoji">🏎️</div><div class="eyebrow" id="modalEyebrow">ST. GEORGE YOUTH</div><h3 id="modalTitle">Ready to race?</h3><p id="modalText">Steer left and right, avoid the traffic, and see how far you can go. Keep your eyes on the road!</p><div class="actions"><button class="btn" id="startBtn">START RACE ▶</button><button class="btn secondary" id="verseBtn">GET INSPIRED ✝</button></div></div>
+      </div>
+    </div>
+    <div class="mobile-controls" aria-label="Touch steering controls"><button class="steer" id="leftBtn" aria-label="Steer left">←</button><button class="steer" id="rightBtn" aria-label="Steer right">→</button></div>
+    <div class="actions" style="margin-top:12px"><button class="btn secondary" id="pauseBtn">⏸ PAUSE</button><button class="btn secondary" id="restartBtn">↻ RESTART</button><button class="btn gold" id="nextVerseBtn">✦ MOTIVATION</button></div>
+  </main>
+  <section class="below">
+    <div class="panel"><h3>🎮 HOW TO PLAY</h3><p>Dodge other cars and stay on the road for as long as possible. The longer you survive, the faster the race becomes. A collision ends your run.</p><div class="controls"><span class="key">←</span><span class="key">→</span><span style="color:#a9c7bd;font-size:12px">Arrow keys or</span><span class="key">A</span><span class="key">D</span><span style="color:#a9c7bd;font-size:12px">on computer; use touch buttons on mobile.</span></div></div>
+    <div class="panel"><h3>✝️ PIT STOP FOR THE SOUL</h3><div class="verse"><blockquote id="verseText">“I can do all things through Christ who strengthens me.”</blockquote><cite id="verseRef">PHILIPPIANS 4:13</cite></div><div style="margin-top:12px"><button class="btn secondary" id="anotherVerse">NEXT VERSE ↗</button></div></div>
+  </section>
+  <footer class="footer">Made for the <b>St. George Youth</b> fellowship · Play fair, encourage one another, and keep the faith.</footer>
+</div>
+<script>
+(() => {
+  const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');
+  const $=id=>document.getElementById(id);
+  const verses=[
+    ['“I can do all things through Christ who strengthens me.”','PHILIPPIANS 4:13'],
+    ['“Be strong and courageous. Do not be afraid.”','JOSHUA 1:9'],
+    ['“Let us not become weary in doing good.”','GALATIANS 6:9'],
+    ['“Whatever you do, work at it with all your heart.”','COLOSSIANS 3:23'],
+    ['“Trust in the Lord with all your heart.”','PROVERBS 3:5'],
+    ['“Run in such a way as to get the prize.”','1 CORINTHIANS 9:24'],
+    ['“Encourage one another and build each other up.”','1 THESSALONIANS 5:11'],
+    ['“With God all things are possible.”','MATTHEW 19:26'],
+    ['“Let your light shine before others.”','MATTHEW 5:16']
+  ];
+  let verseIndex=0;
+  function showVerse(){verseIndex=(verseIndex+1)%verses.length;$('verseText').textContent=verses[verseIndex][0];$('verseRef').textContent=verses[verseIndex][1]}
+  $('verseBtn').addEventListener('click',showVerse);$('nextVerseBtn').addEventListener('click',showVerse);$('anotherVerse').addEventListener('click',showVerse);
+  const W=800,H=480,road={x:225,w:350},lanes=3;
+  let player,traffic,score,speed,frame,running,paused,raf,lastTime,roadOffset,best;
+  best=Number(localStorage.getItem('sgyRaceBest')||0);
+  $('best').textContent=String(best).padStart(4,'0');$('bestTop').textContent=String(best).padStart(4,'0');
+  const laneX=i=>road.x+road.w*(i+.5)/lanes;
+  function reset(){player={x:laneX(1),y:370,w:36,h:60,color:'#ff594f'};traffic=[];score=0;speed=1;frame=0;roadOffset=0;running=false;paused=false;updateHud();draw()}
+  function updateHud(){$('score').textContent=String(Math.floor(score)).padStart(4,'0');$('speed').textContent=speed.toFixed(1)+'x';$('best').textContent=String(best).padStart(4,'0');$('bestTop').textContent=String(best).padStart(4,'0')}
+  function roundedRect(x,y,w,h,r,fill){ctx.fillStyle=fill;ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill()}
+  function car(x,y,w,h,color,isPlayer=false){
+    ctx.save();ctx.translate(x,y);
+    // soft shadow
+    roundedRect(-w/2+3,4,w,h,8,'#0005');
+    roundedRect(-w/2,0,w,h,8,color);
+    roundedRect(-w/2+5,8,w-10,17,4,'#142b34');
+    ctx.fillStyle='#8fe7f4';ctx.fillRect(-w/2+6,10,w-12,5);
+    roundedRect(-w/2+5,h-20,w-10,12,3,'#203d45');
+    ctx.fillStyle='#fff2a8';ctx.fillRect(-w/2+3,4,7,4);ctx.fillRect(w/2-10,4,7,4);
+    ctx.fillStyle='#ffef9e';ctx.fillRect(-w/2+3,h-8,6,4);ctx.fillRect(w/2-9,h-8,6,4);
+    ctx.fillStyle='#080f13';ctx.fillRect(-w/2-3,12,4,12);ctx.fillRect(w/2-1,12,4,12);ctx.fillRect(-w/2-3,h-18,4,12);ctx.fillRect(w/2-1,h-18,4,12);
+    if(isPlayer){ctx.fillStyle='#fff';ctx.font='bold 9px system-ui';ctx.textAlign='center';ctx.fillText('SGY',0,h/2+3)}
+    ctx.restore()
+  }
+  function drawTree(x,y,size){ctx.fillStyle='#704c2d';ctx.fillRect(x-3,y+size*.4,6,size*.55);ctx.fillStyle='#155e37';ctx.beginPath();ctx.arc(x,y,size*.48,0,Math.PI*2);ctx.fill();ctx.fillStyle='#2c8a4e';ctx.beginPath();ctx.arc(x-size*.18,y-size*.12,size*.28,0,Math.PI*2);ctx.fill()}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    // grass and patterned verge
+    ctx.fillStyle='#155b36';ctx.fillRect(0,0,W,H);
+    for(let y=-30+(roadOffset%70);y<H;y+=70){ctx.fillStyle='#1c6c40';ctx.fillRect(0,y,road.x-18,34);ctx.fillRect(road.x+road.w+18,y,W-road.x-road.w-18,34)}
+    // road
+    ctx.fillStyle='#333d42';ctx.fillRect(road.x,0,road.w,H);
+    ctx.fillStyle='#e9e8d6';ctx.fillRect(road.x+8,0,5,H);ctx.fillRect(road.x+road.w-13,0,5,H);
+    // rumble strips
+    for(let y=-38+(roadOffset%38);y<H;y+=38){ctx.fillStyle='#f6f2d8';ctx.fillRect(road.x-8,y,8,20);ctx.fillRect(road.x+road.w,y,8,20);ctx.fillStyle='#e84c48';ctx.fillRect(road.x-8,y+20,8,18);ctx.fillRect(road.x+road.w,y+20,8,18)}
+    ctx.strokeStyle='#d8e0d6';ctx.lineWidth=3;ctx.setLineDash([22,22]);ctx.lineDashOffset=-roadOffset;for(let i=1;i<lanes;i++){ctx.beginPath();ctx.moveTo(road.x+road.w*i/lanes,0);ctx.lineTo(road.x+road.w*i/lanes,H);ctx.stroke()}ctx.setLineDash([]);
+    // trees along shoulders
+    for(let i=0;i<7;i++){let y=(i*83+roadOffset*.75)%(H+70)-35;drawTree(road.x-48-(i%2)*10,y,28);drawTree(road.x+road.w+48+(i%2)*10,y+32,28)}
+    traffic.forEach(t=>car(t.x,t.y,34,56,t.color));
+    if(player)car(player.x,player.y,player.w,player.h,player.color,true);
+    // tiny track label
+    ctx.fillStyle='#ffffffa8';ctx.font='bold 10px system-ui';ctx.textAlign='left';ctx.fillText('ST. GEORGE YOUTH GRAND PRIX',18,24);
+    if(running&& !paused){ctx.fillStyle='#b7f36b';ctx.fillRect(road.x+road.w+15,18,5,55)}
+  }
+  function spawn(){let lane=Math.floor(Math.random()*lanes),x=laneX(lane);if(traffic.some(t=>Math.abs(t.x-x)<10&&t.y<110))return;const colors=['#20b8b0','#f0b94d','#a77cff','#f07c36','#e7f0f4'];traffic.push({x,y:-70,w:34,h:56,color:colors[Math.floor(Math.random()*colors.length)],speed:.7+Math.random()*.6})}
+  function endGame(){running=false;paused=false;cancelAnimationFrame(raf);if(Math.floor(score)>best){best=Math.floor(score);localStorage.setItem('sgyRaceBest',best);updateHud()}$('status').textContent='● RACE COMPLETE';$('modalEmoji').textContent='🏁';$('modalEyebrow').textContent='KEEP GOING';$('modalTitle').textContent='Race finished!';$('modalText').textContent='You scored '+Math.floor(score)+' points. Every setback is a chance to learn. Ready to try again?';$('startBtn').textContent='RACE AGAIN ↻';$('overlay').classList.remove('hidden');draw()}
+  function loop(now){if(!running||paused)return;const dt=Math.min((now-(lastTime||now))/16.67,2);lastTime=now;frame+=dt;score+=dt*(1+speed*.18);speed=Math.min(3.5,1+score/450);roadOffset=(roadOffset+4*speed*dt)%1000;
+    if(frame>Math.max(24,62-speed*10)){spawn();frame=0}
+    traffic.forEach(t=>t.y+=(3.2*speed+t.speed)*dt);traffic=traffic.filter(t=>t.y<H+80);
+    for(const t of traffic){if(Math.abs(t.x-player.x)<(player.w+t.w)/2-5&&Math.abs(t.y-player.y)<(player.h+t.h)/2-8){endGame();return}}
+    updateHud();draw();raf=requestAnimationFrame(loop)}
+  function start(){cancelAnimationFrame(raf);if(!player)reset();if($('overlay').classList.contains('hidden')===false){$('overlay').classList.add('hidden')}running=true;paused=false;lastTime=0;$('status').textContent='● RACING';$('pauseBtn').textContent='⏸ PAUSE';raf=requestAnimationFrame(loop)}
+  function togglePause(){if(!running)return;if(!paused){paused=true;cancelAnimationFrame(raf);$('status').textContent='● PAUSED';$('pauseBtn').textContent='▶ RESUME';$('modalEmoji').textContent='⏸️';$('modalEyebrow').textContent='TAKE A BREATHER';$('modalTitle').textContent='Race paused';$('modalText').textContent='Catch your breath, remember the verse, then get back on the road.';$('startBtn').textContent='RESUME RACE ▶';$('overlay').classList.remove('hidden')}else{start()}}
+  function move(dir){if(!running||paused)return;player.x=Math.max(road.x+road.w/lanes*.5,Math.min(road.x+road.w-road.w/lanes*.5,player.x+dir*road.w/lanes))}
+  document.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','a','A','d','D',' '].includes(e.key))e.preventDefault();if(e.key==='ArrowLeft'||e.key.toLowerCase()==='a')move(-1);if(e.key==='ArrowRight'||e.key.toLowerCase()==='d')move(1);if(e.key===' '&&running)togglePause();if(e.key==='Enter'&&!running)start()});
+  $('leftBtn').addEventListener('pointerdown',e=>{e.preventDefault();move(-1)});$('rightBtn').addEventListener('pointerdown',e=>{e.preventDefault();move(1)});
+  $('startBtn').addEventListener('click',()=>{if(paused){start()}else{reset();start()}});
+  $('pauseBtn').addEventListener('click',togglePause);
+  $('restartBtn').addEventListener('click',()=>{reset();$('overlay').classList.remove('hidden');$('modalEmoji').textContent='🏎️';$('modalEyebrow').textContent='ST. GEORGE YOUTH';$('modalTitle').textContent='Ready to race?';$('modalText').textContent='Steer left and right, avoid the traffic, and see how far you can go. Keep your eyes on the road!';$('startBtn').textContent='START RACE ▶';$('status').textContent='● READY TO RACE'});
+  reset();
+})();
+</script>
+</body>
+</html>

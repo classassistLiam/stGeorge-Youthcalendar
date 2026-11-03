@@ -1,0 +1,576 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070711"><meta name="description" content="Pulse Music Wrapped — your sound, your story.">
+<title>Pulse Music Wrapped — Same God. New Levels.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070711;--panel:#0d1020;--panel2:#11152a;--purple:#a855f7;--pink:#f04dff;--cyan:#22d3ee;--blue:#397bff;--text:#f7f7ff;--muted:#a4a8c3;--line:#9d8aff30;--glow:0 0 35px #8b5cf633}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 70% -15%,#34135b77,transparent 38%),radial-gradient(ellipse at 100% 55%,#004e6d30,transparent 34%),var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;overflow-x:hidden}a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}.noise{position:fixed;inset:0;z-index:10;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E")}.wrap{width:min(1320px,calc(100% - 44px));margin:auto}.top{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:relative;z-index:12}.brand{display:flex;align-items:center;gap:10px;font:700 19px "Space Grotesk";letter-spacing:-.7px}.brand-icon{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--purple),var(--cyan));color:white;font-size:24px;box-shadow:0 0 25px #a855f755}.brand em{display:block;font:600 9px "DM Sans";font-style:normal;letter-spacing:2px;color:#969bbb;margin-top:2px}.nav{display:flex;gap:25px;align-items:center;color:#b7bbd7;font-size:12px}.nav a{transition:.2s}.nav a:hover,.nav a.active{color:white}.nav a.active{position:relative}.nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:-29px;height:2px;background:linear-gradient(90deg,var(--purple),var(--cyan));box-shadow:0 0 12px var(--purple)}.nav-cta,.btn{border:1px solid #a855f77a;background:linear-gradient(100deg,#8b35e9,#176ddc);color:white;padding:11px 16px;border-radius:999px;font-weight:700;font-size:12px;box-shadow:0 0 22px #8b5cf72b;transition:.2s}.nav-cta:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 0 30px #8b5cf766}.menu{display:none;background:#11152a;color:white;border:1px solid var(--line);border-radius:11px;padding:9px 12px}.layout{display:grid;grid-template-columns:66px minmax(0,1fr);gap:20px}.side{border-right:1px solid var(--line);padding:24px 0;display:flex;flex-direction:column;gap:12px;align-items:center}.side button{width:46px;height:46px;border:0;border-radius:14px;background:transparent;color:#8f96b8;font-size:19px;transition:.2s}.side button:hover,.side button.active{color:white;background:linear-gradient(135deg,#9b35ed55,#11d5ed19);box-shadow:inset 0 0 0 1px #b06aff38}.side small{font-size:8px;display:block;margin-top:2px}.main{min-width:0}.hero{margin:24px 0 18px;min-height:420px;border:1px solid #a855f76b;border-radius:23px;overflow:hidden;position:relative;isolation:isolate;background:#090b1c;box-shadow:var(--glow)}.hero-bg{position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,#070814 1%,#070814eF 25%,#07081466 60%,#07081420),url("https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1600&q=90") center 35%/cover;filter:saturate(1.2)}.hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,#070711 0%,transparent 30%),radial-gradient(ellipse at 70% 45%,#9d4dff28,transparent 40%)}.hero-content{padding:47px 38px 26px;max-width:690px;position:relative;z-index:2}.pill{display:inline-flex;gap:7px;align-items:center;border:1px solid #bd7aff69;border-radius:999px;background:#6821a433;padding:7px 11px;color:#e9d5ff;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase}.hero h1{font:700 clamp(46px,6.3vw,82px)/.96 "Space Grotesk";letter-spacing:-4.5px;margin:21px 0 13px}.gradient{background:linear-gradient(95deg,#fff 0%,#83f5ff 35%,#bc74ff 70%,#ff6df2);color:transparent;background-clip:text;-webkit-background-clip:text}.hero p{font-size:14px;line-height:1.75;color:#c5c8e0;max-width:450px;margin:0}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.btn.ghost{background:#0b1028a8;border-color:#9c9fcd66;box-shadow:none}.soundwave{height:65px;position:absolute;bottom:20px;right:24px;left:37%;display:flex;align-items:center;justify-content:center;gap:4px;opacity:.85;mask-image:linear-gradient(90deg,transparent,black 12%,black 90%,transparent)}.soundwave i{width:3px;max-height:100%;border-radius:10px;background:linear-gradient(0deg,var(--cyan),var(--purple),var(--pink));box-shadow:0 0 10px #9d4dff;animation:wave 1.1s ease-in-out infinite alternate;animation-delay:calc(var(--i)*-.075s)}@keyframes wave{from{height:10%}to{height:var(--h)}}.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:26px;position:relative;z-index:2}.metric{border:1px solid #b78aff4a;background:#080b1bcb;backdrop-filter:blur(16px);border-radius:15px;padding:13px 14px;min-width:0}.metric-head{display:flex;align-items:center;gap:8px;color:#c0c5e3;font-size:10px}.metric-icon{width:29px;height:29px;display:grid;place-items:center;border-radius:10px;background:linear-gradient(140deg,#a855f755,#22d3ee24);font-size:14px}.metric strong{display:block;font:700 20px "Space Grotesk";margin-top:8px;white-space:nowrap}.metric small{display:block;color:#53e6c2;font-size:9px;margin-top:4px}.section{padding:30px 0 20px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:18px}.eyebrow{font-size:9px;text-transform:uppercase;letter-spacing:2.4px;color:#a6accd;font-weight:700}.section h2{font:700 25px "Space Grotesk";letter-spacing:-1px;margin:7px 0 0}.section-desc{font-size:11px;line-height:1.65;color:var(--muted);max-width:350px}.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:17px 0}.filter{border:1px solid var(--line);border-radius:999px;background:#0e1020;color:#b4b9d5;padding:8px 12px;font-size:10px}.filter.active,.filter:hover{border-color:#a855f7;background:#852ce533;color:white}.search{margin-left:auto;display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:#0d1020;border-radius:999px;padding:0 12px;min-width:220px}.search input{width:100%;background:transparent;border:0;outline:0;color:white;padding:10px 0;font-size:10px}.tracks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.track{padding:10px;background:linear-gradient(145deg,#10142a,#0a0c18);border:1px solid #a3aaff1d;border-radius:16px;min-width:0;transition:.25s}.track:hover{transform:translateY(-4px);border-color:#b15cff8c;box-shadow:0 12px 28px #0005}.cover{aspect-ratio:1;border-radius:11px;overflow:hidden;position:relative;background:#17162b}.cover img{width:100%;height:100%;object-fit:cover;filter:saturate(.85);transition:.4s}.track:hover .cover img{transform:scale(1.06);filter:saturate(1.25)}.play{position:absolute;right:9px;bottom:9px;width:35px;height:35px;border:1px solid #ffffff55;border-radius:50%;background:#9a3cf1;color:white;box-shadow:0 0 20px #a855f777}.track h3{font:700 12px "Space Grotesk";margin:11px 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.track p{margin:0;color:#989fbe;font-size:10px}.track-meta{display:flex;justify-content:space-between;gap:5px;margin-top:12px;font-size:9px;color:#b0b6d3}.track-meta span:last-child{color:#6de8f2}.empty{display:none;border:1px dashed var(--line);border-radius:15px;padding:25px;text-align:center;color:var(--muted);font-size:12px}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}.panel{background:linear-gradient(145deg,#11152b,#090b17);border:1px solid var(--line);border-radius:19px;padding:22px;position:relative;overflow:hidden}.panel:after{content:"";position:absolute;width:190px;height:190px;border-radius:50%;right:-100px;top:-100px;background:#8b5cf714;pointer-events:none}.panel h3{font:700 17px "Space Grotesk";margin:7px 0}.panel p{font-size:11px;line-height:1.7;color:#a4abc8}.big-number{font:700 clamp(49px,6vw,72px)/1 "Space Grotesk";letter-spacing:-4px;margin:20px 0 8px}.big-number span{color:#9ea5c5;font-size:.42em;letter-spacing:-1px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:20px}.stat{padding:12px 10px;background:#ffffff06;border:1px solid var(--line);border-radius:12px}.stat strong{font:700 19px "Space Grotesk";display:block}.stat small{font-size:9px;color:#a2a9c8;display:block;margin-top:4px}.bars{height:100px;display:flex;align-items:end;gap:5px;margin-top:22px}.bars i{flex:1;border-radius:5px 5px 1px 1px;background:linear-gradient(0deg,#2275ff,#22d3ee 55%,#d946ef);height:var(--h);box-shadow:0 0 12px #7437f22c;animation:barIn .8s both;animation-delay:calc(var(--i)*.04s);transform-origin:bottom}@keyframes barIn{from{transform:scaleY(.05)}to{transform:scaleY(1)}}.month-labels{display:flex;justify-content:space-between;color:#777f9f;font-size:8px;margin-top:7px}.genre-list{display:grid;gap:16px;margin-top:20px}.genre{display:grid;grid-template-columns:85px 1fr 32px;gap:10px;align-items:center;font-size:10px;color:#c6cbea}.line{height:5px;background:#252943;border-radius:10px;overflow:hidden}.line i{height:100%;display:block;width:var(--w);border-radius:10px;background:linear-gradient(90deg,var(--purple),var(--cyan));box-shadow:0 0 12px #a855f777}.genre b{text-align:right;color:#d5d8ee;font-size:10px}.artists{display:grid;gap:9px;margin-top:17px}.artist{display:grid;grid-template-columns:28px 42px 1fr auto;gap:10px;align-items:center;padding:8px;border:1px solid #9d8aff1c;border-radius:13px;background:#080b19a8}.rank{font:700 14px "Space Grotesk";color:#c2c7e4;text-align:center}.artist img{width:42px;height:42px;border-radius:10px;object-fit:cover}.artist strong{font-size:11px;display:block}.artist small{font-size:9px;color:#969fbd;display:block;margin-top:4px}.artist em{font-style:normal;color:#8fefff;font-size:10px}.share-card{margin-top:17px;padding:18px;border:1px solid #a855f75c;border-radius:15px;background:radial-gradient(ellipse at 80% 10%,#6d28d944,transparent 50%),linear-gradient(135deg,#11152b,#080b18);position:relative;overflow:hidden}.share-card:after{content:"〰";position:absolute;right:10px;top:2px;font-size:80px;color:#22d3ee22;transform:rotate(-12deg)}.share-card h4{font:700 26px "Space Grotesk";letter-spacing:-1px;margin:8px 0;background:linear-gradient(90deg,#fff,#9a8dff,#22d3ee);color:transparent;background-clip:text}.share-card p{margin:0;position:relative;z-index:1}.share-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;position:relative;z-index:1}.share-actions button{background:#0a1025;border:1px solid #a5a8d43d;color:#e8ebff;border-radius:10px;padding:9px 11px;font-size:10px}.share-actions button:hover{border-color:var(--cyan)}.bottom-quote{margin-top:14px;border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;gap:12px;align-items:center;color:#c9cde6;font-size:11px;line-height:1.6}.bottom-quote span{font-size:25px;color:#e879f9}.footer{border-top:1px solid var(--line);padding:25px 0 105px;margin-top:24px;color:#7e86a8;font-size:10px}.footer-row{display:flex;justify-content:space-between;gap:20px;align-items:center}.footer-brand{font:700 17px "Space Grotesk";color:#eef0ff}.player{position:fixed;z-index:20;bottom:12px;left:50%;transform:translateX(-50%);width:min(760px,calc(100% - 22px));padding:10px 13px;border:1px solid #a7a1ff55;border-radius:17px;background:#0b0e20eF;backdrop-filter:blur(22px);box-shadow:0 14px 60px #000b;display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center}.now{display:flex;align-items:center;gap:9px;min-width:0}.now img{width:40px;height:40px;object-fit:cover;border-radius:10px}.now strong{font-size:10px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.now small{display:block;color:#959dbd;font-size:9px;margin-top:4px}.controls{display:flex;align-items:center;gap:10px}.controls button{border:0;background:none;color:#cbd1ef;padding:5px;font-size:14px}.controls .main-play{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--purple),#246fff);color:white;box-shadow:0 0 18px #8b5cf755}.player-right{display:flex;align-items:center;justify-content:end;gap:9px;color:#9ba2c1;font-size:9px}.progress{width:88px;height:4px;border-radius:5px;background:#303550;overflow:hidden}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--cyan))}.toast{position:fixed;z-index:25;bottom:91px;left:50%;transform:translate(-50%,12px);opacity:0;pointer-events:none;background:#e9e7ff;color:#17102c;border-radius:999px;padding:11px 16px;font-size:11px;font-weight:700;transition:.25s;max-width:calc(100% - 24px);text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}.reveal{opacity:0;transform:translateY(15px);transition:.6s}.reveal.visible{opacity:1;transform:none}
+@media(max-width:1000px){.layout{grid-template-columns:54px minmax(0,1fr);gap:14px}.hero-content{padding:38px 25px 22px}.hero-stats{grid-template-columns:repeat(2,1fr)}.hero{min-height:490px}.tracks{grid-template-columns:repeat(3,minmax(0,1fr))}.metric strong{font-size:18px}.nav{gap:15px}}
+@media(max-width:680px){.wrap{width:calc(100% - 26px)}.top{height:67px}.brand{font-size:17px}.menu{display:block}.nav{display:none;position:absolute;left:0;right:0;top:66px;background:#0d1020;border:1px solid var(--line);border-radius:15px;padding:18px;align-items:stretch;flex-direction:column;gap:18px;box-shadow:0 20px 50px #0009}.nav.open{display:flex}.nav a.active:after{display:none}.layout{display:block}.side{display:none}.hero{margin-top:14px;min-height:0}.hero-bg{background:linear-gradient(90deg,#070814ef,#07081488),url("https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1000&q=85") center/cover}.hero-content{padding:31px 18px 18px}.hero h1{font-size:clamp(43px,12vw,65px);letter-spacing:-3px;margin:17px 0 12px}.hero p{font-size:12px}.hero-stats{gap:7px;margin-top:20px}.metric{padding:10px}.metric-head{font-size:9px}.metric-icon{width:25px;height:25px}.metric strong{font-size:17px}.metric small{font-size:8px}.soundwave{left:20%;right:5%;bottom:2px;height:35px;opacity:.55}.section{padding-top:24px}.section-head{display:block}.section h2{font-size:23px}.section-desc{margin-top:8px}.filters{gap:6px}.filter{padding:8px 10px}.search{width:100%;margin:4px 0 0;min-width:0}.tracks{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.track{padding:8px;border-radius:14px}.track h3{font-size:11px}.track p{font-size:9px}.track-meta{font-size:8px}.two-col{grid-template-columns:1fr}.panel{padding:18px}.big-number{font-size:60px}.footer-row{align-items:flex-start;flex-direction:column}.player{grid-template-columns:1fr auto;padding:8px 10px;gap:8px;bottom:7px}.player-right{display:none}.controls{gap:7px}.now img{width:35px;height:35px}.footer{padding-bottom:95px}}
+/* PULSE YOUTUBE VIDEO OVERLAY */
+.yt-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(3, 4, 14, .88);
+  backdrop-filter: blur(14px);
+}
+.yt-modal.open { display: flex; }
+
+.yt-dialog {
+  width: min(900px, 100%);
+  max-height: 92dvh;
+  overflow-y: auto;
+  padding: 18px;
+  border: 1px solid #a855f766;
+  border-radius: 20px;
+  background: #0b0e20;
+  box-shadow: 0 20px 80px #000a;
+}
+.yt-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.yt-heading h2 {
+  margin: 0;
+  font: 700 20px "Space Grotesk", sans-serif;
+}
+.yt-close {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #a855f755;
+  border-radius: 12px;
+  color: white;
+  background: #17152b;
+  font-size: 23px;
+}
+.yt-message {
+  color: #b9c0df;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 10px 0 16px;
+}
+.yt-results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.yt-result {
+  min-width: 0;
+  padding: 9px;
+  border: 1px solid #a3aaff28;
+  border-radius: 14px;
+  background: #11152a;
+  color: white;
+  text-align: left;
+}
+.yt-result:hover,
+.yt-result:focus-visible {
+  border-color: #22d3ee;
+  outline: none;
+}
+.yt-result img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 9px;
+  background: #17162b;
+}
+.yt-result strong {
+  display: block;
+  margin-top: 9px;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.yt-result small {
+  display: block;
+  color: #a4a8c3;
+  margin-top: 5px;
+  font-size: 10px;
+}
+.yt-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 200px;
+  border: 0;
+  border-radius: 13px;
+  background: #000;
+}
+.yt-watch {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 13px;
+  border: 1px solid #a855f766;
+  border-radius: 12px;
+  color: white;
+  background: linear-gradient(100deg, #8b35e9, #176ddc);
+  font-weight: 700;
+}
+.yt-watch:disabled {
+  opacity: .5;
+  cursor: wait;
+}
+.yt-search-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.yt-search-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+  color: white;
+  background: #080b19;
+  border: 1px solid #a3aaff38;
+  border-radius: 11px;
+}
+.yt-search-row button {
+  padding: 0 14px;
+  border: 0;
+  border-radius: 11px;
+  background: #852ce5;
+  color: white;
+  font-weight: 700;
+}
+@media(max-width:600px) {
+  .yt-modal { padding: 8px; }
+  .yt-dialog { padding: 12px; border-radius: 15px; }
+  .yt-results { grid-template-columns: 1fr; }
+  .yt-heading h2 { font-size: 17px; }
+}
+
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<header class="wrap top">
+  <a class="brand" href="#"><span class="brand-icon">∿</span><span>Pulse Music<em>YOUR SOUND, AMPLIFIED</em></span></a>
+  <nav class="nav" id="nav"><a href="#discover">Discover</a><a href="#wrapped" class="active">Wrapped</a><a href="#artists">Top Artists</a><a href="#share">Share</a><a class="nav-cta" href="#wrapped">View my Wrapped ↗</a></nav>
+  <button class="menu" id="menu" aria-label="Toggle navigation">☰</button>
+</header>
+<div class="wrap layout">
+  <aside class="side" aria-label="Quick navigation"><button class="active" onclick="location.href='#wrapped'" title="Wrapped">⌂<small>Home</small></button><button onclick="location.href='#discover'" title="Discover">⌕<small>Search</small></button><button onclick="location.href='#artists'" title="Artists">♬<small>Artists</small></button><button onclick="location.href='#share'" title="Share">↗<small>Share</small></button></aside>
+  <main class="main">
+    <section class="hero reveal visible" id="wrapped">
+      <div class="hero-bg"></div><div class="hero-content">
+        <span class="pill">✦ YOUR 2026 · PULSE REPLAY</span>
+        <h1>Music <span class="gradient">Wrapped.</span></h1>
+        <p>Your sound. Your story. Your playlist. From late-night vibes to morning motivation — here's a glimpse of how music moved you.</p>
+        <div class="actions"><a class="btn" href="#your-stats">▶ &nbsp; Reveal my Wrapped</a><button class="btn ghost" id="watchBtn">▷ &nbsp; Play a preview</button></div>
+        <div class="hero-stats" id="your-stats">
+          <div class="metric"><div class="metric-head"><span class="metric-icon">♫</span>Listening time</div><strong>6,482 <small style="display:inline;color:#c4c8e6;font-size:11px">min</small></strong><small>↗ 32% from last year</small></div>
+          <div class="metric"><div class="metric-head"><span class="metric-icon">▶</span>Songs played</div><strong>1,248</strong><small>↗ 28% from last year</small></div>
+          <div class="metric"><div class="metric-head"><span class="metric-icon">♥</span>Top artist</div><strong>SZA</strong><small>↗ 1,243 minutes</small></div>
+          <div class="metric"><div class="metric-head"><span class="metric-icon">✦</span>Top genre</div><strong>Hip Hop</strong><small>↗ 42% of your time</small></div>
+        </div>
+      </div>
+      <div class="soundwave" id="wave" aria-hidden="true"><i style="--i: 0; --h: 17.86396279813465%;"></i><i style="--i: 1; --h: 61.16207050733468%;"></i><i style="--i: 2; --h: 72.3465174426092%;"></i><i style="--i: 3; --h: 97.32077569117133%;"></i><i style="--i: 4; --h: 106.9124477462089%;"></i><i style="--i: 5; --h: 90.65167211137017%;"></i><i style="--i: 6; --h: 72.83367147163068%;"></i><i style="--i: 7; --h: 64.39720017227864%;"></i><i style="--i: 8; --h: 19.500266122420356%;"></i><i style="--i: 9; --h: 43.10850224223136%;"></i><i style="--i: 10; --h: 88.3209631939468%;"></i><i style="--i: 11; --h: 89.88087984101521%;"></i><i style="--i: 12; --h: 106.41246388308524%;"></i><i style="--i: 13; --h: 96.08125128591534%;"></i><i style="--i: 14; --h: 83.47402499916757%;"></i><i style="--i: 15; --h: 55.77192663122241%;"></i><i style="--i: 16; --h: 35.18655608187372%;"></i><i style="--i: 17; --h: 42.297719820703755%;"></i><i style="--i: 18; --h: 84.01832945859636%;"></i><i style="--i: 19; --h: 86.62510898870127%;"></i><i style="--i: 20; --h: 96.91153125135601%;"></i><i style="--i: 21; --h: 109.30127881834798%;"></i><i style="--i: 22; --h: 73.88182564875356%;"></i><i style="--i: 23; --h: 55.85723795738369%;"></i><i style="--i: 24; --h: 32.24164356939908%;"></i><i style="--i: 25; --h: 55.867185651584116%;"></i><i style="--i: 26; --h: 69.48325226141388%;"></i><i style="--i: 27; --h: 89.57289391428066%;"></i><i style="--i: 28; --h: 104.65930857824767%;"></i><i style="--i: 29; --h: 93.10213052803395%;"></i><i style="--i: 30; --h: 91.13742819367846%;"></i><i style="--i: 31; --h: 62.59085755785513%;"></i><i style="--i: 32; --h: 30.119002066631502%;"></i><i style="--i: 33; --h: 41.551191243717234%;"></i><i style="--i: 34; --h: 69.02665324773162%;"></i><i style="--i: 35; --h: 90.70018582373673%;"></i><i style="--i: 36; --h: 103.43810529929141%;"></i><i style="--i: 37; --h: 92.02320144763458%;"></i><i style="--i: 38; --h: 94.53054069567415%;"></i><i style="--i: 39; --h: 54.73583465583654%;"></i><i style="--i: 40; --h: 32.11933658164399%;"></i><i style="--i: 41; --h: 49.88219884642277%;"></i><i style="--i: 42; --h: 67.74626158061214%;"></i><i style="--i: 43; --h: 93.82004767652707%;"></i><i style="--i: 44; --h: 105.29053824228863%;"></i><i style="--i: 45; --h: 104.63538920135836%;"></i><i style="--i: 46; --h: 82.57359079407183%;"></i><i style="--i: 47; --h: 66.30736148694456%;"></i><i style="--i: 48; --h: 31.167385428340502%;"></i><i style="--i: 49; --h: 40.615399299919126%;"></i><i style="--i: 50; --h: 77.78972409719428%;"></i><i style="--i: 51; --h: 101.98745894030714%;"></i><i style="--i: 52; --h: 97.88686708838%;"></i><i style="--i: 53; --h: 109.91255034997334%;"></i><i style="--i: 54; --h: 87.85420217758912%;"></i><i style="--i: 55; --h: 62.0927999122968%;"></i><i style="--i: 56; --h: 45.62020491160499%;"></i><i style="--i: 57; --h: 52.75905627523481%;"></i><i style="--i: 58; --h: 64.07610790057467%;"></i><i style="--i: 59; --h: 90.76712121991011%;"></i><i style="--i: 60; --h: 108.36252126416251%;"></i><i style="--i: 61; --h: 97.88531638646886%;"></i><i style="--i: 62; --h: 96.22136027822359%;"></i><i style="--i: 63; --h: 68.89298833718385%;"></i><i style="--i: 64; --h: 42.263451971386694%;"></i><i style="--i: 65; --h: 41.00447922515603%;"></i><i style="--i: 66; --h: 68.45934066846277%;"></i><i style="--i: 67; --h: 84.57017947878815%;"></i><i style="--i: 68; --h: 105.5241393300945%;"></i><i style="--i: 69; --h: 109.6921439993014%;"></i><i style="--i: 70; --h: 94.0197392692021%;"></i><i style="--i: 71; --h: 67.86686546321496%;"></i><i style="--i: 72; --h: 37.197845762082125%;"></i><i style="--i: 73; --h: 44.51409953412102%;"></i><i style="--i: 74; --h: 60.707674599765966%;"></i><i style="--i: 75; --h: 81.72492261222862%;"></i><i style="--i: 76; --h: 105.08579865382995%;"></i><i style="--i: 77; --h: 102.55094089697764%;"></i><i style="--i: 78; --h: 89.95172569577733%;"></i><i style="--i: 79; --h: 66.8713940918091%;"></i><i style="--i: 80; --h: 35.818802157771344%;"></i><i style="--i: 81; --h: 33.682940757305346%;"></i><i style="--i: 82; --h: 65.62563164439774%;"></i><i style="--i: 83; --h: 85.325258280918%;"></i><i style="--i: 84; --h: 107.87457500705767%;"></i><i style="--i: 85; --h: 102.71832780288183%;"></i><i style="--i: 86; --h: 91.66990054629746%;"></i><i style="--i: 87; --h: 62.690224735451814%;"></i><i style="--i: 88; --h: 43.124648744976845%;"></i><i style="--i: 89; --h: 45.44863021968109%;"></i><i style="--i: 90; --h: 68.71657215323481%;"></i><i style="--i: 91; --h: 80.96337542386955%;"></i><i style="--i: 0; --h: 19.072810495134835%;"></i><i style="--i: 1; --h: 58.85620382398933%;"></i><i style="--i: 2; --h: 70.79231282325766%;"></i><i style="--i: 3; --h: 97.52819295511061%;"></i><i style="--i: 4; --h: 102.64633909178477%;"></i><i style="--i: 5; --h: 88.36263123096361%;"></i><i style="--i: 6; --h: 82.77880854665865%;"></i><i style="--i: 7; --h: 48.282090637432916%;"></i><i style="--i: 8; --h: 29.43225493874513%;"></i><i style="--i: 9; --h: 51.16319388690927%;"></i><i style="--i: 10; --h: 82.31128299916647%;"></i><i style="--i: 11; --h: 98.7685717003713%;"></i><i style="--i: 12; --h: 93.97108466782164%;"></i><i style="--i: 13; --h: 96.94751404603575%;"></i><i style="--i: 14; --h: 89.45271433894115%;"></i><i style="--i: 15; --h: 50.859122715172006%;"></i><i style="--i: 16; --h: 26.122672299855907%;"></i><i style="--i: 17; --h: 56.40385383410199%;"></i><i style="--i: 18; --h: 80.11116645312089%;"></i><i style="--i: 19; --h: 96.87498826504898%;"></i><i style="--i: 20; --h: 110.53489297910836%;"></i><i style="--i: 21; --h: 94.74658598800761%;"></i><i style="--i: 22; --h: 82.3098331455044%;"></i><i style="--i: 23; --h: 53.37030140587571%;"></i><i style="--i: 24; --h: 24.881914523458093%;"></i><i style="--i: 25; --h: 55.131337823744225%;"></i><i style="--i: 26; --h: 78.53223930577391%;"></i><i style="--i: 27; --h: 89.73763039178374%;"></i><i style="--i: 28; --h: 100.1960296144521%;"></i><i style="--i: 29; --h: 96.27792970449134%;"></i><i style="--i: 30; --h: 88.32856377314482%;"></i><i style="--i: 31; --h: 64.70540824947855%;"></i><i style="--i: 32; --h: 33.891114435972106%;"></i><i style="--i: 33; --h: 46.7901901184094%;"></i><i style="--i: 34; --h: 81.46887538380012%;"></i><i style="--i: 35; --h: 101.0781252602606%;"></i><i style="--i: 36; --h: 110.02985209661716%;"></i><i style="--i: 37; --h: 103.47445247318208%;"></i><i style="--i: 38; --h: 80.63369100429045%;"></i><i style="--i: 39; --h: 54.5961018827494%;"></i><i style="--i: 40; --h: 30.460706017653777%;"></i><i style="--i: 41; --h: 54.94367831126185%;"></i><i style="--i: 42; --h: 71.3679182103395%;"></i><i style="--i: 43; --h: 92.8409919579315%;"></i><i style="--i: 44; --h: 104.66715474894563%;"></i><i style="--i: 45; --h: 100.8743544765183%;"></i><i style="--i: 46; --h: 89.56145549762616%;"></i><i style="--i: 47; --h: 56.06494633247134%;"></i><i style="--i: 48; --h: 32.13859394907386%;"></i><i style="--i: 49; --h: 53.82448156347134%;"></i><i style="--i: 50; --h: 72.63378014869318%;"></i><i style="--i: 51; --h: 89.8840084447398%;"></i><i style="--i: 52; --h: 100.30704559408494%;"></i><i style="--i: 53; --h: 109.85612619031436%;"></i><i style="--i: 54; --h: 93.91797067022426%;"></i><i style="--i: 55; --h: 71.80662186066252%;"></i><i style="--i: 56; --h: 40.84977758429374%;"></i><i style="--i: 57; --h: 47.53090787615155%;"></i><i style="--i: 58; --h: 72.69330521152081%;"></i><i style="--i: 59; --h: 101.79536572448387%;"></i><i style="--i: 60; --h: 100.94449990152066%;"></i><i style="--i: 61; --h: 100.1980992508814%;"></i><i style="--i: 62; --h: 87.68523528069133%;"></i><i style="--i: 63; --h: 69.40228236065306%;"></i><i style="--i: 64; --h: 33.92313253580876%;"></i><i style="--i: 65; --h: 33.88220291290634%;"></i><i style="--i: 66; --h: 72.46311304440404%;"></i><i style="--i: 67; --h: 92.8358389067321%;"></i><i style="--i: 68; --h: 100.26278201812818%;"></i><i style="--i: 69; --h: 93.62212164848602%;"></i><i style="--i: 70; --h: 84.85454764304546%;"></i><i style="--i: 71; --h: 70.64292471124867%;"></i><i style="--i: 72; --h: 47.74082324894856%;"></i><i style="--i: 73; --h: 45.5679567211055%;"></i><i style="--i: 74; --h: 76.00622786201978%;"></i><i style="--i: 75; --h: 94.93006211518511%;"></i><i style="--i: 76; --h: 109.71101914277932%;"></i><i style="--i: 77; --h: 95.857151801039%;"></i><i style="--i: 78; --h: 96.9882241096929%;"></i><i style="--i: 79; --h: 63.547748069866316%;"></i><i style="--i: 80; --h: 38.70552414763756%;"></i><i style="--i: 81; --h: 41.867705002329146%;"></i><i style="--i: 82; --h: 73.5086023402801%;"></i><i style="--i: 83; --h: 95.89200113849323%;"></i><i style="--i: 84; --h: 96.72222597918893%;"></i><i style="--i: 85; --h: 97.94458392991741%;"></i><i style="--i: 86; --h: 82.35733416466253%;"></i><i style="--i: 87; --h: 65.44715950597029%;"></i><i style="--i: 88; --h: 39.98243125228717%;"></i><i style="--i: 89; --h: 32.72031856542739%;"></i><i style="--i: 90; --h: 59.307702209242755%;"></i><i style="--i: 91; --h: 93.86452748945793%;"></i><i style="--i: 0; --h: 19.73583152697652%;"></i><i style="--i: 1; --h: 47.74601465303274%;"></i><i style="--i: 2; --h: 80.09140166132133%;"></i><i style="--i: 3; --h: 91.81766860419887%;"></i><i style="--i: 4; --h: 105.03070788232266%;"></i><i style="--i: 5; --h: 96.7920762974022%;"></i><i style="--i: 6; --h: 73.72613467637258%;"></i><i style="--i: 7; --h: 58.59865811243287%;"></i><i style="--i: 8; --h: 16.440732320100953%;"></i><i style="--i: 9; --h: 52.0478901358145%;"></i><i style="--i: 10; --h: 85.66545225750774%;"></i><i style="--i: 11; --h: 91.06300484612814%;"></i><i style="--i: 12; --h: 110.9734963419335%;"></i><i style="--i: 13; --h: 96.34697463677008%;"></i><i style="--i: 14; --h: 84.72138490489225%;"></i><i style="--i: 15; --h: 66.46903843202745%;"></i><i style="--i: 16; --h: 19.791914994064125%;"></i><i style="--i: 17; --h: 57.64110169227134%;"></i><i style="--i: 18; --h: 84.74015926363911%;"></i><i style="--i: 19; --h: 87.42922816577054%;"></i><i style="--i: 20; --h: 109.5961864826543%;"></i><i style="--i: 21; --h: 105.24794354691399%;"></i><i style="--i: 22; --h: 76.0148394637442%;"></i><i style="--i: 23; --h: 63.31163724384017%;"></i><i style="--i: 24; --h: 36.82334457713627%;"></i><i style="--i: 25; --h: 46.40138912609521%;"></i><i style="--i: 26; --h: 68.54686536942053%;"></i><i style="--i: 27; --h: 91.03675267326656%;"></i><i style="--i: 28; --h: 101.440064773855%;"></i><i style="--i: 29; --h: 91.51029665905375%;"></i><i style="--i: 30; --h: 76.49241018000893%;"></i><i style="--i: 31; --h: 59.247101923002674%;"></i><i style="--i: 32; --h: 22.907326555859946%;"></i><i style="--i: 33; --h: 47.27816197896283%;"></i><i style="--i: 34; --h: 81.31888105459794%;"></i><i style="--i: 35; --h: 98.41727702475394%;"></i><i style="--i: 36; --h: 98.61177542747149%;"></i><i style="--i: 37; --h: 96.82935451835148%;"></i><i style="--i: 38; --h: 79.78240245184517%;"></i><i style="--i: 39; --h: 58.46316005892465%;"></i><i style="--i: 40; --h: 33.46514699672733%;"></i><i style="--i: 41; --h: 44.07234787444184%;"></i><i style="--i: 42; --h: 74.92815901930675%;"></i><i style="--i: 43; --h: 97.13655902379585%;"></i><i style="--i: 44; --h: 98.67409317322273%;"></i><i style="--i: 45; --h: 101.28417972634857%;"></i><i style="--i: 46; --h: 81.77356379459248%;"></i><i style="--i: 47; --h: 69.44989334631046%;"></i><i style="--i: 48; --h: 37.182121908332725%;"></i><i style="--i: 49; --h: 51.86109729161396%;"></i><i style="--i: 50; --h: 79.60816469470296%;"></i><i style="--i: 51; --h: 96.10523004951199%;"></i><i style="--i: 52; --h: 97.70730792709698%;"></i><i style="--i: 53; --h: 107.94373212417031%;"></i><i style="--i: 54; --h: 85.89788338235985%;"></i><i style="--i: 55; --h: 66.37953985046282%;"></i><i style="--i: 56; --h: 38.6164686293739%;"></i><i style="--i: 57; --h: 52.57099678870172%;"></i><i style="--i: 58; --h: 68.96896004920713%;"></i><i style="--i: 59; --h: 96.02938638500652%;"></i><i style="--i: 60; --h: 92.99661435516911%;"></i><i style="--i: 61; --h: 99.50188157111522%;"></i><i style="--i: 62; --h: 95.41833430358315%;"></i><i style="--i: 63; --h: 75.63207527878753%;"></i><i style="--i: 64; --h: 38.74570993452366%;"></i><i style="--i: 65; --h: 44.811422501270336%;"></i><i style="--i: 66; --h: 64.75648830533832%;"></i><i style="--i: 67; --h: 92.33788085714954%;"></i><i style="--i: 68; --h: 106.71815504617496%;"></i><i style="--i: 69; --h: 94.74953422086759%;"></i><i style="--i: 70; --h: 88.30980345717694%;"></i><i style="--i: 71; --h: 72.68442989413661%;"></i><i style="--i: 72; --h: 29.48822861758753%;"></i><i style="--i: 73; --h: 37.93968722045938%;"></i><i style="--i: 74; --h: 70.30513427187549%;"></i><i style="--i: 75; --h: 89.76334757853333%;"></i><i style="--i: 76; --h: 108.91464872353913%;"></i><i style="--i: 77; --h: 109.15859451239018%;"></i><i style="--i: 78; --h: 90.48575589272158%;"></i><i style="--i: 79; --h: 59.985462178915334%;"></i><i style="--i: 80; --h: 36.036148909525046%;"></i><i style="--i: 81; --h: 42.83770036083772%;"></i><i style="--i: 82; --h: 57.74780031874727%;"></i><i style="--i: 83; --h: 91.69982593047924%;"></i><i style="--i: 84; --h: 98.32317610551198%;"></i><i style="--i: 85; --h: 98.0021353620452%;"></i><i style="--i: 86; --h: 83.60700732405377%;"></i><i style="--i: 87; --h: 64.64952041064775%;"></i><i style="--i: 88; --h: 41.2213942604376%;"></i><i style="--i: 89; --h: 43.40612212991004%;"></i><i style="--i: 90; --h: 73.13347279483689%;"></i><i style="--i: 91; --h: 79.58784287344689%;"></i><i style="--i: 0; --h: 26.32106662043883%;"></i><i style="--i: 1; --h: 45.671450482654954%;"></i><i style="--i: 2; --h: 78.69520601648429%;"></i><i style="--i: 3; --h: 91.52725705972776%;"></i><i style="--i: 4; --h: 103.22743947223773%;"></i><i style="--i: 5; --h: 93.47879338169497%;"></i><i style="--i: 6; --h: 83.93925323626021%;"></i><i style="--i: 7; --h: 63.229001278132415%;"></i><i style="--i: 8; --h: 22.854843330539744%;"></i><i style="--i: 9; --h: 60.02505425714379%;"></i><i style="--i: 10; --h: 70.64461689568985%;"></i><i style="--i: 11; --h: 92.42127902498429%;"></i><i style="--i: 12; --h: 107.8204426369862%;"></i><i style="--i: 13; --h: 107.21113320664438%;"></i><i style="--i: 14; --h: 89.1920046203191%;"></i><i style="--i: 15; --h: 56.73049834781284%;"></i><i style="--i: 16; --h: 19.314712158769755%;"></i><i style="--i: 17; --h: 57.4738497396589%;"></i><i style="--i: 18; --h: 77.37445408393796%;"></i><i style="--i: 19; --h: 89.18074637692872%;"></i><i style="--i: 20; --h: 100.35561937989294%;"></i><i style="--i: 21; --h: 93.55688417364154%;"></i><i style="--i: 22; --h: 75.3311215491544%;"></i><i style="--i: 23; --h: 65.36668794274058%;"></i><i style="--i: 24; --h: 29.770944598003407%;"></i><i style="--i: 25; --h: 55.62274620350099%;"></i><i style="--i: 26; --h: 86.32770205022308%;"></i><i style="--i: 27; --h: 88.72149868716654%;"></i><i style="--i: 28; --h: 112.56536372017358%;"></i><i style="--i: 29; --h: 97.60212753814888%;"></i><i style="--i: 30; --h: 84.69350980055259%;"></i><i style="--i: 31; --h: 63.86095896712669%;"></i><i style="--i: 32; --h: 28.280454657261515%;"></i><i style="--i: 33; --h: 50.597831720959874%;"></i><i style="--i: 34; --h: 79.52264548510352%;"></i><i style="--i: 35; --h: 102.4992661903297%;"></i><i style="--i: 36; --h: 95.59338991572815%;"></i><i style="--i: 37; --h: 99.08320169357322%;"></i><i style="--i: 38; --h: 87.80242521827958%;"></i><i style="--i: 39; --h: 64.91924930695757%;"></i><i style="--i: 40; --h: 37.31865499946849%;"></i><i style="--i: 41; --h: 38.66404044114885%;"></i><i style="--i: 42; --h: 82.91792999492681%;"></i><i style="--i: 43; --h: 84.83741234690002%;"></i><i style="--i: 44; --h: 101.33831209200153%;"></i><i style="--i: 45; --h: 97.2320146360827%;"></i><i style="--i: 46; --h: 85.09426473581543%;"></i><i style="--i: 47; --h: 70.29557856107513%;"></i><i style="--i: 48; --h: 24.53213164970206%;"></i><i style="--i: 49; --h: 36.21221548049699%;"></i><i style="--i: 50; --h: 67.40159483340709%;"></i><i style="--i: 51; --h: 98.56299992920327%;"></i><i style="--i: 52; --h: 105.78990171810577%;"></i><i style="--i: 53; --h: 91.58217986846603%;"></i><i style="--i: 54; --h: 81.16007093001573%;"></i><i style="--i: 55; --h: 69.9771801629259%;"></i><i style="--i: 56; --h: 37.187950631519925%;"></i><i style="--i: 57; --h: 36.75562244575437%;"></i><i style="--i: 58; --h: 80.51476753687912%;"></i><i style="--i: 59; --h: 85.47252796832488%;"></i><i style="--i: 60; --h: 95.32718742843815%;"></i><i style="--i: 61; --h: 100.23917913729221%;"></i><i style="--i: 62; --h: 89.84917148924865%;"></i><i style="--i: 63; --h: 69.7348341762554%;"></i><i style="--i: 64; --h: 30.77504605660876%;"></i><i style="--i: 65; --h: 32.753055892691876%;"></i><i style="--i: 66; --h: 70.90430704120341%;"></i><i style="--i: 67; --h: 100.8885211470128%;"></i><i style="--i: 68; --h: 94.87462876151082%;"></i><i style="--i: 69; --h: 109.14030663593024%;"></i><i style="--i: 70; --h: 96.36320650028415%;"></i><i style="--i: 71; --h: 75.38639526373802%;"></i><i style="--i: 72; --h: 38.15921762249494%;"></i><i style="--i: 73; --h: 36.45237135161882%;"></i><i style="--i: 74; --h: 63.677071448504435%;"></i><i style="--i: 75; --h: 98.09169673610135%;"></i><i style="--i: 76; --h: 105.31976176249029%;"></i><i style="--i: 77; --h: 99.67189189711875%;"></i><i style="--i: 78; --h: 98.32226173441684%;"></i><i style="--i: 79; --h: 66.60508901699849%;"></i><i style="--i: 80; --h: 39.07957114325183%;"></i><i style="--i: 81; --h: 47.65376459332113%;"></i><i style="--i: 82; --h: 63.38872660686293%;"></i><i style="--i: 83; --h: 97.6401344693343%;"></i><i style="--i: 84; --h: 110.5055703234224%;"></i><i style="--i: 85; --h: 104.28654027672955%;"></i><i style="--i: 86; --h: 82.42181302571616%;"></i><i style="--i: 87; --h: 76.5511218548927%;"></i><i style="--i: 88; --h: 43.426235805840555%;"></i><i style="--i: 89; --h: 42.044360716711%;"></i><i style="--i: 90; --h: 60.54144949144915%;"></i><i style="--i: 91; --h: 89.18298230960946%;"></i></div>
+    </section>
+    <section class="section reveal visible" id="discover">
+      <div class="section-head"><div><div class="eyebrow">THE LISTENING ROOM</div><h2>Find your next frequency.</h2></div><p class="section-desc">Fresh sounds for the moments that matter. Pick a mood, press play, and let it move you.</p></div>
+      <div class="filters" id="filters"><button class="filter active" data-filter="All">All sounds</button><button class="filter" data-filter="Afrobeats">Afrobeats</button><button class="filter" data-filter="Hip Hop">Hip Hop</button><button class="filter" data-filter="R&amp;B">R&amp;B</button><button class="filter" data-filter="Electronic">Electronic</button><label class="search">⌕ <input id="search" type="search" placeholder="Search tracks or artists…" aria-label="Search tracks"></label></div>
+      <div class="tracks" id="tracks"><article class="track"><div class="cover"><img loading="lazy" src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&amp;fit=crop&amp;w=500&amp;q=85" alt="Good Days cover"><button class="play" data-play="0" aria-label="Play Good Days">▶</button></div><h3>Good Days</h3><p>SZA · R&amp;B</p><div class="track-meta"><span>♫ 1,243 min</span><span>Pulse pick ✦</span></div></article><article class="track"><div class="cover"><img loading="lazy" src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&amp;fit=crop&amp;w=500&amp;q=85" alt="Calm Down cover"><button class="play" data-play="1" aria-label="Play Calm Down">▶</button></div><h3>Calm Down</h3><p>Rema · Afrobeats</p><div class="track-meta"><span>♫ 982 min</span><span>Pulse pick ✦</span></div></article><article class="track"><div class="cover"><img loading="lazy" src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&amp;fit=crop&amp;w=500&amp;q=85" alt="IDGAF cover"><button class="play" data-play="2" aria-label="Play IDGAF">▶</button></div><h3>IDGAF</h3><p>Drake · Hip Hop</p><div class="track-meta"><span>♫ 876 min</span><span>Pulse pick ✦</span></div></article><article class="track"><div class="cover"><img loading="lazy" src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&amp;fit=crop&amp;w=500&amp;q=85" alt="Water cover"><button class="play" data-play="3" aria-label="Play Water">▶</button></div><h3>Water</h3><p>Tyla · Afrobeats</p><div class="track-meta"><span>♫ 654 min</span><span>Pulse pick ✦</span></div></article><article class="track"><div class="cover"><img loading="lazy" src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&amp;fit=crop&amp;w=500&amp;q=85" alt="Piece of My Heart cover"><button class="play" data-play="4" aria-label="Play Piece of My Heart">▶</button></div><h3>Piece of My Heart</h3><p>Wizkid · Afrobeats</p><div class="track-meta"><span>♫ 521 min</span><span>Pulse pick ✦</span></div></article><article class="track"><div class="cover"><img loading="lazy" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&amp;fit=crop&amp;w=500&amp;q=85" alt="Starboy cover"><button class="play" data-play="5" aria-label="Play Starboy">▶</button></div><h3>Starboy</h3><p>The Weeknd · R&amp;B</p><div class="track-meta"><span>♫ 488 min</span><span>Pulse pick ✦</span></div></article><article class="track"><div class="cover"><img loading="lazy" src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&amp;fit=crop&amp;w=500&amp;q=85" alt="City Lights cover"><button class="play" data-play="6" aria-label="Play City Lights">▶</button></div><h3>City Lights</h3><p>Pulse Selects · Electronic</p><div class="track-meta"><span>♫ 402 min</span><span>Pulse pick ✦</span></div></article><article class="track"><div class="cover"><img loading="lazy" src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&amp;fit=crop&amp;w=500&amp;q=85" alt="Calm Before cover"><button class="play" data-play="7" aria-label="Play Calm Before">▶</button></div><h3>Calm Before</h3><p>Nia Sol · Hip Hop</p><div class="track-meta"><span>♫ 376 min</span><span>Pulse pick ✦</span></div></article></div><div class="empty" id="empty" style="display: none;">No tracks found. Try a different search or genre.</div>
+    </section>
+    <section class="section reveal visible">
+      <div class="section-head"><div><div class="eyebrow">THE YEAR IN NUMBERS</div><h2>Your listening fingerprint.</h2></div><p class="section-desc">A sample view of the patterns, moods and little moments that made up your year.</p></div>
+      <div class="two-col">
+        <article class="panel"><div class="eyebrow">TOTAL LISTENING TIME</div><div class="big-number">6,482 <span>min</span></div><p>That's over 108 hours with music in your corner. Your soundtrack was there for the commute, the grind, and the quiet moments.</p><div class="bars" id="bars"><i style="--h: 22%; --i: 0;"></i><i style="--h: 43%; --i: 1;"></i><i style="--h: 32%; --i: 2;"></i><i style="--h: 56%; --i: 3;"></i><i style="--h: 75%; --i: 4;"></i><i style="--h: 48%; --i: 5;"></i><i style="--h: 63%; --i: 6;"></i><i style="--h: 89%; --i: 7;"></i><i style="--h: 57%; --i: 8;"></i><i style="--h: 77%; --i: 9;"></i><i style="--h: 98%; --i: 10;"></i><i style="--h: 67%; --i: 11;"></i><i style="--h: 46%; --i: 12;"></i><i style="--h: 83%; --i: 13;"></i><i style="--h: 61%; --i: 14;"></i><i style="--h: 90%; --i: 15;"></i><i style="--h: 52%; --i: 16;"></i><i style="--h: 72%; --i: 17;"></i><i style="--h: 43%; --i: 18;"></i><i style="--h: 86%; --i: 19;"></i><i style="--h: 66%; --i: 20;"></i><i style="--h: 94%; --i: 21;"></i><i style="--h: 58%; --i: 22;"></i><i style="--h: 76%; --i: 23;"></i><i style="--h: 22%; --i: 0;"></i><i style="--h: 43%; --i: 1;"></i><i style="--h: 32%; --i: 2;"></i><i style="--h: 56%; --i: 3;"></i><i style="--h: 75%; --i: 4;"></i><i style="--h: 48%; --i: 5;"></i><i style="--h: 63%; --i: 6;"></i><i style="--h: 89%; --i: 7;"></i><i style="--h: 57%; --i: 8;"></i><i style="--h: 77%; --i: 9;"></i><i style="--h: 98%; --i: 10;"></i><i style="--h: 67%; --i: 11;"></i><i style="--h: 46%; --i: 12;"></i><i style="--h: 83%; --i: 13;"></i><i style="--h: 61%; --i: 14;"></i><i style="--h: 90%; --i: 15;"></i><i style="--h: 52%; --i: 16;"></i><i style="--h: 72%; --i: 17;"></i><i style="--h: 43%; --i: 18;"></i><i style="--h: 86%; --i: 19;"></i><i style="--h: 66%; --i: 20;"></i><i style="--h: 94%; --i: 21;"></i><i style="--h: 58%; --i: 22;"></i><i style="--h: 76%; --i: 23;"></i><i style="--h: 22%; --i: 0;"></i><i style="--h: 43%; --i: 1;"></i><i style="--h: 32%; --i: 2;"></i><i style="--h: 56%; --i: 3;"></i><i style="--h: 75%; --i: 4;"></i><i style="--h: 48%; --i: 5;"></i><i style="--h: 63%; --i: 6;"></i><i style="--h: 89%; --i: 7;"></i><i style="--h: 57%; --i: 8;"></i><i style="--h: 77%; --i: 9;"></i><i style="--h: 98%; --i: 10;"></i><i style="--h: 67%; --i: 11;"></i><i style="--h: 46%; --i: 12;"></i><i style="--h: 83%; --i: 13;"></i><i style="--h: 61%; --i: 14;"></i><i style="--h: 90%; --i: 15;"></i><i style="--h: 52%; --i: 16;"></i><i style="--h: 72%; --i: 17;"></i><i style="--h: 43%; --i: 18;"></i><i style="--h: 86%; --i: 19;"></i><i style="--h: 66%; --i: 20;"></i><i style="--h: 94%; --i: 21;"></i><i style="--h: 58%; --i: 22;"></i><i style="--h: 76%; --i: 23;"></i><i style="--h: 22%; --i: 0;"></i><i style="--h: 43%; --i: 1;"></i><i style="--h: 32%; --i: 2;"></i><i style="--h: 56%; --i: 3;"></i><i style="--h: 75%; --i: 4;"></i><i style="--h: 48%; --i: 5;"></i><i style="--h: 63%; --i: 6;"></i><i style="--h: 89%; --i: 7;"></i><i style="--h: 57%; --i: 8;"></i><i style="--h: 77%; --i: 9;"></i><i style="--h: 98%; --i: 10;"></i><i style="--h: 67%; --i: 11;"></i><i style="--h: 46%; --i: 12;"></i><i style="--h: 83%; --i: 13;"></i><i style="--h: 61%; --i: 14;"></i><i style="--h: 90%; --i: 15;"></i><i style="--h: 52%; --i: 16;"></i><i style="--h: 72%; --i: 17;"></i><i style="--h: 43%; --i: 18;"></i><i style="--h: 86%; --i: 19;"></i><i style="--h: 66%; --i: 20;"></i><i style="--h: 94%; --i: 21;"></i><i style="--h: 58%; --i: 22;"></i><i style="--h: 76%; --i: 23;"></i></div><div class="month-labels"><span>JAN</span><span>MAR</span><span>MAY</span><span>JUL</span><span>SEP</span><span>DEC</span></div><div class="stats"><div class="stat"><strong>7h 42m</strong><small>Peak listening day</small></div><div class="stat"><strong>11:48 PM</strong><small>Favourite hour</small></div><div class="stat"><strong>Friday</strong><small>Top day</small></div></div></article>
+        <article class="panel"><div class="eyebrow">YOUR MUSIC PERSONALITY</div><h3>The Dreamer ✦</h3><p>You feel deeply, think big, and keep going. Music helps you reset, find focus and chase your dreams.</p><div class="genre-list"><div class="genre"><span>Hip Hop</span><div class="line"><i style="--w:42%"></i></div><b>42%</b></div><div class="genre"><span>R&amp;B</span><div class="line"><i style="--w:18%"></i></div><b>18%</b></div><div class="genre"><span>Afrobeats</span><div class="line"><i style="--w:14%"></i></div><b>14%</b></div><div class="genre"><span>Pop</span><div class="line"><i style="--w:10%"></i></div><b>10%</b></div><div class="genre"><span>Electronic</span><div class="line"><i style="--w:8%"></i></div><b>8%</b></div></div><div class="bottom-quote"><span>〽</span><div>“Music was there for your highs, your lows, and everything in between.”</div></div></article>
+      </div>
+    </section>
+    <section class="section reveal visible" id="artists">
+      <div class="section-head"><div><div class="eyebrow">YOUR PEOPLE, YOUR SOUND</div><h2>Top artists &amp; tracks.</h2></div><p class="section-desc">The artists who kept you company and the tracks you couldn't stop playing.</p></div>
+      <div class="two-col">
+        <article class="panel"><div class="eyebrow">MOST PLAYED ARTISTS</div><div class="artists" id="artistsList"><div class="artist"><span class="rank">1</span><img loading="lazy" src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&amp;fit=crop&amp;w=120&amp;q=85" alt=""><div><strong>SZA</strong><small>Top artist this year</small></div><em>1,243 mins</em></div><div class="artist"><span class="rank">2</span><img loading="lazy" src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&amp;fit=crop&amp;w=120&amp;q=85" alt=""><div><strong>Drake</strong><small>Top artist this year</small></div><em>982 mins</em></div><div class="artist"><span class="rank">3</span><img loading="lazy" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&amp;fit=crop&amp;w=120&amp;q=85" alt=""><div><strong>The Weeknd</strong><small>Top artist this year</small></div><em>876 mins</em></div><div class="artist"><span class="rank">4</span><img loading="lazy" src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&amp;fit=crop&amp;w=120&amp;q=85" alt=""><div><strong>Burna Boy</strong><small>Top artist this year</small></div><em>654 mins</em></div><div class="artist"><span class="rank">5</span><img loading="lazy" src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&amp;fit=crop&amp;w=120&amp;q=85" alt=""><div><strong>Tems</strong><small>Top artist this year</small></div><em>521 mins</em></div></div></article>
+        <article class="panel"><div class="eyebrow">ON REPEAT</div><div id="topTracks" class="artists"><div class="artist"><span class="rank">1</span><img loading="lazy" src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&amp;fit=crop&amp;w=120&amp;q=85" alt=""><div><strong>Good Days</strong><small>SZA · R&amp;B</small></div><button class="play" data-play="0" aria-label="Play Good Days" style="position:static;width:30px;height:30px">▶</button></div><div class="artist"><span class="rank">2</span><img loading="lazy" src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&amp;fit=crop&amp;w=120&amp;q=85" alt=""><div><strong>Calm Down</strong><small>Rema · Afrobeats</small></div><button class="play" data-play="1" aria-label="Play Calm Down" style="position:static;width:30px;height:30px">▶</button></div><div class="artist"><span class="rank">3</span><img loading="lazy" src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&amp;fit=crop&amp;w=120&amp;q=85" alt=""><div><strong>IDGAF</strong><small>Drake · Hip Hop</small></div><button class="play" data-play="2" aria-label="Play IDGAF" style="position:static;width:30px;height:30px">▶</button></div><div class="artist"><span class="rank">4</span><img loading="lazy" src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&amp;fit=crop&amp;w=120&amp;q=85" alt=""><div><strong>Water</strong><small>Tyla · Afrobeats</small></div><button class="play" data-play="3" aria-label="Play Water" style="position:static;width:30px;height:30px">▶</button></div><div class="artist"><span class="rank">5</span><img loading="lazy" src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&amp;fit=crop&amp;w=120&amp;q=85" alt=""><div><strong>Piece of My Heart</strong><small>Wizkid · Afrobeats</small></div><button class="play" data-play="4" aria-label="Play Piece of My Heart" style="position:static;width:30px;height:30px">▶</button></div></div></article>
+      </div>
+    </section>
+    <section class="section reveal visible" id="share">
+      <div class="two-col">
+        <article class="panel"><div class="eyebrow">MAKE IT YOURS</div><h3>Good music. Great memories.</h3><p>Your Wrapped is a snapshot of the year you lived. Share your soundtrack with your people — or copy the summary for your status.</p><div class="share-card"><div class="eyebrow">PULSE MUSIC PRESENTS</div><h4>YOUR 2024<br>WRAPPED ∿</h4><p>6,482 minutes · 1,248 songs · one unforgettable soundtrack.</p></div><div class="share-actions"><button id="shareBtn">↗ Share Wrapped</button><button id="copyBtn">▣ Copy summary</button><button id="downloadBtn">↓ Save summary</button></div></article>
+        <article class="panel"><div class="eyebrow">YOUR NEXT CHAPTER</div><h3>Same God. New Levels.</h3><p>Every year has a rhythm. Keep discovering the songs that move you, the artists who inspire you, and the sounds that feel like home.</p><div class="bottom-quote"><span>✦</span><div>“Life moves fast. Keep a soundtrack for the moments worth remembering.”</div></div><div style="margin-top:20px"><a href="#discover" class="btn">Explore more music ↗</a></div></article>
+      </div>
+    </section>
+  </main>
+</div>
+<footer class="footer"><div class="wrap footer-row"><div class="brand"><span class="brand-icon">∿</span><span>Pulse Music<em>YOUR SOUND, AMPLIFIED</em></span></div><div>More Music &nbsp; • &nbsp; More Moments &nbsp; • &nbsp; More You</div><div>Made with love in Kenya 🇰🇪</div></div></footer>
+<div class="player"><div class="now"><img id="nowImg" src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&amp;fit=crop&amp;w=120&amp;q=85" alt=""><div style="min-width:0"><strong id="nowTitle">Calm Before</strong><small id="nowArtist">Nia Sol · Pulse demo</small></div></div><div class="controls"><button id="prev" aria-label="Previous track">⏮</button><button id="play" class="main-play" aria-label="Play or pause">Ⅱ</button><button id="next" aria-label="Next track">⏭</button></div><div class="player-right"><span id="status">PLAYING</span><div class="progress"><i id="progress" style="width: 68.9632%;"></i></div><button id="mute" style="border:0;background:none;color:#c5cbea">⌁</button></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite">Sample audio did not load. Check your connection and try again.</div>
+
+<div class="yt-modal" id="ytModal" role="dialog" aria-modal="true" aria-labelledby="ytTitle" aria-hidden="true">
+  <div class="yt-dialog">
+    <div class="yt-heading">
+      <h2 id="ytTitle">Pulse Video Lounge ∿</h2>
+      <button class="yt-close" id="ytClose" aria-label="Close video player">×</button>
+    </div>
+
+    <form class="yt-search-row" id="ytSearchForm">
+      <input id="ytSearchInput" type="search" placeholder="Search songs, artists or music videos..." aria-label="Search YouTube videos" required="">
+      <button type="submit">Search</button>
+    </form>
+
+    <p class="yt-message" id="ytMessage" role="status" aria-live="polite">
+      Hover over a track or tap it to discover its music videos.
+    </p>
+
+    <div class="yt-results" id="ytResults"></div>
+
+    <div id="ytWatchArea" hidden="">
+      <iframe class="yt-frame" id="ytFrame" title="YouTube video player" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+      <button class="yt-watch" id="ytBack">← Back to video results</button>
+    </div>
+  </div>
+</div>
+
+<div class="yt-modal" id="ytModal" role="dialog" aria-modal="true" aria-labelledby="ytTitle" aria-hidden="true">
+  <div class="yt-dialog">
+    <div class="yt-heading">
+      <h2 id="ytTitle">Pulse Video Lounge ∿</h2>
+      <button class="yt-close" id="ytClose" aria-label="Close video player">×</button>
+    </div>
+
+    <form class="yt-search-row" id="ytSearchForm">
+      <input id="ytSearchInput" type="search" placeholder="Search songs, artists or music videos..." aria-label="Search YouTube videos" required="">
+      <button type="submit">Search</button>
+    </form>
+
+    <p class="yt-message" id="ytMessage" role="status" aria-live="polite">
+      Hover over a track or tap it to discover its music videos.
+    </p>
+
+    <div class="yt-results" id="ytResults"></div>
+
+    <div id="ytWatchArea" hidden="">
+      <iframe class="yt-frame" id="ytFrame" title="YouTube video player" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+      <button class="yt-watch" id="ytBack">← Back to video results</button>
+    </div>
+  </div>
+</div>
+<audio id="audio" preload="none" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"></audio>
+<script>
+const tracks=[
+ {title:"Good Days",artist:"SZA",genre:"R&B",plays:"1,243 min",img:"photo-1516280440614-37939bbacd81",audio:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"},
+ {title:"Calm Down",artist:"Rema",genre:"Afrobeats",plays:"982 min",img:"photo-1501386761578-eac5c94b800a",audio:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"},
+ {title:"IDGAF",artist:"Drake",genre:"Hip Hop",plays:"876 min",img:"photo-1506157786151-b8491531f063",audio:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"},
+ {title:"Water",artist:"Tyla",genre:"Afrobeats",plays:"654 min",img:"photo-1492684223066-81342ee5ff30",audio:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"},
+ {title:"Piece of My Heart",artist:"Wizkid",genre:"Afrobeats",plays:"521 min",img:"photo-1459749411175-04bf5292ceea",audio:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"},
+ {title:"Starboy",artist:"The Weeknd",genre:"R&B",plays:"488 min",img:"photo-1470225620780-dba8ba36b745",audio:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"},
+ {title:"City Lights",artist:"Pulse Selects",genre:"Electronic",plays:"402 min",img:"photo-1519608487953-e999c86e7455",audio:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3"},
+ {title:"Calm Before",artist:"Nia Sol",genre:"Hip Hop",plays:"376 min",img:"photo-1516280440614-37939bbacd81",audio:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"}
+];
+const artists=[{name:"SZA",mins:"1,243 mins",img:tracks[0].img},{name:"Drake",mins:"982 mins",img:tracks[2].img},{name:"The Weeknd",mins:"876 mins",img:tracks[5].img},{name:"Burna Boy",mins:"654 mins",img:tracks[4].img},{name:"Tems",mins:"521 mins",img:tracks[3].img}];
+const img=(id,w=500)=>`https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
+const audio=document.getElementById('audio');let current=-1,playing=false,filter='All';
+const tracksEl=document.getElementById('tracks');
+function trackCard(t,i){return `<article class="track"><div class="cover"><img loading="lazy" src="${img(t.img,500)}" alt="${t.title} cover"><button class="play" data-play="${i}" aria-label="Play ${t.title}">▶</button></div><h3>${t.title}</h3><p>${t.artist} · ${t.genre}</p><div class="track-meta"><span>♫ ${t.plays}</span><span>Pulse pick ✦</span></div></article>`}
+function renderTracks(){const q=document.getElementById('search').value.trim().toLowerCase();const found=tracks.map((t,i)=>({...t,i})).filter(t=>(filter==='All'||t.genre===filter)&&(`${t.title} ${t.artist} ${t.genre}`).toLowerCase().includes(q));tracksEl.innerHTML=found.map(t=>trackCard(t,t.i)).join('');document.getElementById('empty').style.display=found.length?'none':'block';tracksEl.querySelectorAll('[data-play]').forEach(b=>b.addEventListener('click',()=>playTrack(+b.dataset.play)))}
+function renderLists(){document.getElementById('artistsList').innerHTML=artists.map((a,i)=>`<div class="artist"><span class="rank">${i+1}</span><img loading="lazy" src="${img(a.img,120)}" alt=""><div><strong>${a.name}</strong><small>Top artist this year</small></div><em>${a.mins}</em></div>`).join('');document.getElementById('topTracks').innerHTML=tracks.slice(0,5).map((t,i)=>`<div class="artist"><span class="rank">${i+1}</span><img loading="lazy" src="${img(t.img,120)}" alt=""><div><strong>${t.title}</strong><small>${t.artist} · ${t.genre}</small></div><button class="play" data-play="${i}" aria-label="Play ${t.title}" style="position:static;width:30px;height:30px">▶</button></div>`).join('');document.querySelectorAll('#topTracks [data-play]').forEach(b=>b.addEventListener('click',()=>playTrack(+b.dataset.play)))}
+function notify(s){const t=document.getElementById('toast');t.textContent=s;t.classList.add('show');clearTimeout(notify.timer);notify.timer=setTimeout(()=>t.classList.remove('show'),2600)}
+function updatePlayer(){if(current<0)return;const t=tracks[current];document.getElementById('nowImg').src=img(t.img,120);document.getElementById('nowTitle').textContent=t.title;document.getElementById('nowArtist').textContent=t.artist+' · Pulse demo';document.getElementById('play').textContent=playing?'Ⅱ':'▶';document.getElementById('status').textContent=playing?'PLAYING':'PAUSED';document.querySelectorAll('[data-play]').forEach(b=>b.textContent=+b.dataset.play===current&&playing?'Ⅱ':'▶')}
+async function playTrack(i){current=(i+tracks.length)%tracks.length;audio.src=tracks[current].audio;playing=false;updatePlayer();try{await audio.play();playing=true;updatePlayer()}catch(e){notify('Sample audio did not load. Check your connection and try again.')}} 
+document.getElementById('play').onclick=()=>{if(current<0){playTrack(0);return}if(playing){audio.pause();playing=false;updatePlayer()}else audio.play().then(()=>{playing=true;updatePlayer()}).catch(()=>notify('Audio could not start. Try again.'))};
+document.getElementById('next').onclick=()=>playTrack(current+1);document.getElementById('prev').onclick=()=>playTrack(current<=0?tracks.length-1:current-1);audio.addEventListener('ended',()=>playTrack(current+1));audio.addEventListener('timeupdate',()=>document.getElementById('progress').style.width=(audio.duration?audio.currentTime/audio.duration*100:0)+'%');document.getElementById('mute').onclick=()=>{audio.muted=!audio.muted;notify(audio.muted?'Audio muted':'Audio unmuted')};
+document.getElementById('filters').querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;document.querySelectorAll('[data-filter]').forEach(x=>x.classList.toggle('active',x===b));renderTracks()});document.getElementById('search').addEventListener('input',renderTracks);
+document.getElementById('watchBtn').onclick=()=>current<0?playTrack(0):document.getElementById('play').click();
+const summary='My Pulse Music Wrapped: 6,482 minutes listened, 1,248 songs played, SZA as my top artist, and Hip Hop as my top genre. Same God. New Levels. ∿';
+document.getElementById('shareBtn').onclick=async()=>{if(navigator.share){try{await navigator.share({title:'My Pulse Music Wrapped',text:summary})}catch(e){}}else copySummary()};
+function copySummary(){if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(summary).then(()=>notify('Wrapped summary copied!')).catch(()=>notify(summary));else notify(summary)}
+document.getElementById('copyBtn').onclick=copySummary;document.getElementById('downloadBtn').onclick=()=>{const blob=new Blob([summary+'\n\nPulse Music Wrapped — demo statistics.'],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='pulse-music-wrapped.txt';a.click();URL.revokeObjectURL(url);notify('Your summary file is ready.')};
+document.getElementById('menu').onclick=()=>document.getElementById('nav').classList.toggle('open');document.querySelectorAll('#nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nav').classList.remove('open')));
+const wave=document.getElementById('wave');for(let i=0;i<92;i++){const bar=document.createElement('i');bar.style.setProperty('--i',i);bar.style.setProperty('--h',(14+Math.abs(Math.sin(i*.39))*80+Math.random()*20)+'%');wave.appendChild(bar)}
+const bars=document.getElementById('bars');[22,43,32,56,75,48,63,89,57,77,98,67,46,83,61,90,52,72,43,86,66,94,58,76].forEach((h,i)=>{const b=document.createElement('i');b.style.setProperty('--h',h+'%');b.style.setProperty('--i',i);bars.appendChild(b)});
+const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.07});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));renderTracks();renderLists();
+
+    
+(() => {
+  "use strict";
+
+  // 1. Add your restricted YouTube Data API v3 key here.
+  const YT_API_KEY = "PASTE_YOUR_YOUTUBE_API_KEY_HERE";
+
+  const modal = document.getElementById("ytModal");
+  const resultsEl = document.getElementById("ytResults");
+  const messageEl = document.getElementById("ytMessage");
+  const searchInput = document.getElementById("ytSearchInput");
+  const searchForm = document.getElementById("ytSearchForm");
+  const frame = document.getElementById("ytFrame");
+  const watchArea = document.getElementById("ytWatchArea");
+  const closeBtn = document.getElementById("ytClose");
+  const backBtn = document.getElementById("ytBack");
+
+  if (!modal || !resultsEl || !searchForm || !frame) {
+    console.error("Pulse YouTube overlay elements are missing.");
+    return;
+  }
+
+  let requestController = null;
+  let hoverTimer = null;
+  let lastQuery = "";
+  let lastResults = [];
+  let previousFocus = null;
+  let requestNumber = 0;
+
+  const isConfigured = () =>
+    YT_API_KEY &&
+    YT_API_KEY !== "AIzaSyAW_VWCCv_LigGkqvME06xrB3Nv-WKi3OU";
+
+  function getQuery(index) {
+    const t = window.tracks?.[index];
+    return t ? `${t.title} ${t.artist} official music video` : "";
+  }
+
+  function stopVideo() {
+    frame.src = "";
+    watchArea.hidden = true;
+  }
+
+  function closeModal() {
+    clearTimeout(hoverTimer);
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    stopVideo();
+    resultsEl.replaceChildren();
+    lastQuery = "";
+    if (requestController) requestController.abort();
+    if (previousFocus?.isConnected) previousFocus.focus();
+  }
+
+  function showModal(query) {
+    clearTimeout(hoverTimer);
+
+    previousFocus = document.activeElement;
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+
+    searchInput.value = query;
+    resultsEl.replaceChildren();
+    stopVideo();
+
+    searchVideos(query);
+  }
+
+  async function searchVideos(query) {
+    query = query.trim();
+    if (!query) return;
+
+    if (!isConfigured()) {
+      messageEl.textContent =
+        "AIzaSyAW_VWCCv_LigGkqvME06xrB3Nv-WKi3OU";
+      resultsEl.replaceChildren();
+      return;
+    }
+
+    if (requestController) requestController.abort();
+
+    requestController = new AbortController();
+    const thisRequest = ++requestNumber;
+
+    lastQuery = query;
+    resultsEl.replaceChildren();
+    stopVideo();
+    messageEl.textContent = "Finding matching music videos…";
+
+    const params = new URLSearchParams({
+      part: "snippet",
+      type: "video",
+      q: query,
+      maxResults: "8",
+      videoEmbeddable: "true",
+      safeSearch: "moderate",
+      key: YT_API_KEY
+    });
+
+    try {
+      const response = await fetch(
+        "https://www.googleapis.com/youtube/v3/search?" +
+          params.toString(),
+        { signal: requestController.signal }
+      );
+
+      const data = await response.json();
+
+      if (thisRequest !== requestNumber) return;
+
+      if (!response.ok) {
+        throw new Error(
+          data.error?.message || "YouTube search failed."
+        );
+      }
+
+      lastResults = (data.items || []).filter(item =>
+        item.id?.videoId && item.snippet
+      );
+
+      if (!lastResults.length) {
+        messageEl.textContent =
+          "No matching embeddable videos found. Try another search.";
+        return;
+      }
+
+      messageEl.textContent =
+        "Choose a video to watch inside Pulse Music.";
+
+      const fragment = document.createDocumentFragment();
+
+      lastResults.forEach(item => {
+        const videoId = item.id.videoId;
+        const snippet = item.snippet;
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "yt-result";
+        button.setAttribute(
+          "aria-label",
+          "Watch " + snippet.title
+        );
+
+        const image = document.createElement("img");
+        image.loading = "lazy";
+        image.alt = "Video thumbnail";
+        image.src =
+          snippet.thumbnails?.medium?.url ||
+          snippet.thumbnails?.default?.url || "";
+
+        const title = document.createElement("strong");
+        title.textContent = snippet.title;
+
+        const channel = document.createElement("small");
+        channel.textContent = snippet.channelTitle || "YouTube";
+
+        button.append(image, title, channel);
+
+        button.addEventListener("click", () => {
+          playVideo(videoId, snippet.title);
+        });
+
+        fragment.appendChild(button);
+      });
+
+      resultsEl.appendChild(fragment);
+    } catch (error) {
+      if (error.name === "AbortError") return;
+
+      console.error("Pulse YouTube search error:", error);
+      messageEl.textContent =
+        "Could not load videos. Check your connection, API key, " +
+        "API quota and website restrictions, then try again.";
+    }
+  }
+
+  function playVideo(videoId, title) {
+    // Only accept video IDs returned by YouTube search.
+    if (!/^[a-zA-Z0-9_-]{11}$/.test(videoId)) return;
+
+    const url = new URL(
+      "https://www.youtube-nocookie.com/embed/" +
+        encodeURIComponent(videoId)
+    );
+
+    url.searchParams.set("autoplay", "1");
+    url.searchParams.set("playsinline", "1");
+    url.searchParams.set("rel", "0");
+
+    // Set an origin for the embed on a normal HTTP(S) website.
+    if (location.protocol === "https:" ||
+        location.protocol === "http:") {
+      url.searchParams.set("origin", location.origin);
+    }
+
+    resultsEl.hidden = true;
+    watchArea.hidden = false;
+    frame.title = title;
+    frame.src = url.toString();
+    messageEl.textContent =
+      "Now playing: " + title +
+      ". If playback is blocked, use the YouTube player's controls.";
+  }
+
+  closeBtn.addEventListener("click", closeModal);
+
+  backBtn.addEventListener("click", () => {
+    stopVideo();
+    resultsEl.hidden = false;
+    messageEl.textContent =
+      "Choose another video or search for a different song.";
+  });
+
+  searchForm.addEventListener("submit", event => {
+    event.preventDefault();
+    showModal(searchInput.value);
+  });
+
+  modal.addEventListener("click", event => {
+    if (event.target === modal) closeModal();
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && modal.classList.contains("open")) {
+      closeModal();
+    }
+  });
+
+  // Desktop: hovering over a card discovers videos.
+  // The delay prevents accidental opening when moving the mouse.
+  const supportsHover = window.matchMedia(
+    "(hover: hover) and (pointer: fine)"
+  );
+
+  document.addEventListener("pointerover", event => {
+    if (!supportsHover.matches) return;
+
+    const card = event.target.closest(".track");
+    if (!card || card.contains(event.relatedTarget)) return;
+
+    const button = card.querySelector("[data-play]");
+    if (!button) return;
+
+    const query = getQuery(Number(button.dataset.play));
+    if (!query) return;
+
+    clearTimeout(hoverTimer);
+    hoverTimer = setTimeout(() => showModal(query), 650);
+  });
+
+  document.addEventListener("pointerout", event => {
+    const card = event.target.closest(".track");
+    if (!card || card.contains(event.relatedTarget)) return;
+    clearTimeout(hoverTimer);
+  });
+
+  // Touch, mouse click and keyboard: open the video finder.
+  // This also prevents the old demo MP3 from playing by mistake.
+  document.addEventListener("click", event => {
+    const button = event.target.closest("[data-play]");
+    if (!button) return;
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    const query = getQuery(Number(button.dataset.play));
+    if (query) showModal(query);
+  }, true);
+
+  // Let the existing "Play a preview" button open the video lounge.
+  document.getElementById("watchBtn")?.addEventListener("click", event => {
+    event.preventDefault();
+    showModal(getQuery(0) || "popular music videos");
+  }, true);
+
+})();
+
+</script>
+</body></html>
