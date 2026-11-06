@@ -2,6 +2,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b5b43">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="St George Youth">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
 <meta name="description" content="St George Youth church community dashboard for attendance, stewardship, Bible trivia, leadership and events.">
 <title>St George Youth | Community Hub</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
@@ -48,6 +55,24 @@ body{background:radial-gradient(ellipse at 92% 0%,#e4f4e7 0,transparent 32%),var
 #syncNowBtn{padding:7px 11px;border-radius:10px}
 @media(max-width:600px){.welcome:before{display:none}.welcome{padding:20px}.topbar{border-bottom:0;padding-bottom:4px}#serverSyncBar{font-size:11px;gap:7px}.main{padding-top:12px}}
 
+
+/* Accessible dark theme */
+body.dark-theme{--paper:#101a16;--ink:#e6f0e9;--muted:#a7b8ad;--line:#2b4035;--mint:#1b3428;background:#101a16;color:var(--ink)}
+body.dark-theme .main{color:var(--ink)}
+body.dark-theme .card,body.dark-theme .stat,body.dark-theme .member-card,body.dark-theme .modal,body.dark-theme .clock-pill,body.dark-theme .icon-btn{background:#182720;color:var(--ink);border-color:#2b4035}
+body.dark-theme .field input,body.dark-theme .field select,body.dark-theme .field textarea,body.dark-theme .search-input{background:#102019;color:var(--ink);border-color:#355244}
+body.dark-theme th{background:#20352a;color:#dce9df}
+body.dark-theme td{border-color:#2b4035}
+body.dark-theme .event-item,body.dark-theme .song{background:#1b2d24;border-color:#30483a}
+body.dark-theme .event-date{background:#14231b;border-color:#30483a}
+body.dark-theme .btn.secondary{background:#294637;color:#e7f5eb}
+body.dark-theme .finance-balance{background:#263a24}
+body.dark-theme .notice{background:#3a321b;color:#f5e6b4;border-color:#64552a}
+body.dark-theme .notice.success{background:#173c2a;color:#c5f1d4;border-color:#276344}
+body.dark-theme .notice.error{background:#421f20;color:#ffd3d3;border-color:#703536}
+body.dark-theme .section-title{border-color:#2b4035}
+body.dark-theme .topbar{border-color:#2b4035}
+
 </style>
 </head>
 <body>
@@ -57,13 +82,13 @@ body{background:radial-gradient(ellipse at 92% 0%,#e4f4e7 0,transparent 32%),var
   <nav class="nav" id="nav">
     <button class="active" data-target="overview"><span class="ico">▦</span> Dashboard</button>
     <button data-target="members"><span class="ico">♙</span> Members &amp; Attendance</button>
-    <button data-target="finance"><span class="ico">▤</span> Finance &amp; Stewardship</button>
+    <button data-target="finance"><span class="ico">▤</span> Treasurer's Office · Finance &amp; Stewardship</button>
     <button data-target="trivia"><span class="ico">✝</span> Bible Trivia</button>
     <button data-target="awards"><span class="ico">🏆</span> Awards &amp; Recognition</button>
     <button data-target="elections"><span class="ico">☑</span> Leadership Elections</button>
     <button data-target="choir"><span class="ico">♫</span> Choir Planner</button>
-    <button data-target="events"><span class="ico">▣</span> Treasure's Office</button>
-    <button data-target="backup"><span class="ico">⇧</span> Fun &amp; Games</button>
+    <button data-target="events"><span class="ico">▣</span> Events Calendar</button>
+    <button data-target="backup"><span class="ico">⇧</span> Data &amp; Settings</button>
   </nav>
   <div class="sidebar-bottom"><div class="side-note">“Let all that you do be done in love.”<br><b>1 Corinthians 16:14</b><br><br>Local-first · cloud sync available through the configured Apps Script server.</div></div>
 </aside>
@@ -74,7 +99,7 @@ body{background:radial-gradient(ellipse at 92% 0%,#e4f4e7 0,transparent 32%),var
       <button class="icon-btn mobile-menu" id="menuBtn" aria-label="Open menu">☰</button>
       <div><div class="eyebrow">Your community, connected</div><h1>Church dashboard</h1></div>
     </div>
-    <div class="top-actions"><div class="clock-pill" id="liveClock">Loading date…</div><button class="icon-btn" id="notifyBtn" aria-label="Notifications">♧</button><button class="icon-btn" id="themeBtn" aria-label="Toggle contrast">◐</button></div>
+    <div class="top-actions"><div class="clock-pill" id="liveClock">Loading date…</div><button class="btn secondary small" id="appInstallBtn" type="button" hidden="">⬇ Install app</button><button class="icon-btn" id="notifyBtn" aria-label="Notifications">♧</button><button class="icon-btn" id="themeBtn" aria-label="Toggle contrast">◐</button></div>
   </header>
   <div id="serverSyncBar" data-status="connecting" role="status" aria-live="polite">
     <span id="serverDot"></span><strong id="serverSyncTitle">Server sync not configured</strong>
@@ -137,7 +162,7 @@ body{background:radial-gradient(ellipse at 92% 0%,#e4f4e7 0,transparent 32%),var
       </div>
       <div class="stack">
         <article class="card"><div class="card-head"><div><h3>Record Sunday finances</h3><p>Demo treasurer gate</p></div></div>
-          <div class="notice">Prototype security: this local PIN gate is not secure authorization. Before real church use, move finance writes to a backend with individual accounts, roles and an audit log.</div>
+          <div class="notice">Finance entries are accepted only after server-side PIN verification. The PIN is never stored in this browser. Use a unique PIN and restrict Apps Script editor access.</div>
           <form id="financeForm" style="margin-top:14px"><div class="form-grid">
             <div class="field full"><label for="financeDate">Sunday / transaction date</label><input type="date" id="financeDate" required=""></div>
             <div class="field"><label for="financeIncome">Total income (KSh)</label><input type="number" id="financeIncome" min="0" step="0.01" placeholder="0.00" required=""></div>
@@ -145,10 +170,10 @@ body{background:radial-gradient(ellipse at 92% 0%,#e4f4e7 0,transparent 32%),var
             <div class="field"><label for="financeMpesa">M-PESA income (KSh)</label><input type="number" id="financeMpesa" min="0" step="0.01" value="0"></div>
             <div class="field"><label for="financeCash">Cash income (KSh)</label><input type="number" id="financeCash" min="0" step="0.01" value="0"></div>
             <div class="field full"><label for="financeExpenseNote">Expenditure details / notes</label><textarea id="financeExpenseNote" placeholder="e.g. transport, refreshments, printing"></textarea></div>
-            <div class="field full"><label for="treasurerPin">Treasurer PIN (demo default: 2468)</label><input type="password" id="treasurerPin" inputmode="numeric" autocomplete="current-password" placeholder="Enter PIN" required=""></div>
-          </div><button class="btn" style="width:100%;margin-top:14px" type="submit">Verify &amp; save finance record</button><p class="help" style="margin-top:9px">Income is checked against M-PESA + cash. Savings = income − expenses. A negative result is flagged as a loss in red.</p><div id="financeMessage" style="margin-top:12px"></div></form>
+            <div class="field full"><label for="treasurerPin">Treasurer PIN (verified securely by the server)</label><input type="password" id="treasurerPin" inputmode="numeric" autocomplete="current-password" placeholder="Enter PIN" required=""></div>
+          </div><button class="btn" style="width:100%;margin-top:14px" type="submit">Verify &amp; save finance record</button><p class="help" style="margin-top:9px">The server verifies the treasurer PIN, validates totals, records an audit entry and prevents duplicate Sunday records. Income must equal M-PESA + cash.</p><div id="financeMessage" style="margin-top:12px"></div></form>
         </article>
-        <article class="card"><h3>Latest Sunday token</h3><p class="subtle" style="font-size:12px">Stable per date; a new record gets a unique transaction ID.</p><div class="token" id="latestToken" style="margin-top:10px">ACK-SUN-—</div><button class="btn secondary small" id="copyTokenBtn" style="margin-top:12px">Copy token</button></article>
+        <article class="card"><h3>Sunday reference token</h3><p class="subtle" style="font-size:12px">Stable reference for the selected Sunday; each saved finance entry receives its own transaction ID.</p><div class="token" id="latestToken" style="margin-top:10px">ACK-SUN-—</div><button class="btn secondary small" id="copyTokenBtn" style="margin-top:12px">Copy token</button></article>
       </div>
     </div>
   </section>
@@ -169,22 +194,22 @@ body{background:radial-gradient(ellipse at 92% 0%,#e4f4e7 0,transparent 32%),var
   </section>
 
   <section class="section" id="awards">
-    <div class="section-title"><div><div class="eyebrow">Celebrate faithfulness</div><h2>Awards &amp; recognition</h2><p>Transparent candidate scoring from attendance, trivia and service records.</p></div><button class="btn secondary" id="refreshAwards">Refresh shortlist</button></div>
-    <article class="card"><div class="notice">Suggested shortlist only. Leaders should review context fairly, including approved boarding-school pauses, disability, caregiving and other excused absences. Do not use this score as the sole basis for awards.</div><div class="award-grid" style="margin-top:16px"><div class="award"><b>🏅 Attendance champion</b><small>Reliable eligible attendance</small></div><div class="award"><b>📖 Bible scholar</b><small>Trivia score and improvement</small></div><div class="award"><b>🤝 Community servant</b><small>Service notes entered by leaders</small></div></div><div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Suggested rank</th><th>Member</th><th>Attendance</th><th>Trivia avg.</th><th>Combined score</th><th>Review</th></tr></thead><tbody id="awardRows"></tbody></table></div></article>
+    <div class="section-title"><div><div class="eyebrow">Celebrate faithfulness</div><h2>Awards &amp; recognition</h2><p>Suggested shortlist from attendance and trivia records, with service recognition reviewed by church leaders.</p></div><button class="btn secondary" id="refreshAwards">Refresh shortlist</button></div>
+    <article class="card"><div class="notice">Suggested shortlist only. Leaders should review context fairly, including approved boarding-school pauses, disability, caregiving and other excused absences. Do not use this score as the sole basis for awards.</div><div class="award-grid" style="margin-top:16px"><div class="award"><b>🏅 Attendance champion</b><small>Reliable eligible attendance</small></div><div class="award"><b>📖 Bible scholar</b><small>Trivia score and improvement</small></div><div class="award"><b>🤝 Community servant</b><small>Leader nomination and documented service</small></div></div><div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Suggested rank</th><th>Member</th><th>Attendance</th><th>Trivia avg.</th><th>Combined score</th><th>Review</th></tr></thead><tbody id="awardRows"></tbody></table></div></article>
   </section>
 
   <section class="section" id="elections">
-    <div class="section-title"><div><div class="eyebrow">Servant leadership</div><h2>Leadership elections</h2><p>Collect demo ballots by office. Real secret ballots require a secure server and verified eligibility.</p></div><span class="pill">3-YEAR CYCLE</span></div>
+    <div class="section-title"><div><div class="eyebrow">Servant leadership</div><h2>Leadership elections</h2><p>Record leadership ballots by office and election year. The server prevents duplicate submissions; this is not a cryptographically secret ballot.</p></div><span class="pill">3-YEAR CYCLE</span></div>
     <div class="layout">
-      <article class="card"><div class="card-head"><div><h3>Cast a demo ballot</h3><p>One ballot per member per office in this browser</p></div></div><form id="voteForm"><div class="form-grid"><div class="field full"><label for="voterMember">Voter profile</label><select id="voterMember" required=""><option value="">Select registered member…</option></select></div><div class="field full"><label for="voteRole">Office</label><select id="voteRole" required=""><option>Chairperson</option><option>Vice Chairperson</option><option>Secretary</option><option>Vice Secretary</option><option>Treasurer</option><option>Time Keeper</option><option>Brigadier Officer</option></select></div><div class="field full"><label for="voteCandidate">Candidate</label><input id="voteCandidate" required="" placeholder="Candidate's registered full name"></div><div class="field full"><label for="voteConfirm">Confirmation</label><select id="voteConfirm"><option value="touch">On-screen confirmation (demo)</option><option value="passkey">Device passkey (needs secure backend)</option></select></div></div><button class="btn" style="width:100%;margin-top:14px">Confirm demo ballot</button><div id="voteMessage" style="margin-top:12px"></div></form></article>
-      <article class="card"><h3>Election summary</h3><p class="subtle" style="font-size:12px">Only aggregate totals are displayed here. This local prototype does not provide cryptographic ballot secrecy or prevent someone with browser access from modifying records.</p><div id="electionSummary" style="margin-top:14px"></div><button class="btn secondary small" id="exportVotesBtn" style="margin-top:14px">Export election log</button></article>
+      <article class="card"><div class="card-head"><div><h3>Record a leadership ballot</h3><p>One server-validated ballot per member per office and election year</p></div></div><form id="voteForm"><div class="form-grid"><div class="field full"><label for="voterMember">Voter profile</label><select id="voterMember" required=""><option value="">Select registered member…</option></select></div><div class="field"><label for="voteYear">Election year</label><select id="voteYear" required=""><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option>2030</option></select></div><div class="field"><label for="voteRole">Office</label><select id="voteRole" required=""><option>Chairperson</option><option>Vice Chairperson</option><option>Secretary</option><option>Vice Secretary</option><option>Treasurer</option><option>Time Keeper</option><option>Brigadier Officer</option></select></div><div class="field full"><label for="voteCandidate">Candidate</label><input id="voteCandidate" required="" placeholder="Candidate's registered full name"></div><div class="field full"><label for="voteConfirm">Confirmation</label><select id="voteConfirm"><option value="touch">On-screen confirmation (demo)</option><option value="passkey">Device passkey (needs secure backend)</option></select></div></div><button class="btn" style="width:100%;margin-top:14px">Submit ballot</button><div id="voteMessage" style="margin-top:12px"></div></form></article>
+      <article class="card"><h3>Election summary</h3><p class="subtle" style="font-size:12px">Aggregate totals are displayed here. The server validates duplicates and stores the election year. Voter eligibility and cryptographic ballot secrecy still require a dedicated election identity and secret-ballot system.</p><div id="electionSummary" style="margin-top:14px"></div><button class="btn secondary small" id="exportVotesBtn" style="margin-top:14px">Export election log</button></article>
     </div>
   </section>
 
   <section class="section" id="choir">
     <div class="section-title"><div><div class="eyebrow">Worship planning</div><h2>Choir song planner</h2><p>Build a balanced setlist in Swahili, Kikuyu and English. Recommendations are editable examples, not live trend rankings.</p></div><button class="btn" id="addSongBtn">＋ Add song</button></div>
     <div class="layout">
-      <article class="card"><div class="card-head"><div><h3>Recommended starting library</h3><p>Choose by language, theme and congregation familiarity.</p></div><select id="songLanguage" class="search-input" aria-label="Filter songs"><option value="all">All languages</option><option>Swahili</option><option>Kikuyu</option><option>English</option></select></div><div id="songList" class="stack" style="gap:9px"></div></article>
+      <article class="card"><div class="card-head"><div><h3>Recommended starting library</h3><p>Choose by language, theme and congregation familiarity.</p></div><select id="songLanguage" class="search-input" aria-label="Filter songs"><option value="all">All languages</option><option>Swahili</option><option>Kikuyu</option><option>English</option><option>Other</option></select></div><div id="songList" class="stack" style="gap:9px"></div></article>
       <article class="card"><h3>Sunday setlist</h3><p class="subtle" style="font-size:12px">Add songs to the plan and export it for choir practice.</p><div id="setlist" class="stack" style="margin-top:14px;gap:8px"></div><button class="btn secondary" id="exportSetlist" style="margin-top:13px;width:100%">Export setlist CSV</button><div class="notice" style="margin-top:13px">Check song keys, lyrics permissions, and the choir's vocal range before rehearsal.</div></article>
     </div>
   </section>
@@ -201,39 +226,13 @@ body{background:radial-gradient(ellipse at 92% 0%,#e4f4e7 0,transparent 32%),var
       <article class="card"><h3>Storage &amp; server status</h3><div id="storageStatus" style="margin-top:12px"></div><div class="notice" style="margin-top:14px">For real deployment: use Firebase or another backend, server-enforced roles, consent and privacy notices, backups, and an audit log. Never store raw fingerprint or face data in localStorage.</div><button class="btn danger" id="clearDemoBtn" style="margin-top:14px">Clear all local demo data</button></article>
     </div>
   </section>
-  <div class="footer">St George Youth Community Hub · Local prototype · Designed for phone, tablet and desktop · Verify parish dates and finance entries before official use.</div>
+  <div class="footer">St George Youth Community Hub · Connected community hub · Designed for phone, tablet and desktop · Finance and election records require server authorization.</div>
 </main>
 </div>
 
 <div class="toast-area" id="toastArea" aria-live="polite"></div>
 <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="modal-head"><h3 id="modalTitle">Add record</h3><button class="close-btn" id="closeModal" aria-label="Close dialog">✕</button></div><div id="modalContent"></div></div></div>
 
-<script>document.querySelectorAll('#nav [data-target]').forEach(button => {
-  button.addEventListener('click', () => {
-    const targetId = button.dataset.target;
-    const target = document.getElementById(targetId);
-
-    if (!target) {
-      console.error(`Navigation error: No section found with id="${targetId}"`);
-      return;
-    }
-
-    document.querySelectorAll('#nav [data-target]').forEach(item => {
-      item.classList.remove('active');
-      item.removeAttribute('aria-current');
-    });
-
-    button.classList.add('active');
-    button.setAttribute('aria-current', 'page');
-
-    // This assumes your main content sections use these IDs.
-    document.querySelectorAll('main section[id]').forEach(section => {
-      section.hidden = section.id !== targetId;
-    });
-
-    target.hidden = false;
-  });
-});</script>
 <script>
 'use strict';
 // SETUP: paste your existing Apps Script deployment URL (ending in /exec) into SERVER_API_URL below.
@@ -250,24 +249,38 @@ const uid=prefix=>prefix+'-'+Date.now().toString(36).toUpperCase()+'-'+Math.rand
 const currentYear=()=>new Date().getFullYear();
 function weekKey(date=new Date()){const d=new Date(date);d.setHours(0,0,0,0);d.setDate(d.getDate()+4-(d.getDay()||7));const y0=new Date(d.getFullYear(),0,1);return `${d.getFullYear()}-W${String(Math.ceil((((d-y0)/86400000)+1)/7)).padStart(2,'0')}`}
 function sundayFor(date=new Date()){const d=new Date(date);d.setHours(0,0,0,0);d.setDate(d.getDate()-d.getDay());return isoDate(d)}
-function seedState(){return {version:3,members:[],finances:[],triviaScores:[],votes:[],events:seedEvents(),songs:seedSongs(),setlist:[],attendanceSundays:[],settings:{treasurerPin:'2468',lastResetYear:currentYear()}}}
-function loadState(){try{const raw=localStorage.getItem(STORE_KEY);if(!raw)return seedState();const s=JSON.parse(raw);return {...seedState(),...s,settings:{...seedState().settings,...s.settings}}}catch(e){return seedState()}}
+function seedState(){return {version:3,members:[],finances:[],triviaScores:[],votes:[],events:seedEvents(),songs:seedSongs(),setlist:[],attendanceSundays:[],settings:{lastResetYear:currentYear(),electionYear:2026,theme:'light'}}}
+function loadState(){try{const raw=localStorage.getItem(STORE_KEY);if(!raw)return seedState();const s=JSON.parse(raw);if(s.settings)delete s.settings.treasurerPin;return {...seedState(),...s,settings:{...seedState().settings,...s.settings}}}catch(e){return seedState()}}
+let state=loadState();
+// Add the expanded built-in choir catalogue to existing browser data without
+// deleting or overwriting any songs the choir has already added.
+let songLibraryUpdated=false;
+for(const builtInSong of seedSongs()){
+ const exists=state.songs.some(song=>song.id===builtInSong.id ||
+   String(song.title||'').trim().toLowerCase()===builtInSong.title.toLowerCase());
+ if(!exists){state.songs.push({...builtInSong});songLibraryUpdated=true;}
+}
+if(songLibraryUpdated){
+ try{
+  localStorage.setItem(STORE_KEY,JSON.stringify(state));
+  localStorage.setItem(STORE_KEY+'_updatedAt',String(Date.now()));
+ }catch(error){console.warn('Could not cache the expanded song library:',error);}
+}
 /*
   SERVER SYNC — uses the EXISTING Code.gs API without modifying it.
   The app-state snapshot is stored as a special message in the existing Messages sheet.
-  Paste your deployed Apps Script Web App URL ending in /exec below.
+  The Cloudflare Worker URL below forwards requests to the configured Apps Script deployment.
 */
-const SERVER_API_URL='https://script.google.com/macros/s/AKfycbyX6LQnFHqPySpKc__sX34P-Kj_iJGGAvwkSyX_GVy8YCwFO_4Q2aLzGqmelpZG7apy/exec';
-const SERVER_STATE_ROOM='__stgeorge_hub_state_v3__';
-const SERVER_STATE_NAME='St George Hub Snapshot';
+const SERVER_API_URL='https://st-george-bridge.samterrencekabatha.workers.dev';
 const SERVER_TRIVIA_QUESTIONS_ROOM='__stgeorge_trivia_questions_v1__';
 const SERVER_TRIVIA_SCORES_ROOM='__stgeorge_trivia_scores_v1__';
 const SERVER_TRIVIA_QUESTIONS_NAME='St George Trivia Question Bank';
 const SERVER_TRIVIA_SCORE_NAME='St George Trivia Score';
 let triviaServerBusy=false;
 let serverSyncTimer=null,serverSyncBusy=false,serverSyncPending=false,serverSyncLastAt=0;
-const localStateHadData=!!localStorage.getItem(STORE_KEY);
-function serverConfigured(){return /^https:\/\/script\.google\.com\/macros\/s\/.+\/exec(?:\?.*)?$/.test(SERVER_API_URL)}
+function serverConfigured() {
+  return /^https:\/\/[a-z0-9-]+\.workers\.dev$/i.test(SERVER_API_URL);
+}
 function setServerStatus(status,title,detail){const bar=$('serverSyncBar');if(!bar)return;bar.dataset.status=status;$('serverSyncTitle').textContent=title;$('serverSyncDetail').textContent=detail}
 async function serverCall(action,payload={}){
  if(!serverConfigured())throw new Error('Add the deployed Apps Script /exec URL to SERVER_API_URL first.');
@@ -294,29 +307,35 @@ async function uploadLocalPhotos(){
   const match=member.photo.match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/);
   if(!match)continue;
   const ext=(match[1].split('/')[1]||'jpg').replace('jpeg','jpg');
-  const result=await serverCall('uploadMedia',{name:member.name,data:match[2],mimeType:match[1],fileName:'stgeorge_'+String(member.id||Date.now()).replace(/[^a-z0-9_-]/gi,'_')+'.'+ext});
-  if(result&&result.success&&result.url)member.photo=result.url;
+  try{
+   const result=await serverCall('uploadMedia',{name:member.name,data:match[2],mimeType:match[1],fileName:'stgeorge_'+String(member.id||Date.now()).replace(/[^a-z0-9_-]/gi,'_')+'.'+ext});
+   if(result&&result.success&&result.url)member.photo=result.url;
+  }catch(error){
+   console.warn('Profile photo upload failed; member data will still sync:',error);
+   member.photo='';
+  }
  }
 }
+
 async function writeServerSnapshot(){
  if(!serverConfigured())return false;
  await uploadLocalPhotos();
- const snapshot={__stGeorgeHubSnapshot:3,savedAt:Date.now(),state:stateForServer()};
- const message=JSON.stringify(snapshot);
- if(message.length>47000)throw new Error('The saved records are too large for one Google Sheets cell. Export a backup and reduce large profile photos.');
- const result=await serverCall('sendMessage',{name:SERVER_STATE_NAME,message,roomId:SERVER_STATE_ROOM,messageType:'state'});
- if(!result||!result.success)throw new Error('Server did not confirm the saved snapshot.');
- const savedAt=snapshot.savedAt;localStorage.setItem(STORE_KEY+'_updatedAt',String(savedAt));localStorage.setItem(STORE_KEY+'_serverSavedAt',String(savedAt));serverSyncLastAt=savedAt;
+ localStorage.setItem(STORE_KEY,JSON.stringify(state));
+ const snapshot={schemaVersion:4,savedAt:Date.now(),state:stateForServer()};
+ const result=await serverCall('saveState',{snapshot});
+ if(!result||!result.success)throw new Error(result.message||'Server did not confirm the saved state.');
+ const savedAt=snapshot.savedAt;
+ localStorage.setItem(STORE_KEY+'_updatedAt',String(savedAt));
+ localStorage.setItem(STORE_KEY+'_serverSavedAt',String(savedAt));
+ serverSyncLastAt=savedAt;
  return true;
 }
 async function readServerSnapshot(){
- const result=await serverCall('getMessages',{roomId:SERVER_STATE_ROOM});
- const messages=Array.isArray(result.messages)?result.messages:[];
- for(let i=messages.length-1;i>=0;i--){
-  const m=messages[i];if(m.name!==SERVER_STATE_NAME||!m.message)continue;
-  try{const parsed=JSON.parse(m.message);if(parsed&&parsed.__stGeorgeHubSnapshot===3&&parsed.state&&Array.isArray(parsed.state.members))return parsed}catch(e){}
- }
- return null;
+ const result=await serverCall('getState');
+ if(!result||!result.snapshot)return null;
+ const snap=result.snapshot;
+ if(snap.schemaVersion!==4||!snap.state||!Array.isArray(snap.state.members))return null;
+ return snap;
 }
 async function syncServerNow({quiet=false}={}){
  if(!serverConfigured()){
@@ -361,37 +380,61 @@ function queueServerSync(delay=1600){
 function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state));localStorage.setItem(STORE_KEY+'_updatedAt',String(Date.now()));renderAll();queueServerSync();return true}catch(e){toast('Could not save locally. Browser storage may be full; export a backup and reduce photos.','bad');return false}}
 function toast(message,type='ok'){const el=document.createElement('div');el.className='toast'+(type==='bad'?' bad':'');el.textContent=message;$('toastArea').appendChild(el);setTimeout(()=>el.remove(),3800)}
 function seedEvents(){
- const y=currentYear(); const fixed=[
-  [y+'-01-01','New Year’s Day','kenya','Kenya public holiday / community'],
-  [y+'-02-14',"Valentine’s Day",'community','Community observance'],
-  [y+'-03-08',"International Women’s Day",'community','Community observance'],
-  [y+'-05-01','Labour Day','kenya','Kenya public holiday'],
-  [y+'-06-01','Madaraka Day','kenya','Kenya public holiday'],
-  [y+'-06-05','World Environment Day','community','Environmental awareness'],
-  [y+'-10-10','Mazingira Day','kenya','Kenya public holiday'],
-  [y+'-10-20','Mashujaa Day','kenya','Kenya public holiday'],
-  [y+'-10-31','International Girlfriend’s Day (informal)','community','Informal community observance'],
-  [y+'-11-01','National Boyfriend Day (informal)','community','Informal community observance'],
-  [y+'-12-12','Jamhuri Day','kenya','Kenya public holiday'],
-  [y+'-12-25','Christmas Day','christian','Christian celebration / public holiday'],
-  [y+'-12-26','Boxing Day','kenya','Kenya public holiday'],
+ const events=[
+  {id:'SG-2026-1025',date:'2026-10-25',title:'St George Youth Contribution Sunday',category:'custom',description:'Youth contribution Sunday. M-PESA Till: 8151142. Keep contribution records and receipts.',custom:false},
+  {id:'SG-2026-NOV',date:'2026-11-01',title:'November weekly youth activities',category:'custom',description:'Weekly St George Youth fellowship and activities throughout November. Exact weekly programme details and logistics remain to be confirmed by the parish.',custom:false},
+  {id:'SG-2026-1206',date:'2026-12-06',title:'KAYO Sunday climax',category:'christian',description:'St George Youth / KAYO Sunday climax.',custom:false},
+  {id:'SG-2026-1214',date:'2026-12-14',title:'St George Youth Conference (Day 1)',category:'christian',description:'Youth conference runs 14–18 December 2026.',custom:false},
+  {id:'SG-2026-1215',date:'2026-12-15',title:'St George Youth Conference (Day 2)',category:'christian',description:'Youth conference continues.',custom:false},
+  {id:'SG-2026-1216',date:'2026-12-16',title:'St George Youth Conference (Day 3)',category:'christian',description:'Youth conference continues.',custom:false},
+  {id:'SG-2026-1217',date:'2026-12-17',title:'St George Youth Conference (Day 4)',category:'christian',description:'Youth conference continues.',custom:false},
+  {id:'SG-2026-1218',date:'2026-12-18',title:'St George Youth Conference (Closing)',category:'christian',description:'Final day of the 14–18 December youth conference.',custom:false},
+  {id:'SG-2026-1225',date:'2026-12-25',title:'Christmas Day',category:'christian',description:'Christmas celebration.',custom:false},
+  {id:'SG-2026-1226',date:'2026-12-26',title:'Boxing Day',category:'kenya',description:'Kenya public holiday.',custom:false},
+  {id:'SG-2026-1231',date:'2026-12-31',title:'Year-end thanksgiving',category:'christian',description:'St George Youth year-end thanksgiving.',custom:false}
  ];
- // Easter-based dates calculated using Gregorian computus.
- const easter=easterDate(y);const add=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return isoDate(x)};
- fixed.push([add(easter,-2),'Good Friday','christian','Holy Week'],[isoDate(easter),'Easter Sunday','christian','Resurrection celebration'],[add(easter,1),'Easter Monday','kenya','Public holiday subject to official notice'],[add(easter,39),'Ascension Day','christian','40th day after Easter'],[add(easter,49),'Pentecost Sunday','christian','50th day after Easter'],[add(easter,-7),'Palm Sunday','christian','Beginning of Holy Week']);
- fixed.push([y+'-05-10',"Mother’s Day (second Sunday in May)",'community','Community observance'],[y+'-06-21',"Father’s Day (third Sunday in June)",'community','Community observance']);
- return fixed.map((e,i)=>({id:'EVT-'+y+'-'+i,date:e[0],title:e[1],category:e[2],description:e[3],custom:false}));
+ return events;
 }
 function easterDate(Y){const a=Y%19,b=Math.floor(Y/100),c=Y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),month=Math.floor((h+l-7*m+114)/31),day=((h+l-7*m+114)%31)+1;return new Date(Y,month-1,day)}
 function seedSongs(){return [
  {id:'S1',title:'Mungu Ni Mwema',language:'Swahili',theme:'Thanksgiving',note:'Choose a familiar congregational arrangement.'},
- {id:'S2',title:'Ninakupenda Yesu',language:'Swahili',theme:'Devotion',note:'Works well as a reflective worship song.'},
- {id:'S3',title:'Nĩwe Mũthamaki (confirm local title/lyrics)',language:'Kikuyu',theme:'Praise',note:'Confirm title and preferred local arrangement with the choir.'},
- {id:'S4',title:'Ngai Witu',language:'Kikuyu',theme:'Prayer',note:'Check the exact version used by your congregation.'},
- {id:'S5',title:'Goodness of God',language:'English',theme:'Testimony',note:'A strong testimony / thanksgiving theme.'},
- {id:'S6',title:'Great Is Thy Faithfulness',language:'English',theme:'Hymn',note:'Traditional hymn; suitable for reflective worship.'},
- {id:'S7',title:'10,000 Reasons (Bless the Lord)',language:'English',theme:'Praise',note:'Good for a congregational praise set.'},
- {id:'S8',title:'Amazing Grace',language:'English',theme:'Grace',note:'Traditional hymn; choose a key suitable for the group.'}
+ {id:'S2',title:'Ninakupenda Yesu',language:'Swahili',theme:'Devotion',note:'Reflective worship.'},
+ {id:'S3',title:'Asante Yesu',language:'Swahili',theme:'Thanksgiving',note:'A simple thanksgiving selection; confirm your choir’s preferred version.'},
+ {id:'S4',title:'Hakuna Mungu Kama Wewe',language:'Swahili',theme:'Praise',note:'Praise and adoration.'},
+ {id:'S5',title:'Nani Kama Wewe',language:'Swahili',theme:'Praise',note:'Use the arrangement familiar to the congregation.'},
+ {id:'S6',title:'Bwana U Sehemu Yangu',language:'Swahili',theme:'Trust',note:'Suitable for a reflective worship set.'},
+ {id:'S7',title:'Nimekuja Kusema Asante',language:'Swahili',theme:'Thanksgiving',note:'Thanksgiving theme.'},
+ {id:'S8',title:'U Mwema',language:'Swahili',theme:'Goodness of God',note:'Choose a familiar congregational version.'},
+ {id:'S9',title:'Unatosha',language:'Swahili',theme:'Surrender',note:'Reflective worship.'},
+ {id:'S10',title:'Niko Salama',language:'Swahili',theme:'Comfort',note:'Encouragement and assurance.'},
+ {id:'S11',title:'Nipe Macho',language:'Swahili',theme:'Prayer',note:'Prayer and devotion.'},
+ {id:'S12',title:'Nĩwe Mũthamaki',language:'Kikuyu',theme:'Praise',note:'Confirm the exact title, dialect and arrangement with local choir members.'},
+ {id:'S13',title:'Ngai Witu',language:'Kikuyu',theme:'Prayer',note:'Confirm the version used by your congregation.'},
+ {id:'S14',title:'Mwathani Wakwa',language:'Kikuyu',theme:'Devotion',note:'Confirm spelling and preferred local version.'},
+ {id:'S15',title:'Nĩũrathime',language:'Kikuyu',theme:'Blessing',note:'Confirm title and lyrics with a fluent speaker before rehearsal.'},
+ {id:'S16',title:'Goodness of God',language:'English',theme:'Testimony',note:'Contemporary worship; check licensing before reproducing lyrics.'},
+ {id:'S17',title:'Great Is Thy Faithfulness',language:'English',theme:'Hymn',note:'Traditional hymn; choose a key suitable for the group.'},
+ {id:'S18',title:'10,000 Reasons (Bless the Lord)',language:'English',theme:'Praise',note:'Congregational praise.'},
+ {id:'S19',title:'Amazing Grace',language:'English',theme:'Grace',note:'Traditional hymn.'},
+ {id:'S20',title:'How Great Thou Art',language:'English',theme:'Worship',note:'Classic hymn of adoration.'},
+ {id:'S21',title:'Holy, Holy, Holy',language:'English',theme:'Adoration',note:'Traditional hymn.'},
+ {id:'S22',title:'To God Be the Glory',language:'English',theme:'Praise',note:'Traditional hymn.'},
+ {id:'S23',title:'Blessed Assurance',language:'English',theme:'Assurance',note:'Traditional hymn.'},
+ {id:'S24',title:'It Is Well with My Soul',language:'English',theme:'Comfort',note:'Traditional hymn.'},
+ {id:'S25',title:'What a Friend We Have in Jesus',language:'English',theme:'Prayer',note:'Traditional hymn.'},
+ {id:'S26',title:'Be Thou My Vision',language:'English',theme:'Devotion',note:'Traditional hymn.'},
+ {id:'S27',title:'In Christ Alone',language:'English',theme:'Faith',note:'Modern hymn; check licensing for lyrics.'},
+ {id:'S28',title:'The Lord’s My Shepherd (Psalm 23)',language:'English',theme:'Trust',note:'Choose a familiar Psalm 23 setting.'},
+ {id:'S29',title:'Here I Am to Worship',language:'English',theme:'Worship',note:'Contemporary worship.'},
+ {id:'S30',title:'Shout to the Lord',language:'English',theme:'Praise',note:'Contemporary worship.'},
+ {id:'S31',title:'How Deep the Father’s Love for Us',language:'English',theme:'Grace',note:'Reflective worship.'},
+ {id:'S32',title:'Cornerstone',language:'English',theme:'Faith',note:'Contemporary worship.'},
+ {id:'S33',title:'Way Maker',language:'English',theme:'Faith',note:'Contemporary worship.'},
+ {id:'S34',title:'Build My Life',language:'English',theme:'Surrender',note:'Contemporary worship.'},
+ {id:'S35',title:'Great Are You Lord',language:'English',theme:'Adoration',note:'Contemporary worship.'},
+ {id:'S36',title:'This Is Amazing Grace',language:'English',theme:'Grace',note:'Contemporary praise.'},
+ {id:'S37',title:'Who You Say I Am',language:'English',theme:'Identity',note:'Contemporary worship.'},
+ {id:'S38',title:'Yet Not I but Through Christ in Me',language:'English',theme:'Faith',note:'Contemporary hymn.'}
 ]}
 function resetYearIfNeeded(){const y=currentYear();if(state.settings.lastResetYear!==y){state.triviaScores=state.triviaScores.filter(x=>x.year===y);state.settings.lastResetYear=y;persistOnly()}}
 function persistOnly(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state));localStorage.setItem(STORE_KEY+'_updatedAt',String(Date.now()));queueServerSync(2200)}catch(e){}}
@@ -432,7 +475,7 @@ function renderCharts(){
 }
 function renderFinance(){
  const fs=state.finances.slice().sort((a,b)=>b.date.localeCompare(a.date));$('financeRows').innerHTML=fs.length?fs.map(f=>`<tr><td><b>${dateLabel(f.date)}</b><br><small>${escapeHTML(f.id)}</small></td><td>${fmtMoney(f.income)}</td><td>${fmtMoney(f.expenses)}</td><td class="${f.balance<0?'loss':''}"><b>${fmtMoney(f.balance)}</b>${f.balance<0?' · LOSS':''}</td><td>${fmtMoney(f.mpesa)} M-PESA<br>${fmtMoney(f.cash)} cash</td></tr>`).join(''):'<tr><td colspan="5" class="empty">No finance records have been saved.</td></tr>';
- const latest=fs[0];$('latestToken').textContent=latest?latest.id:`ACK-SUN-${sundayFor()}`;
+ $('latestToken').textContent=stableSundayToken($('financeDate')?.value||sundayFor());
 }
 const questions={
  1:[{q:'Who built an ark to survive the flood?',a:['noah'],ref:'Genesis 6–9'},{q:'Who was the mother of Jesus?',a:['mary'],ref:'Luke 1'},{q:'What is the first book of the Bible?',a:['genesis'],ref:'Genesis 1'},{q:'Who defeated Goliath?',a:['david'],ref:'1 Samuel 17'}],
@@ -494,22 +537,60 @@ function renderAwards(){
  $('awardRows').innerHTML=list.length?list.slice(0,20).map((x,i)=>`<tr><td><span class="rank ${i===0?'gold':i===1?'silver':i===2?'bronze':''}">${i+1}</span></td><td>${escapeHTML(x.m.name)}${isPaused(x.m)?' (paused)':''}</td><td>${x.p}%</td><td>${Math.round(x.avg)}%</td><td><b>${x.score}/100</b></td><td>${isPaused(x.m)?'Review pause':'Leader review'}</td></tr>`).join(''):'<tr><td colspan="6" class="empty">Register members to build a fair shortlist.</td></tr>';
 }
 function renderSongs(){const lang=$('songLanguage')?.value||'all';const songs=state.songs.filter(s=>lang==='all'||s.language===lang);$('songList').innerHTML=songs.map(s=>`<div class="song"><div><b>${escapeHTML(s.title)}</b><small>${escapeHTML(s.language)} · ${escapeHTML(s.theme||'Worship')}</small><small>${escapeHTML(s.note||'')}</small></div><button class="btn secondary small" data-add-song="${s.id}">Add</button></div>`).join('')||'<div class="empty">No songs in this category.</div>';const chosen=state.setlist.map(id=>state.songs.find(s=>s.id===id)).filter(Boolean);$('setlist').innerHTML=chosen.length?chosen.map((s,i)=>`<div class="song"><div><b>${i+1}. ${escapeHTML(s.title)}</b><small>${escapeHTML(s.language)}</small></div><button class="btn danger small" data-remove-song="${s.id}">Remove</button></div>`).join(''):'<div class="empty">Your setlist is empty. Add a song from the library.</div>'}
-function renderVotes(){const offices=['Chairperson','Vice Chairperson','Secretary','Vice Secretary','Treasurer','Time Keeper','Brigadier Officer'];$('electionSummary').innerHTML=offices.map(role=>{const votes=state.votes.filter(v=>v.role===role);const counts={};votes.forEach(v=>counts[v.candidate]=(counts[v.candidate]||0)+1);const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]);return `<div style="padding:11px 0;border-bottom:1px solid var(--line)"><b style="font-size:13px">${role}</b><div class="subtle" style="font-size:11px">${votes.length} demo ballot(s)</div>${sorted.slice(0,3).map(([name,n])=>`<div style="display:flex;justify-content:space-between;font-size:12px;margin-top:6px"><span>${escapeHTML(name)}</span><b>${n}</b></div>`).join('')||'<small class="subtle">No ballots recorded</small>'}</div>`}).join('')}
+function renderVotes(){const selectedYear=Number($('voteYear')?.value||currentYear());const offices=['Chairperson','Vice Chairperson','Secretary','Vice Secretary','Treasurer','Time Keeper','Brigadier Officer'];$('electionSummary').innerHTML='<div class="pill" style="margin-bottom:10px">Election year '+selectedYear+'</div>'+offices.map(role=>{const votes=state.votes.filter(v=>v.role===role&&Number(v.year||2026)===selectedYear);const counts={};votes.forEach(v=>counts[v.candidate]=(counts[v.candidate]||0)+1);const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]);return `<div style="padding:11px 0;border-bottom:1px solid var(--line)"><b style="font-size:13px">${role}</b><div class="subtle" style="font-size:11px">${votes.length} ballot(s)</div>${sorted.slice(0,3).map(([name,n])=>`<div style="display:flex;justify-content:space-between;font-size:12px;margin-top:6px"><span>${escapeHTML(name)}</span><b>${n}</b></div>`).join('')||'<small class="subtle">No ballots recorded</small>'}</div>`}).join('')}
 function renderStorage(){const bytes=new Blob([JSON.stringify(state)]).size;const mb=(bytes/1024/1024).toFixed(2);$('storageStatus').innerHTML=`<div style="display:flex;justify-content:space-between;margin:9px 0;font-size:13px"><span class="subtle">Estimated data size</span><b>${mb} MB</b></div><div style="display:flex;justify-content:space-between;margin:9px 0;font-size:13px"><span class="subtle">Members</span><b>${state.members.length}</b></div><div style="display:flex;justify-content:space-between;margin:9px 0;font-size:13px"><span class="subtle">Finance records</span><b>${state.finances.length}</b></div><div style="display:flex;justify-content:space-between;margin:9px 0;font-size:13px"><span class="subtle">Last backup</span><b>${localStorage.getItem(STORE_KEY+'_backupAt')||'Not recorded'}</b></div>`}
 function renderAll(){renderClock();renderStats();renderMembers();renderFinance();renderTrivia();renderEvents();renderPulse();renderAwards();renderSongs();renderVotes();renderStorage();renderCharts()}
 function openModal(title,html){$('modalTitle').textContent=title;$('modalContent').innerHTML=html;$('modalBackdrop').classList.add('open')}
 function closeModal(){$('modalBackdrop').classList.remove('open')}
 function compressImage(file){return new Promise((resolve,reject)=>{if(!file){resolve('');return}if(!file.type.startsWith('image/')){reject(new Error('Please choose an image file.'));return}const reader=new FileReader();reader.onerror=()=>reject(new Error('Could not read image.'));reader.onload=()=>{const img=new Image();img.onerror=()=>reject(new Error('Could not load image.'));img.onload=()=>{const max=420,scale=Math.min(1,max/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=Math.round(img.width*scale);c.height=Math.round(img.height*scale);c.getContext('2d').drawImage(img,0,0,c.width,c.height);resolve(c.toDataURL('image/jpeg',.72))};img.src=reader.result};reader.readAsDataURL(file)})}
-function registerModal(member=null){const m=member||{};openModal(member?'Edit member':'Register a member',`<form id="memberForm"><div class="form-grid"><div class="field full"><label>Full name *</label><input name="name" required maxlength="90" value="${escapeHTML(m.name||'')}" placeholder="Member's full name"></div><div class="field"><label>Age</label><input name="age" type="number" min="1" max="120" value="${escapeHTML(m.age||'')}"></div><div class="field"><label>Gender (optional)</label><select name="gender"><option value="">Prefer not to say</option><option ${m.gender==='Female'?'selected':''}>Female</option><option ${m.gender==='Male'?'selected':''}>Male</option><option ${m.gender==='Other'?'selected':''}>Other</option></select></div><div class="field"><label>Ministry / role</label><input name="ministry" maxlength="60" value="${escapeHTML(m.ministry||'Youth member')}" placeholder="e.g. Choir"></div><div class="field"><label>Member status</label><select name="status"><option ${m.status==='Active'?'selected':''}>Active</option><option ${isPaused(m)?'selected':''}>Paused / boarding</option></select></div><div class="field full"><label>Profile photo (optional)</label><input name="photo" type="file" accept="image/*"><small class="help">Photo is resized before saving to reduce device storage use.</small></div><div class="field full"><label>Consent</label><label style="font-weight:500"><input name="consent" type="checkbox" required style="width:auto" ${member?'checked':''}> I have permission to store this member's profile details and optional photo for church administration.</label></div></div><button class="btn" style="width:100%;margin-top:15px">${member?'Save changes':'Register member & generate ID'}</button></form>`);
- $('memberForm').addEventListener('submit',async e=>{e.preventDefault();const fd=new FormData(e.currentTarget),name=String(fd.get('name')).trim();if(!name)return;try{let photo=m.photo||'';const file=fd.get('photo');if(file&&file.size)photo=await compressImage(file);if(member){Object.assign(member,{name,age:fd.get('age'),gender:fd.get('gender'),ministry:fd.get('ministry')||'Youth member',status:fd.get('status'),photo})}else{if(state.members.some(x=>x.name.toLowerCase()===name.toLowerCase())){toast('A member with that name already exists. Check the directory first.','bad');return}state.members.push({id:uid('ACK'),name,age:fd.get('age'),gender:fd.get('gender'),ministry:fd.get('ministry')||'Youth member',status:fd.get('status'),photo,attendance:[],createdAt:new Date().toISOString()})}closeModal();saveState();toast(member?'Member updated.':'Member registered and ID generated.');}catch(err){toast(err.message||'Could not save member.','bad')}});}
+function registerModal(member=null){const m=member||{};openModal(member?'Edit member':'Register a member',`<form id="memberForm"><div class="form-grid"><div class="field full"><label>Full name *</label><input name="name" required maxlength="90" value="${escapeHTML(m.name||'')}" placeholder="Member's full name"></div><div class="field"><label>Age</label><input name="age" type="number" min="1" max="120" value="${escapeHTML(m.age||'')}"></div><div class="field"><label>Gender (optional)</label><select name="gender"><option value="">Prefer not to say</option><option ${m.gender==='Female'?'selected':''}>Female</option><option ${m.gender==='Male'?'selected':''}>Male</option><option ${m.gender==='Other'?'selected':''}>Other</option></select></div><div class="field"><label>Ministry / role</label><input name="ministry" maxlength="60" value="${escapeHTML(m.ministry||'Youth member')}" placeholder="e.g. Choir"></div><div class="field"><label>Member status</label><select name="status"><option ${m.status==='Active'?'selected':''}>Active</option><option ${isPaused(m)?'selected':''}>Paused / boarding</option></select></div><div class="field full"><label>Profile photo (optional)</label><input name="photo" type="file" accept="image/*"><small class="help">Photo is resized before saving to reduce device storage use.</small></div><div class="field full"><label>Consent</label><label style="font-weight:500"><input name="consent" type="checkbox" required style="width:auto" ${member?'checked':''}> I confirm permission to store this member's profile details and upload the optional photo to Drive; anyone with the photo link may view it.</label></div></div><button class="btn" style="width:100%;margin-top:15px">${member?'Save changes':'Register member & generate ID'}</button></form>`);
+ $('memberForm').addEventListener('submit',async e=>{e.preventDefault();const fd=new FormData(e.currentTarget),name=String(fd.get('name')).trim();if(!name)return;try{let photo=m.photo||'';const file=fd.get('photo');if(file&&file.size)photo=await compressImage(file);if(member){Object.assign(member,{name,age:fd.get('age'),gender:fd.get('gender'),ministry:fd.get('ministry')||'Youth member',status:fd.get('status'),photo})}else{if(state.members.some(x=>x.name.toLowerCase()===name.toLowerCase())){toast('A member with that name already exists. Check the directory first.','bad');return}state.members.push({id:uid('ACK'),name,age:fd.get('age'),gender:fd.get('gender'),ministry:fd.get('ministry')||'Youth member',status:fd.get('status'),photo,attendance:[],createdAt:new Date().toISOString()})}closeModal();if(!saveState())throw new Error('The member could not be saved to this browser.');toast(member?'Member updated.':'Member registered and ID generated.');}catch(err){toast(err.message||'Could not save member.','bad')}});}
 function recordAttendance(memberId){const m=getMember(memberId);if(!m){toast('Select a registered member first.','bad');return}if(isPaused(m)){toast('This member is paused. Resume their profile before recording attendance.','bad');return}const date=sundayFor(new Date());m.attendance=m.attendance||[];if(m.attendance.some(a=>a.date===date&&a.present)){toast(`${m.name} is already checked in for ${dateLabel(date)}.`,'bad');return}if(!state.attendanceSundays.includes(date))state.attendanceSundays.push(date);m.attendance.push({date,present:true,excused:false,method:'touch-demo',at:new Date().toISOString()});saveState();toast('Attendance recorded for '+m.name+'.')}
 function showAttendanceModal(){if(!state.members.length){toast('Register members before recording attendance.','bad');return}openModal('Sunday attendance register',`<p class="subtle" style="font-size:13px">Sunday: <b>${dateLabel(sundayFor())}</b>. Tick each person who is present. Paused members are disabled.</p><div style="display:grid;gap:8px;margin:14px 0;max-height:45vh;overflow:auto">${state.members.map(m=>`<label style="display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:12px;${isPaused(m)?'opacity:.5':''}"><input type="checkbox" data-bulk-member="${m.id}" ${isPaused(m)?'disabled':''} ${(m.attendance||[]).some(a=>a.date===sundayFor()&&a.present)?'checked':''} style="width:18px;height:18px"><span><b>${escapeHTML(m.name)}</b><small style="display:block;color:var(--muted)">${m.id}${isPaused(m)?' · paused':''}</small></span></label>`).join('')}</div><button class="btn" id="saveBulkAttendance" style="width:100%">Save attendance register</button>`);
  $('saveBulkAttendance').onclick=()=>{const date=sundayFor();if(!state.attendanceSundays.includes(date))state.attendanceSundays.push(date);document.querySelectorAll('[data-bulk-member]').forEach(cb=>{const m=getMember(cb.dataset.bulkMember);if(!m||isPaused(m))return;m.attendance=m.attendance||[];const old=m.attendance.find(a=>a.date===date);if(cb.checked){if(old){old.present=true;old.excused=false}else m.attendance.push({date,present:true,excused:false,method:'bulk-touch-demo',at:new Date().toISOString()})}else if(old){old.present=false}});closeModal();saveState();toast('Sunday attendance register saved.')}
 }
 function stableSundayToken(date){return 'ACK-SUN-'+date.replaceAll('-','')+'-'+hashCode(date).toString(36).toUpperCase()}
 function hashCode(s){let h=0;for(let i=0;i<s.length;i++)h=((h<<5)-h+s.charCodeAt(i))|0;return Math.abs(h)}
-$('financeDate').value=sundayFor();
-$('financeForm').addEventListener('submit',e=>{e.preventDefault();const pin=$('treasurerPin').value;if(pin!==state.settings.treasurerPin){$('financeMessage').innerHTML='<div class="notice error">Treasurer verification failed. Finance was not saved.</div>';return}const date=$('financeDate').value,income=Number($('financeIncome').value),expenses=Number($('financeExpenses').value),mpesa=Number($('financeMpesa').value||0),cash=Number($('financeCash').value||0);if(!date||[income,expenses,mpesa,cash].some(n=>!Number.isFinite(n)||n<0)){toast('Enter valid non-negative amounts and a date.','bad');return}if(Math.abs((mpesa+cash)-income)>0.01){$('financeMessage').innerHTML='<div class="notice error">M-PESA + cash must equal total income. Please reconcile the figures before saving.</div>';return}const existing=state.finances.find(f=>f.date===date);if(existing&&!confirm('A record already exists for this date. Replace it?'))return;const record={id:uid('TRX'),sundayToken:stableSundayToken(date),date,income,expenses,mpesa,cash,balance:income-expenses,notes:$('financeExpenseNote').value.trim(),source:'M-PESA + cash',createdAt:new Date().toISOString()};if(existing)state.finances=state.finances.filter(f=>f.date!==date);state.finances.push(record);$('financeMessage').innerHTML=`<div class="notice success">Saved. ${record.balance<0?'Loss recorded: ':'Savings recorded: '}${fmtMoney(record.balance)} · ${record.id}</div>`;$('treasurerPin').value='';saveState();toast('Finance record saved with transaction ID.');});
+$('financeDate').value=sundayFor();$('financeDate').addEventListener('change',()=>{$('latestToken').textContent=stableSundayToken($('financeDate').value||sundayFor())});
+$('financeForm').addEventListener('submit',async e=>{
+ e.preventDefault();
+ const submit=e.currentTarget.querySelector('button[type="submit"]');
+ const pin=$('treasurerPin').value.trim();
+ const date=$('financeDate').value;
+ const income=Number($('financeIncome').value);
+ const expenses=Number($('financeExpenses').value);
+ const mpesa=Number($('financeMpesa').value||0);
+ const cash=Number($('financeCash').value||0);
+ if(!serverConfigured()){ $('financeMessage').innerHTML='<div class="notice error">Finance is locked until the new Apps Script deployment URL is configured.</div>';return; }
+ if(!pin){$('financeMessage').innerHTML='<div class="notice error">Enter the treasurer PIN.</div>';return;}
+ if(!date||[income,expenses,mpesa,cash].some(n=>!Number.isFinite(n)||n<0)){
+   $('financeMessage').innerHTML='<div class="notice error">Enter a valid date and non-negative amounts.</div>';return;
+ }
+ if(Math.abs((mpesa+cash)-income)>0.01){
+   $('financeMessage').innerHTML='<div class="notice error">M-PESA + cash must equal total income.</div>';return;
+ }
+ if(state.finances.some(f=>f.date===date)&&!confirm('A record already exists for this date. Ask an authorized administrator to correct it; do not overwrite the audit trail.'))return;
+ submit.disabled=true;
+ $('financeMessage').innerHTML='<div class="notice">Verifying treasurer authorization and saving securely…</div>';
+ try{
+   const result=await serverCall('saveFinance',{
+     pin,date,income,expenses,mpesa,cash,
+     notes:$('financeExpenseNote').value.trim(),
+     sundayToken:stableSundayToken(date)
+   });
+   if(!result||!result.success||!result.record)throw new Error(result.message||'Finance record was not saved.');
+   const record=result.record;
+   state.finances=state.finances.filter(f=>f.id!==record.id&&f.date!==record.date);
+   state.finances.push(record);
+   $('financeMessage').innerHTML=`<div class="notice success">Server verified and saved. ${record.balance<0?'Loss recorded: ':'Surplus recorded: '}${fmtMoney(record.balance)} · ${escapeHTML(record.id)}</div>`;
+   $('treasurerPin').value='';
+   saveState();
+   toast('Finance record verified and saved to the server.');
+ }catch(err){
+   $('financeMessage').innerHTML='<div class="notice error">'+escapeHTML(err.message||'Finance save failed.')+'</div>';
+   toast('Finance was not saved: '+(err.message||'Server error.'),'bad');
+ }finally{submit.disabled=false;}
+});
 $('checkinBtn').onclick=()=>{const id=$('checkinMember').value;if(!id){toast('Choose a member first.','bad');return}if($('checkinMethod').value==='passkey'){toast('Real passkey verification needs a configured secure backend; no biometric was claimed.','bad');return}if(confirm('Confirm this member is present today? This is a touch confirmation demo, not fingerprint verification.')){recordAttendance(id);$('attendanceMessage').innerHTML='<div class="notice success">Touch confirmation saved locally.</div>'}};
 $('attendanceBtn').onclick=showAttendanceModal;$('openRegister').onclick=()=>registerModal();
 $('membersGrid').addEventListener('click',e=>{const a=e.target.closest('[data-attend]'),p=e.target.closest('[data-pause]'),ed=e.target.closest('[data-edit]');if(a)recordAttendance(a.dataset.attend);if(p){const m=getMember(p.dataset.pause);if(!m)return;if(isPaused(m)){m.status='Active';m.resumedAt=todayISO()}else{m.status='Paused / boarding';m.pausedAt=todayISO()}saveState();toast(isPaused(m)?'Profile paused.':'Profile resumed.')}if(ed){const m=getMember(ed.dataset.edit);if(m)registerModal(m)}});
@@ -527,32 +608,80 @@ $('triviaForm').addEventListener('submit',async e=>{
 });
 $('newTipBtn').onclick=()=>{$('weeklyTip').textContent=tips[Math.floor(Math.random()*tips.length)]};
 $('refreshAwards').onclick=()=>{renderAwards();toast('Award shortlist refreshed.');};
-$('voteForm').addEventListener('submit',e=>{e.preventDefault();const member=getMember($('voterMember').value),role=$('voteRole').value,candidate=$('voteCandidate').value.trim();if(!member||!candidate){toast('Complete voter and candidate fields.','bad');return}if($('voteConfirm').value==='passkey'){toast('Real passkey verification requires a secure backend; ballot not recorded.','bad');return}if(state.votes.some(v=>v.voterId===member.id&&v.role===role)){ $('voteMessage').innerHTML='<div class="notice error">This member already has a demo ballot for this office on this device.</div>';return}if(!confirm(`Confirm demo ballot for ${role}: ${candidate}? This is not a secure secret ballot.`))return;state.votes.push({id:uid('BAL'),voterId:member.id,role,candidate,at:new Date().toISOString()});saveState();$('voteMessage').innerHTML='<div class="notice success">Demo ballot saved locally. Do not use this prototype for official elections.</div>';toast('Demo ballot recorded.');});
-$('songLanguage').onchange=renderSongs;$('songList').addEventListener('click',e=>{const b=e.target.closest('[data-add-song]');if(!b)return;if(!state.setlist.includes(b.dataset.addSong))state.setlist.push(b.dataset.addSong);saveState();toast('Song added to setlist.')});$('setlist').addEventListener('click',e=>{const b=e.target.closest('[data-remove-song]');if(!b)return;state.setlist=state.setlist.filter(id=>id!==b.dataset.removeSong);saveState()});
-$('addSongBtn').onclick=()=>openModal('Add a choir song',`<form id="songForm"><div class="form-grid"><div class="field full"><label>Song title</label><input name="title" required></div><div class="field"><label>Language</label><select name="language"><option>Swahili</option><option>Kikuyu</option><option>English</option></select></div><div class="field"><label>Theme</label><input name="theme" placeholder="Praise, prayer…"></div><div class="field full"><label>Notes</label><input name="note"></div></div><button class="btn" style="margin-top:14px;width:100%">Save song</button></form>`);$('songForm').onsubmit=e=>{e.preventDefault();const f=new FormData(e.currentTarget);state.songs.push({id:uid('SONG'),title:f.get('title').trim(),language:f.get('language'),theme:f.get('theme'),note:f.get('note')});closeModal();saveState();toast('Song added.')};
-$('addEventBtn').onclick=()=>openModal('Add church event',`<form id="eventForm"><div class="form-grid"><div class="field full"><label>Event name</label><input name="title" required></div><div class="field"><label>Date</label><input name="date" type="date" required value="${todayISO()}"></div><div class="field"><label>Category</label><select name="category"><option value="christian">Christian</option><option value="kenya">Kenya public holiday</option><option value="community">Community</option><option value="custom">Church programme</option></select></div><div class="field full"><label>Details</label><textarea name="description"></textarea></div></div><button class="btn" style="width:100%;margin-top:14px">Save event</button></form>`);$('eventForm').onsubmit=e=>{e.preventDefault();const f=new FormData(e.currentTarget);state.events.push({id:uid('EVT'),title:f.get('title').trim(),date:f.get('date'),category:f.get('category'),description:f.get('description'),custom:true});closeModal();saveState();toast('Event added to calendar.')};
+$('voteForm').addEventListener('submit',async e=>{
+ e.preventDefault();
+ const member=getMember($('voterMember').value);
+ const role=$('voteRole').value;
+ const candidate=$('voteCandidate').value.trim();
+ const year=Number($('voteYear').value);
+ if(!member||!candidate||!Number.isInteger(year)){toast('Complete voter, candidate and election year fields.','bad');return;}
+ if(!serverConfigured()){ $('voteMessage').innerHTML='<div class="notice error">Connect the Apps Script server before recording an election ballot.</div>';return;}
+ if($('voteConfirm').value==='passkey'){toast('Passkey mode is not configured. Select on-screen confirmation.','bad');return;}
+ if(state.votes.some(v=>v.voterId===member.id&&v.role===role&&Number(v.year)===year)){
+   $('voteMessage').innerHTML='<div class="notice error">This member already has a ballot for this office in '+year+'.</div>';return;
+ }
+ if(!confirm(`Record a ballot for ${role}, election year ${year}, candidate ${candidate}? This prototype is not a cryptographically secret ballot.`))return;
+ const btn=e.currentTarget.querySelector('button[type="submit"]');btn.disabled=true;
+ try{
+   const result=await serverCall('saveVote',{vote:{voterId:member.id,voterName:member.name,role,candidate,year}});
+   if(!result||!result.success)throw new Error(result.message||'Ballot was not accepted.');
+   const saved=result.vote||{id:uid('BAL'),voterId:member.id,role,candidate,year,at:new Date().toISOString()};
+   state.votes.push(saved);saveState();
+   $('voteMessage').innerHTML='<div class="notice success">Ballot recorded on the server for election year '+year+'. Aggregate totals updated.</div>';
+   $('voteCandidate').value='';toast('Election ballot recorded.');
+ }catch(err){
+   $('voteMessage').innerHTML='<div class="notice error">'+escapeHTML(err.message||'Election save failed.')+'</div>';
+   toast('Election ballot not saved: '+(err.message||'Server error.'),'bad');
+ }finally{btn.disabled=false;}
+});
+$('voteYear').onchange=renderVotes;$('songLanguage').onchange=renderSongs;$('songList').addEventListener('click',e=>{const b=e.target.closest('[data-add-song]');if(!b)return;if(!state.setlist.includes(b.dataset.addSong))state.setlist.push(b.dataset.addSong);saveState();toast('Song added to setlist.')});$('setlist').addEventListener('click',e=>{const b=e.target.closest('[data-remove-song]');if(!b)return;state.setlist=state.setlist.filter(id=>id!==b.dataset.removeSong);saveState()});
+$('addSongBtn').onclick=()=>openModal('Add a choir song',`<form id="songForm"><div class="form-grid"><div class="field full"><label>Song title</label><input name="title" required></div><div class="field"><label>Language</label><select name="language"><option>Swahili</option><option>Kikuyu</option><option>English</option><option>Other</option></select></div><div class="field"><label>Theme</label><input name="theme" placeholder="Praise, prayer…"></div><div class="field full"><label>Notes</label><input name="note"></div></div><button class="btn" style="margin-top:14px;width:100%">Save song</button></form>`);
+$('modalContent').addEventListener('submit',e=>{
+ if(e.target.id==='songForm'){
+  e.preventDefault();const f=new FormData(e.target);const title=String(f.get('title')||'').trim();if(!title)return;
+  state.songs.push({id:uid('SONG'),title,language:f.get('language'),theme:String(f.get('theme')||'').trim(),note:String(f.get('note')||'').trim()});
+  closeModal();saveState();toast('Song added to the choir library.');
+ }else if(e.target.id==='eventForm'){
+  e.preventDefault();const f=new FormData(e.target);const title=String(f.get('title')||'').trim();if(!title)return;
+  state.events.push({id:uid('EVT'),title,date:f.get('date'),category:f.get('category'),description:String(f.get('description')||'').trim(),custom:true});
+  closeModal();saveState();toast('Event added to calendar.');
+ }
+});
+$('addEventBtn').onclick=()=>openModal('Add church event',`<form id="eventForm"><div class="form-grid"><div class="field full"><label>Event name</label><input name="title" required></div><div class="field"><label>Date</label><input name="date" type="date" required value="${todayISO()}"></div><div class="field"><label>Category</label><select name="category"><option value="christian">Christian</option><option value="kenya">Kenya public holiday</option><option value="community">Community</option><option value="custom">Church programme</option></select></div><div class="field full"><label>Details</label><textarea name="description"></textarea></div></div><button class="btn" style="width:100%;margin-top:14px">Save event</button></form>`);
 $('allEvents').addEventListener('click',e=>{const b=e.target.closest('[data-delete-event]');if(!b)return;state.events=state.events.filter(x=>x.id!==b.dataset.deleteEvent);saveState();toast('Custom event deleted.')});$('eventFilter').onchange=renderEvents;$('eventMonth').onchange=renderEvents;
 function csvEscape(v){return '"'+String(v??'').replaceAll('"','""')+'"'}
 function downloadText(filename,text,type='text/plain'){const blob=new Blob([text],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 function downloadCSV(filename,rows){downloadText(filename,rows.map(r=>r.map(csvEscape).join(',')).join('\r\n'),'text/csv;charset=utf-8')}
 $('exportFinanceBtn').onclick=()=>downloadCSV('church-finance.csv',[['Transaction ID','Date','Income KSh','Expenses KSh','Savings or loss KSh','M-PESA KSh','Cash KSh','Notes'],...state.finances.map(f=>[f.id,f.date,f.income,f.expenses,f.balance,f.mpesa,f.cash,f.notes])]);
 $('exportTriviaBtn').onclick=()=>downloadCSV('bible-trivia.csv',[['Member','Score','Level','Week','Year','Question'],...state.triviaScores.map(s=>[getMember(s.memberId)?.name||s.memberName,s.score,s.level,s.week,s.year,s.question])]);
-$('exportVotesBtn').onclick=()=>downloadCSV('demo-election-log.csv',[['Ballot ID','Voter ID','Office','Candidate','Date'],...state.votes.map(v=>[v.id,v.voterId,v.role,v.candidate,v.at])]);
+$('exportVotesBtn').onclick=()=>downloadCSV('demo-election-log.csv',[['Ballot ID','Voter ID','Office','Candidate','Election year','Date'],...state.votes.map(v=>[v.id,v.voterId,v.role,v.candidate,v.year,v.at])]);
 $('exportSetlist').onclick=()=>downloadCSV('choir-setlist.csv',[['Order','Song','Language','Theme','Notes'],...state.setlist.map((id,i)=>{const s=state.songs.find(x=>x.id===id);return s?[i+1,s.title,s.language,s.theme,s.note]:[]}).filter(x=>x.length)]);
 $('backupBtn').onclick=()=>{downloadText('st-george-youth-backup-'+todayISO()+'.json',JSON.stringify(state,null,2),'application/json');localStorage.setItem(STORE_KEY+'_backupAt',new Date().toLocaleString());renderStorage();toast('Backup downloaded. Keep it private.')};
 $('restoreBtn').onclick=()=>$('restoreFile').click();$('restoreFile').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const parsed=JSON.parse(await file.text());if(!parsed||!Array.isArray(parsed.members)||!Array.isArray(parsed.finances))throw new Error('This does not look like a valid church backup.');if(!confirm('Replace the current local records with this backup? Download a backup of the current data first if needed.'))return;state={...seedState(),...parsed};saveState();toast('Backup restored.');}catch(err){toast(err.message||'Could not restore backup.','bad')}e.target.value=''};
 $('clearDemoBtn').onclick=()=>{if(!confirm('Permanently clear all local demo members, finances, trivia, votes, and custom records from this browser? Export a backup first.'))return;state=seedState();saveState();toast('Local demo data cleared.')};
 $('copyTokenBtn').onclick=async()=>{try{await navigator.clipboard.writeText($('latestToken').textContent);toast('Token copied.')}catch(e){toast('Copy unavailable in this browser. Select the token and copy it.','bad')}};
 $('notifyBtn').onclick=()=>{const n=state.members.filter(m=>!isPaused(m)&&attendancePercent(m)<60).length;toast(n?`${n} member profile(s) are below 60% attendance.`:'No attendance alerts right now.')};
-$('themeBtn').onclick=()=>{document.body.classList.toggle('high-contrast');if(document.body.classList.contains('high-contrast')){document.documentElement.style.setProperty('--paper','#eaf4ec');document.documentElement.style.setProperty('--line','#c9ddd0')}else{document.documentElement.style.setProperty('--paper','#f4f8f5');document.documentElement.style.setProperty('--line','#e1eae4')}};
+function applyTheme(theme){
+ document.body.classList.toggle('dark-theme',theme==='dark');
+ $('themeBtn').textContent=theme==='dark'?'☀':'◐';
+ $('themeBtn').setAttribute('aria-label',theme==='dark'?'Switch to light theme':'Switch to dark theme');
+ localStorage.setItem(STORE_KEY+'_theme',theme);
+}
+$('themeBtn').onclick=()=>applyTheme(document.body.classList.contains('dark-theme')?'light':'dark');
 $('closeModal').onclick=closeModal;$('modalBackdrop').addEventListener('click',e=>{if(e.target===$('modalBackdrop'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 $('menuBtn').onclick=()=>$('sidebar').classList.toggle('open');
-document.querySelectorAll('[data-target]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x===b));document.getElementById(b.dataset.target).scrollIntoView({behavior:'smooth'});$('sidebar').classList.remove('open')}));
+document.querySelectorAll('#nav [data-target]').forEach(b=>b.addEventListener('click',()=>{
+  const target=document.getElementById(b.dataset.target);
+  if(!target){console.error('[ST GEORGE] Missing section:',b.dataset.target);return;}
+  document.querySelectorAll('#nav [data-target]').forEach(x=>x.classList.toggle('active',x===b));
+  target.scrollIntoView({behavior:'smooth',block:'start'});
+  $('sidebar').classList.remove('open');
+}));
 document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.go).scrollIntoView({behavior:'smooth'})));
 $('exportTriviaBtn').addEventListener('click',()=>{});
 $('syncNowBtn').addEventListener('click',async()=>{await syncServerNow();await initialiseTriviaServer();});
 function init(){
- resetYearIfNeeded();renderAll();setInterval(renderClock,30000);
+ resetYearIfNeeded();renderAll();applyTheme(localStorage.getItem(STORE_KEY+'_theme')||'light');setInterval(renderClock,30000);
  if(serverConfigured()){
   setServerStatus('connecting','Connecting to Google Sheets…','Loading saved records from the configured Apps Script deployment.');
   setTimeout(async()=>{await syncServerNow({quiet:true});await initialiseTriviaServer();},250);
@@ -562,6 +691,232 @@ function init(){
  }
 }
 init();
+</script>
+
+
+
+<script>
+    
+/* ST GEORGE — AUTOMATIC DATA RESTORATION */
+(function () {
+  'use strict';
+
+  let restoreRunning = false;
+
+  async function restoreChurchData() {
+    if (restoreRunning || !navigator.onLine) return;
+    if (typeof syncServerNow !== 'function') return;
+    if (typeof serverConfigured !== 'function' || !serverConfigured()) return;
+
+    restoreRunning = true;
+
+    try {
+      await syncServerNow({ quiet: true });
+
+      if (typeof initialiseTriviaServer === 'function') {
+        await initialiseTriviaServer();
+      }
+
+      console.info('[ST GEORGE] Cloud data restoration completed.');
+    } catch (error) {
+      console.error('[ST GEORGE] Restoration failed:', error);
+    } finally {
+      restoreRunning = false;
+    }
+  }
+
+  // Restore when the page opens or is refreshed.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', restoreChurchData);
+  } else {
+    restoreChurchData();
+  }
+
+  // Restore when the computer reconnects to the internet.
+  window.addEventListener('online', restoreChurchData);
+
+  // Restore when the user returns to the website.
+  window.addEventListener('focus', restoreChurchData);
+
+  // Restore when returning from another browser tab.
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) restoreChurchData();
+  });
+
+  // Allow manual restoration from the browser console.
+  window.restoreChurchData = restoreChurchData;
+
+})();
+</script><script>
+/* ==========================================
+   ST GEORGE YOUTH HUB — SMART NAVIGATION
+========================================== */
+(function () {
+  'use strict';
+
+  const sidebar = document.getElementById('sidebar');
+  const nav = document.getElementById('nav');
+  const menuBtn = document.getElementById('menuBtn');
+  const main = document.querySelector('.main');
+
+  if (!sidebar || !nav || !menuBtn || !main) return;
+
+  const navButtons = [...nav.querySelectorAll('[data-target]')];
+
+  const sectionTitles = {
+    overview: 'Church dashboard',
+    members: 'Members & Attendance',
+    finance: 'Finance & Stewardship',
+    trivia: 'Bible Trivia',
+    awards: 'Awards & Recognition',
+    elections: 'Leadership Elections',
+    choir: 'Choir Planner',
+    events: 'Events Calendar',
+    backup: 'Data & Settings'
+  };
+
+  function setActive(id) {
+    navButtons.forEach(button => {
+      const active = button.dataset.target === id;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-current', active ? 'page' : 'false');
+    });
+
+    const heading = main.querySelector('.topbar h1');
+    if (heading && sectionTitles[id]) {
+      heading.textContent = sectionTitles[id];
+    }
+  }
+
+  function closeMenu() {
+    sidebar.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.setAttribute('aria-label', 'Open menu');
+  }
+
+  function openMenu() {
+    sidebar.classList.add('open');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    menuBtn.setAttribute('aria-label', 'Close menu');
+  }
+
+  function toggleMenu() {
+    sidebar.classList.contains('open') ? closeMenu() : openMenu();
+  }
+
+  function navigateTo(id) {
+    const section = document.getElementById(id);
+    if (!section) return;
+
+    setActive(id);
+
+    section.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+
+    if (window.innerWidth <= 900) closeMenu();
+  }
+
+  // Sidebar navigation
+  navButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      navigateTo(button.dataset.target);
+    });
+  });
+
+  // Mobile menu
+  menuBtn.addEventListener('click', toggleMenu);
+
+  // Quick action buttons and dashboard shortcuts
+  document.querySelectorAll('[data-go]').forEach(button => {
+    button.addEventListener('click', () => {
+      navigateTo(button.dataset.go);
+    });
+  });
+
+  // Highlight the section currently visible on screen
+  const sections = navButtons
+    .map(button => document.getElementById(button.dataset.target))
+    .filter(Boolean);
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+      if (visible.length) setActive(visible[0].target.id);
+    }, {
+      root: null,
+      rootMargin: '-15% 0px -65% 0px',
+      threshold: [0, 0.1, 0.25, 0.5]
+    });
+
+    sections.forEach(section => observer.observe(section));
+  }
+
+  // Close menu when clicking outside it on mobile
+  document.addEventListener('click', event => {
+    if (
+      window.innerWidth <= 900 &&
+      sidebar.classList.contains('open') &&
+      !sidebar.contains(event.target) &&
+      !menuBtn.contains(event.target)
+    ) {
+      closeMenu();
+    }
+  });
+
+  // Escape key closes mobile sidebar
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeMenu();
+  });
+
+  // Reset mobile menu when resizing to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) closeMenu();
+  });
+
+  // Initial state
+  const initialSection = navButtons.find(button =>
+    button.classList.contains('active')
+  );
+
+  if (initialSection) setActive(initialSection.dataset.target);
+
+  menuBtn.setAttribute('aria-expanded', 'false');
+
+})();
+</script>
+<script>
+// St George Youth PWA installation and offline-shell support.
+(()=>{
+ let installPrompt=null;
+ const installButton=document.getElementById('appInstallBtn');
+ const standalone=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
+ if(standalone&&installButton){installButton.hidden=true;}
+ window.addEventListener('beforeinstallprompt',event=>{
+  event.preventDefault();installPrompt=event;
+  if(installButton&&!standalone)installButton.hidden=false;
+ });
+ if(installButton){
+  installButton.addEventListener('click',async()=>{
+   if(!installPrompt){alert('To install St George Youth, open this page in Chrome, tap the three-dot menu, then choose Install app or Add to Home screen.');return;}
+   installPrompt.prompt();
+   try{const choice=await installPrompt.userChoice;if(choice&&choice.outcome==='accepted')installButton.hidden=true;}catch(error){console.warn('Install prompt was not completed:',error);}
+   installPrompt=null;
+  });
+ }
+ window.addEventListener('appinstalled',()=>{if(installButton)installButton.hidden=true;installPrompt=null;});
+ if('serviceWorker' in navigator && location.protocol==='https:'){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js',{scope:'./'})
+   .then(reg=>console.info('St George Youth offline support ready:',reg.scope))
+   .catch(error=>console.warn('PWA service worker registration failed:',error)));
+ }
+ window.addEventListener('offline',()=>{const d=document.getElementById('serverSyncDetail');if(d)d.textContent='You are offline. Saved on this device data remains available; cloud updates will resume when connected.';});
+ window.addEventListener('online',()=>{const d=document.getElementById('serverSyncDetail');if(d)d.textContent='Internet connection restored. Use Sync now to send pending updates.';});
+})();
 </script>
 
 
