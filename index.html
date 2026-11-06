@@ -482,16 +482,27 @@ function stateForServer(){
 async function uploadLocalPhotos(){
  for(const member of state.members){
   if(typeof member.photo!=='string'||!member.photo.startsWith('data:image/'))continue;
+
   const match=member.photo.match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/);
-  if(!match)continue;
-  const ext=(match[1].split('/')[1]||'jpg').replace('jpeg','jpg');
-  try{
-   const result=await serverCall('uploadMedia',{name:member.name,data:match[2],mimeType:match[1],fileName:'stgeorge_'+String(member.id||Date.now()).replace(/[^a-z0-9_-]/gi,'_')+'.'+ext});
-   if(result&&result.success&&result.url)member.photo=result.url;
-  }catch(error){
-   console.warn('Profile photo upload failed; member data will still sync:',error);
-   member.photo='';
+  if(!match){
+   throw new Error('Could not read the profile photo for '+(member.name||'a member'));
   }
+
+  const ext=(match[1].split('/')[1]||'jpg').replace('jpeg','jpg');
+
+  const result=await serverCall('uploadMedia',{
+   name:member.name,
+   data:match[2],
+   mimeType:match[1],
+   fileName:'stgeorge_'+String(member.id||Date.now()).replace(/[^a-z0-9_-]/gi,'_')+'.'+ext
+  });
+
+  if(!result||result.success!==true||!result.url){
+   throw new Error('Photo upload failed for '+(member.name||'a member')+'. Member data has not been overwritten.');
+  }
+
+  member.photo=result.url;
+  localStorage.setItem(STORE_KEY,JSON.stringify(state));
  }
 }
 
